@@ -14,7 +14,27 @@ def p_instructionFunction(p):
 
 def p_instructionConditional(p):
   '''  
-    instruction : IF condition 
+    instruction : IF condition instructionBody END
+                | IF condition instructionBody conditionalElsif END
+                | IF condition instructionBody ELSE instructionBody END
+                | IF condition instructionBody conditionalElsif ELSE instructionBody END
+  '''
+
+def p_elsif(p):
+  '''
+  elsif : ELSIF instructionBody 
+  '''
+
+def p_conditionalElsif(p):
+  '''
+  conditionalElsif : elsif 
+                  | elsif  conditionalElsif
+  '''
+
+def p_nestedElsif(p):
+  '''
+  nesteElsif : instructionConditional
+  
   '''
 
 def p_instructionLoop(p):
