@@ -5,7 +5,6 @@ Unused terminals:
     AND
     ASSIGNDECREMENT
     ASSIGNINCREMENT
-    ASSIGNMENT
     BREAK
     CASE
     CHOMP
@@ -14,12 +13,9 @@ Unused terminals:
     DOT
     ELSE
     ELSIF
-    EQUALS
     FOR
     GETS
-    GREATERTHAN
     IN
-    LESSTHAN
     OPENBRACKET
     PUTS
     THEN
@@ -29,108 +25,127 @@ Unused terminals:
 Grammar
 
 Rule 0     S' -> instruction
-Rule 1     instruction -> PRINT printBody
-Rule 2     instruction -> DEF ID LPAREN parameters RPAREN END
+Rule 1     instruction -> instructionBody
+Rule 2     instruction -> DEF ID LPAREN parameters RPAREN instructionBody END
 Rule 3     instruction -> DEF ID LPAREN RPAREN END
-Rule 4     printBody -> ID
-Rule 5     printBody -> TRUE
-Rule 6     printBody -> FALSE
-Rule 7     printBody -> dataType
-Rule 8     printBody -> condition
-Rule 9     instruction -> IF condition
-Rule 10    instruction -> WHILE condition END
-Rule 11    parameters -> ID
-Rule 12    parameters -> ID COMMA ID
-Rule 13    arithmetic -> PLUS
-Rule 14    arithmetic -> MINUS
-Rule 15    arithmetic -> POWER
-Rule 16    arithmetic -> MULTIPLICATION
-Rule 17    arithmetic -> DIVISION
-Rule 18    operations -> dataType arithmetic dataType
-Rule 19    operations -> arithmetic dataType
-Rule 20    condition -> TRUE
-Rule 21    condition -> FALSE
-Rule 22    condition -> number GREATEROREQUALS number
-Rule 23    number -> FLOAT
-Rule 24    number -> INTEGER
-Rule 25    dataType -> STRING
-Rule 26    dataType -> number
+Rule 4     instruction -> IF condition
+Rule 5     instruction -> WHILE condition instructionBody END
+Rule 6     bodyLine -> ID ASSIGNMENT number
+Rule 7     bodyLine -> ID ASSIGNMENT STRING
+Rule 8     bodyLine -> PRINT printBody
+Rule 9     instructionBody -> bodyLine
+Rule 10    instructionBody -> bodyLine instructionBody
+Rule 11    printBody -> ID
+Rule 12    printBody -> TRUE
+Rule 13    printBody -> FALSE
+Rule 14    printBody -> dataType
+Rule 15    printBody -> condition
+Rule 16    parameters -> ID
+Rule 17    parameters -> ID COMMA ID
+Rule 18    arithmaticOperator -> PLUS
+Rule 19    arithmaticOperator -> MINUS
+Rule 20    arithmaticOperator -> POWER
+Rule 21    arithmaticOperator -> MULTIPLICATION
+Rule 22    arithmaticOperator -> DIVISION
+Rule 23    operations -> dataType arithmaticOperator dataType
+Rule 24    condition -> number comparator number
+Rule 25    comparator -> GREATERTHAN
+Rule 26    comparator -> LESSTHAN
+Rule 27    comparator -> EQUALS
+Rule 28    comparator -> GREATEROREQUALS
+Rule 29    comparator -> LESSOREQUALS
+Rule 30    number -> FLOAT
+Rule 31    number -> INTEGER
+Rule 32    dataType -> STRING
+Rule 33    dataType -> number
 
 Terminals, with rules where they appear
 
 AND                  : 
 ASSIGNDECREMENT      : 
 ASSIGNINCREMENT      : 
-ASSIGNMENT           : 
+ASSIGNMENT           : 6 7
 BREAK                : 
 CASE                 : 
 CHOMP                : 
 CLASS                : 
 CLOSEDBRACKET        : 
-COMMA                : 12
+COMMA                : 17
 DEF                  : 2 3
-DIVISION             : 17
+DIVISION             : 22
 DOT                  : 
 ELSE                 : 
 ELSIF                : 
-END                  : 2 3 10
-EQUALS               : 
-FALSE                : 6 21
-FLOAT                : 23
+END                  : 2 3 5
+EQUALS               : 27
+FALSE                : 13
+FLOAT                : 30
 FOR                  : 
 GETS                 : 
-GREATEROREQUALS      : 22
-GREATERTHAN          : 
-ID                   : 2 3 4 11 12 12
-IF                   : 9
+GREATEROREQUALS      : 28
+GREATERTHAN          : 25
+ID                   : 2 3 6 7 11 16 17 17
+IF                   : 4
 IN                   : 
-INTEGER              : 24
-LESSTHAN             : 
+INTEGER              : 31
+LESSOREQUALS         : 29
+LESSTHAN             : 26
 LPAREN               : 2 3
-MINUS                : 14
-MULTIPLICATION       : 16
+MINUS                : 19
+MULTIPLICATION       : 21
 OPENBRACKET          : 
-PLUS                 : 13
-POWER                : 15
-PRINT                : 1
+PLUS                 : 18
+POWER                : 20
+PRINT                : 8
 PUTS                 : 
 RPAREN               : 2 3
-STRING               : 25
+STRING               : 7 32
 THEN                 : 
 TO_F                 : 
 TO_I                 : 
-TRUE                 : 5 20
-WHILE                : 10
+TRUE                 : 12
+WHILE                : 5
 error                : 
 
 Nonterminals, with rules where they appear
 
-arithmetic           : 18 19
-condition            : 8 9 10
-dataType             : 7 18 18 19
+arithmaticOperator   : 23
+bodyLine             : 9 10
+comparator           : 24
+condition            : 4 5 15
+dataType             : 14 23 23
 instruction          : 0
-number               : 22 22 26
+instructionBody      : 1 2 5 10
+number               : 6 24 24 33
 operations           : 
 parameters           : 2
-printBody            : 1
+printBody            : 8
 
 Parsing method: LALR
 
 state 0
 
     (0) S' -> . instruction
-    (1) instruction -> . PRINT printBody
-    (2) instruction -> . DEF ID LPAREN parameters RPAREN END
+    (1) instruction -> . instructionBody
+    (2) instruction -> . DEF ID LPAREN parameters RPAREN instructionBody END
     (3) instruction -> . DEF ID LPAREN RPAREN END
-    (9) instruction -> . IF condition
-    (10) instruction -> . WHILE condition END
+    (4) instruction -> . IF condition
+    (5) instruction -> . WHILE condition instructionBody END
+    (9) instructionBody -> . bodyLine
+    (10) instructionBody -> . bodyLine instructionBody
+    (6) bodyLine -> . ID ASSIGNMENT number
+    (7) bodyLine -> . ID ASSIGNMENT STRING
+    (8) bodyLine -> . PRINT printBody
 
-    PRINT           shift and go to state 2
     DEF             shift and go to state 3
-    IF              shift and go to state 4
-    WHILE           shift and go to state 5
+    IF              shift and go to state 5
+    WHILE           shift and go to state 6
+    ID              shift and go to state 4
+    PRINT           shift and go to state 8
 
     instruction                    shift and go to state 1
+    instructionBody                shift and go to state 2
+    bodyLine                       shift and go to state 7
 
 state 1
 
@@ -140,302 +155,463 @@ state 1
 
 state 2
 
-    (1) instruction -> PRINT . printBody
-    (4) printBody -> . ID
-    (5) printBody -> . TRUE
-    (6) printBody -> . FALSE
-    (7) printBody -> . dataType
-    (8) printBody -> . condition
-    (25) dataType -> . STRING
-    (26) dataType -> . number
-    (20) condition -> . TRUE
-    (21) condition -> . FALSE
-    (22) condition -> . number GREATEROREQUALS number
-    (23) number -> . FLOAT
-    (24) number -> . INTEGER
+    (1) instruction -> instructionBody .
 
-    ID              shift and go to state 7
-    TRUE            shift and go to state 8
-    FALSE           shift and go to state 9
-    STRING          shift and go to state 12
-    FLOAT           shift and go to state 14
-    INTEGER         shift and go to state 15
+    $end            reduce using rule 1 (instruction -> instructionBody .)
 
-    printBody                      shift and go to state 6
-    dataType                       shift and go to state 10
-    condition                      shift and go to state 11
-    number                         shift and go to state 13
 
 state 3
 
-    (2) instruction -> DEF . ID LPAREN parameters RPAREN END
+    (2) instruction -> DEF . ID LPAREN parameters RPAREN instructionBody END
     (3) instruction -> DEF . ID LPAREN RPAREN END
 
-    ID              shift and go to state 16
+    ID              shift and go to state 9
 
 
 state 4
 
-    (9) instruction -> IF . condition
-    (20) condition -> . TRUE
-    (21) condition -> . FALSE
-    (22) condition -> . number GREATEROREQUALS number
-    (23) number -> . FLOAT
-    (24) number -> . INTEGER
+    (6) bodyLine -> ID . ASSIGNMENT number
+    (7) bodyLine -> ID . ASSIGNMENT STRING
 
-    TRUE            shift and go to state 18
-    FALSE           shift and go to state 19
-    FLOAT           shift and go to state 14
-    INTEGER         shift and go to state 15
+    ASSIGNMENT      shift and go to state 10
 
-    condition                      shift and go to state 17
-    number                         shift and go to state 20
 
 state 5
 
-    (10) instruction -> WHILE . condition END
-    (20) condition -> . TRUE
-    (21) condition -> . FALSE
-    (22) condition -> . number GREATEROREQUALS number
-    (23) number -> . FLOAT
-    (24) number -> . INTEGER
+    (4) instruction -> IF . condition
+    (24) condition -> . number comparator number
+    (30) number -> . FLOAT
+    (31) number -> . INTEGER
 
-    TRUE            shift and go to state 18
-    FALSE           shift and go to state 19
-    FLOAT           shift and go to state 14
-    INTEGER         shift and go to state 15
+    FLOAT           shift and go to state 13
+    INTEGER         shift and go to state 14
 
-    condition                      shift and go to state 21
-    number                         shift and go to state 20
+    condition                      shift and go to state 11
+    number                         shift and go to state 12
 
 state 6
 
-    (1) instruction -> PRINT printBody .
+    (5) instruction -> WHILE . condition instructionBody END
+    (24) condition -> . number comparator number
+    (30) number -> . FLOAT
+    (31) number -> . INTEGER
 
-    $end            reduce using rule 1 (instruction -> PRINT printBody .)
+    FLOAT           shift and go to state 13
+    INTEGER         shift and go to state 14
 
+    condition                      shift and go to state 15
+    number                         shift and go to state 12
 
 state 7
 
-    (4) printBody -> ID .
+    (9) instructionBody -> bodyLine .
+    (10) instructionBody -> bodyLine . instructionBody
+    (9) instructionBody -> . bodyLine
+    (10) instructionBody -> . bodyLine instructionBody
+    (6) bodyLine -> . ID ASSIGNMENT number
+    (7) bodyLine -> . ID ASSIGNMENT STRING
+    (8) bodyLine -> . PRINT printBody
 
-    $end            reduce using rule 4 (printBody -> ID .)
+    $end            reduce using rule 9 (instructionBody -> bodyLine .)
+    END             reduce using rule 9 (instructionBody -> bodyLine .)
+    ID              shift and go to state 4
+    PRINT           shift and go to state 8
 
+    bodyLine                       shift and go to state 7
+    instructionBody                shift and go to state 16
 
 state 8
 
-    (5) printBody -> TRUE .
-    (20) condition -> TRUE .
+    (8) bodyLine -> PRINT . printBody
+    (11) printBody -> . ID
+    (12) printBody -> . TRUE
+    (13) printBody -> . FALSE
+    (14) printBody -> . dataType
+    (15) printBody -> . condition
+    (32) dataType -> . STRING
+    (33) dataType -> . number
+    (24) condition -> . number comparator number
+    (30) number -> . FLOAT
+    (31) number -> . INTEGER
 
-  ! reduce/reduce conflict for $end resolved using rule 5 (printBody -> TRUE .)
-    $end            reduce using rule 5 (printBody -> TRUE .)
+    ID              shift and go to state 18
+    TRUE            shift and go to state 19
+    FALSE           shift and go to state 20
+    STRING          shift and go to state 23
+    FLOAT           shift and go to state 13
+    INTEGER         shift and go to state 14
 
-  ! $end            [ reduce using rule 20 (condition -> TRUE .) ]
-
+    printBody                      shift and go to state 17
+    dataType                       shift and go to state 21
+    condition                      shift and go to state 22
+    number                         shift and go to state 24
 
 state 9
 
-    (6) printBody -> FALSE .
-    (21) condition -> FALSE .
+    (2) instruction -> DEF ID . LPAREN parameters RPAREN instructionBody END
+    (3) instruction -> DEF ID . LPAREN RPAREN END
 
-  ! reduce/reduce conflict for $end resolved using rule 6 (printBody -> FALSE .)
-    $end            reduce using rule 6 (printBody -> FALSE .)
-
-  ! $end            [ reduce using rule 21 (condition -> FALSE .) ]
+    LPAREN          shift and go to state 25
 
 
 state 10
 
-    (7) printBody -> dataType .
+    (6) bodyLine -> ID ASSIGNMENT . number
+    (7) bodyLine -> ID ASSIGNMENT . STRING
+    (30) number -> . FLOAT
+    (31) number -> . INTEGER
 
-    $end            reduce using rule 7 (printBody -> dataType .)
+    STRING          shift and go to state 27
+    FLOAT           shift and go to state 13
+    INTEGER         shift and go to state 14
 
+    number                         shift and go to state 26
 
 state 11
 
-    (8) printBody -> condition .
+    (4) instruction -> IF condition .
 
-    $end            reduce using rule 8 (printBody -> condition .)
+    $end            reduce using rule 4 (instruction -> IF condition .)
 
 
 state 12
 
-    (25) dataType -> STRING .
+    (24) condition -> number . comparator number
+    (25) comparator -> . GREATERTHAN
+    (26) comparator -> . LESSTHAN
+    (27) comparator -> . EQUALS
+    (28) comparator -> . GREATEROREQUALS
+    (29) comparator -> . LESSOREQUALS
 
-    $end            reduce using rule 25 (dataType -> STRING .)
+    GREATERTHAN     shift and go to state 29
+    LESSTHAN        shift and go to state 30
+    EQUALS          shift and go to state 31
+    GREATEROREQUALS shift and go to state 32
+    LESSOREQUALS    shift and go to state 33
 
+    comparator                     shift and go to state 28
 
 state 13
 
-    (26) dataType -> number .
-    (22) condition -> number . GREATEROREQUALS number
+    (30) number -> FLOAT .
 
-    $end            reduce using rule 26 (dataType -> number .)
-    GREATEROREQUALS shift and go to state 22
+    GREATERTHAN     reduce using rule 30 (number -> FLOAT .)
+    LESSTHAN        reduce using rule 30 (number -> FLOAT .)
+    EQUALS          reduce using rule 30 (number -> FLOAT .)
+    GREATEROREQUALS reduce using rule 30 (number -> FLOAT .)
+    LESSOREQUALS    reduce using rule 30 (number -> FLOAT .)
+    ID              reduce using rule 30 (number -> FLOAT .)
+    PRINT           reduce using rule 30 (number -> FLOAT .)
+    $end            reduce using rule 30 (number -> FLOAT .)
+    END             reduce using rule 30 (number -> FLOAT .)
 
 
 state 14
 
-    (23) number -> FLOAT .
+    (31) number -> INTEGER .
 
-    GREATEROREQUALS reduce using rule 23 (number -> FLOAT .)
-    $end            reduce using rule 23 (number -> FLOAT .)
-    END             reduce using rule 23 (number -> FLOAT .)
+    GREATERTHAN     reduce using rule 31 (number -> INTEGER .)
+    LESSTHAN        reduce using rule 31 (number -> INTEGER .)
+    EQUALS          reduce using rule 31 (number -> INTEGER .)
+    GREATEROREQUALS reduce using rule 31 (number -> INTEGER .)
+    LESSOREQUALS    reduce using rule 31 (number -> INTEGER .)
+    ID              reduce using rule 31 (number -> INTEGER .)
+    PRINT           reduce using rule 31 (number -> INTEGER .)
+    $end            reduce using rule 31 (number -> INTEGER .)
+    END             reduce using rule 31 (number -> INTEGER .)
 
 
 state 15
 
-    (24) number -> INTEGER .
+    (5) instruction -> WHILE condition . instructionBody END
+    (9) instructionBody -> . bodyLine
+    (10) instructionBody -> . bodyLine instructionBody
+    (6) bodyLine -> . ID ASSIGNMENT number
+    (7) bodyLine -> . ID ASSIGNMENT STRING
+    (8) bodyLine -> . PRINT printBody
 
-    GREATEROREQUALS reduce using rule 24 (number -> INTEGER .)
-    $end            reduce using rule 24 (number -> INTEGER .)
-    END             reduce using rule 24 (number -> INTEGER .)
+    ID              shift and go to state 4
+    PRINT           shift and go to state 8
 
+    instructionBody                shift and go to state 34
+    bodyLine                       shift and go to state 7
 
 state 16
 
-    (2) instruction -> DEF ID . LPAREN parameters RPAREN END
-    (3) instruction -> DEF ID . LPAREN RPAREN END
+    (10) instructionBody -> bodyLine instructionBody .
 
-    LPAREN          shift and go to state 23
+    $end            reduce using rule 10 (instructionBody -> bodyLine instructionBody .)
+    END             reduce using rule 10 (instructionBody -> bodyLine instructionBody .)
 
 
 state 17
 
-    (9) instruction -> IF condition .
+    (8) bodyLine -> PRINT printBody .
 
-    $end            reduce using rule 9 (instruction -> IF condition .)
+    ID              reduce using rule 8 (bodyLine -> PRINT printBody .)
+    PRINT           reduce using rule 8 (bodyLine -> PRINT printBody .)
+    $end            reduce using rule 8 (bodyLine -> PRINT printBody .)
+    END             reduce using rule 8 (bodyLine -> PRINT printBody .)
 
 
 state 18
 
-    (20) condition -> TRUE .
+    (11) printBody -> ID .
 
-    $end            reduce using rule 20 (condition -> TRUE .)
-    END             reduce using rule 20 (condition -> TRUE .)
+    ID              reduce using rule 11 (printBody -> ID .)
+    PRINT           reduce using rule 11 (printBody -> ID .)
+    $end            reduce using rule 11 (printBody -> ID .)
+    END             reduce using rule 11 (printBody -> ID .)
 
 
 state 19
 
-    (21) condition -> FALSE .
+    (12) printBody -> TRUE .
 
-    $end            reduce using rule 21 (condition -> FALSE .)
-    END             reduce using rule 21 (condition -> FALSE .)
+    ID              reduce using rule 12 (printBody -> TRUE .)
+    PRINT           reduce using rule 12 (printBody -> TRUE .)
+    $end            reduce using rule 12 (printBody -> TRUE .)
+    END             reduce using rule 12 (printBody -> TRUE .)
 
 
 state 20
 
-    (22) condition -> number . GREATEROREQUALS number
+    (13) printBody -> FALSE .
 
-    GREATEROREQUALS shift and go to state 22
+    ID              reduce using rule 13 (printBody -> FALSE .)
+    PRINT           reduce using rule 13 (printBody -> FALSE .)
+    $end            reduce using rule 13 (printBody -> FALSE .)
+    END             reduce using rule 13 (printBody -> FALSE .)
 
 
 state 21
 
-    (10) instruction -> WHILE condition . END
+    (14) printBody -> dataType .
 
-    END             shift and go to state 24
+    ID              reduce using rule 14 (printBody -> dataType .)
+    PRINT           reduce using rule 14 (printBody -> dataType .)
+    $end            reduce using rule 14 (printBody -> dataType .)
+    END             reduce using rule 14 (printBody -> dataType .)
 
 
 state 22
 
-    (22) condition -> number GREATEROREQUALS . number
-    (23) number -> . FLOAT
-    (24) number -> . INTEGER
+    (15) printBody -> condition .
 
-    FLOAT           shift and go to state 14
-    INTEGER         shift and go to state 15
+    ID              reduce using rule 15 (printBody -> condition .)
+    PRINT           reduce using rule 15 (printBody -> condition .)
+    $end            reduce using rule 15 (printBody -> condition .)
+    END             reduce using rule 15 (printBody -> condition .)
 
-    number                         shift and go to state 25
 
 state 23
 
-    (2) instruction -> DEF ID LPAREN . parameters RPAREN END
-    (3) instruction -> DEF ID LPAREN . RPAREN END
-    (11) parameters -> . ID
-    (12) parameters -> . ID COMMA ID
+    (32) dataType -> STRING .
 
-    RPAREN          shift and go to state 28
-    ID              shift and go to state 26
+    ID              reduce using rule 32 (dataType -> STRING .)
+    PRINT           reduce using rule 32 (dataType -> STRING .)
+    $end            reduce using rule 32 (dataType -> STRING .)
+    END             reduce using rule 32 (dataType -> STRING .)
 
-    parameters                     shift and go to state 27
 
 state 24
 
-    (10) instruction -> WHILE condition END .
+    (33) dataType -> number .
+    (24) condition -> number . comparator number
+    (25) comparator -> . GREATERTHAN
+    (26) comparator -> . LESSTHAN
+    (27) comparator -> . EQUALS
+    (28) comparator -> . GREATEROREQUALS
+    (29) comparator -> . LESSOREQUALS
 
-    $end            reduce using rule 10 (instruction -> WHILE condition END .)
+    ID              reduce using rule 33 (dataType -> number .)
+    PRINT           reduce using rule 33 (dataType -> number .)
+    $end            reduce using rule 33 (dataType -> number .)
+    END             reduce using rule 33 (dataType -> number .)
+    GREATERTHAN     shift and go to state 29
+    LESSTHAN        shift and go to state 30
+    EQUALS          shift and go to state 31
+    GREATEROREQUALS shift and go to state 32
+    LESSOREQUALS    shift and go to state 33
 
+    comparator                     shift and go to state 28
 
 state 25
 
-    (22) condition -> number GREATEROREQUALS number .
+    (2) instruction -> DEF ID LPAREN . parameters RPAREN instructionBody END
+    (3) instruction -> DEF ID LPAREN . RPAREN END
+    (16) parameters -> . ID
+    (17) parameters -> . ID COMMA ID
 
-    $end            reduce using rule 22 (condition -> number GREATEROREQUALS number .)
-    END             reduce using rule 22 (condition -> number GREATEROREQUALS number .)
+    RPAREN          shift and go to state 37
+    ID              shift and go to state 35
 
+    parameters                     shift and go to state 36
 
 state 26
 
-    (11) parameters -> ID .
-    (12) parameters -> ID . COMMA ID
+    (6) bodyLine -> ID ASSIGNMENT number .
 
-    RPAREN          reduce using rule 11 (parameters -> ID .)
-    COMMA           shift and go to state 29
+    ID              reduce using rule 6 (bodyLine -> ID ASSIGNMENT number .)
+    PRINT           reduce using rule 6 (bodyLine -> ID ASSIGNMENT number .)
+    $end            reduce using rule 6 (bodyLine -> ID ASSIGNMENT number .)
+    END             reduce using rule 6 (bodyLine -> ID ASSIGNMENT number .)
 
 
 state 27
 
-    (2) instruction -> DEF ID LPAREN parameters . RPAREN END
+    (7) bodyLine -> ID ASSIGNMENT STRING .
 
-    RPAREN          shift and go to state 30
+    ID              reduce using rule 7 (bodyLine -> ID ASSIGNMENT STRING .)
+    PRINT           reduce using rule 7 (bodyLine -> ID ASSIGNMENT STRING .)
+    $end            reduce using rule 7 (bodyLine -> ID ASSIGNMENT STRING .)
+    END             reduce using rule 7 (bodyLine -> ID ASSIGNMENT STRING .)
 
 
 state 28
 
-    (3) instruction -> DEF ID LPAREN RPAREN . END
+    (24) condition -> number comparator . number
+    (30) number -> . FLOAT
+    (31) number -> . INTEGER
 
-    END             shift and go to state 31
+    FLOAT           shift and go to state 13
+    INTEGER         shift and go to state 14
 
+    number                         shift and go to state 38
 
 state 29
 
-    (12) parameters -> ID COMMA . ID
+    (25) comparator -> GREATERTHAN .
 
-    ID              shift and go to state 32
+    FLOAT           reduce using rule 25 (comparator -> GREATERTHAN .)
+    INTEGER         reduce using rule 25 (comparator -> GREATERTHAN .)
 
 
 state 30
 
-    (2) instruction -> DEF ID LPAREN parameters RPAREN . END
+    (26) comparator -> LESSTHAN .
 
-    END             shift and go to state 33
+    FLOAT           reduce using rule 26 (comparator -> LESSTHAN .)
+    INTEGER         reduce using rule 26 (comparator -> LESSTHAN .)
 
 
 state 31
+
+    (27) comparator -> EQUALS .
+
+    FLOAT           reduce using rule 27 (comparator -> EQUALS .)
+    INTEGER         reduce using rule 27 (comparator -> EQUALS .)
+
+
+state 32
+
+    (28) comparator -> GREATEROREQUALS .
+
+    FLOAT           reduce using rule 28 (comparator -> GREATEROREQUALS .)
+    INTEGER         reduce using rule 28 (comparator -> GREATEROREQUALS .)
+
+
+state 33
+
+    (29) comparator -> LESSOREQUALS .
+
+    FLOAT           reduce using rule 29 (comparator -> LESSOREQUALS .)
+    INTEGER         reduce using rule 29 (comparator -> LESSOREQUALS .)
+
+
+state 34
+
+    (5) instruction -> WHILE condition instructionBody . END
+
+    END             shift and go to state 39
+
+
+state 35
+
+    (16) parameters -> ID .
+    (17) parameters -> ID . COMMA ID
+
+    RPAREN          reduce using rule 16 (parameters -> ID .)
+    COMMA           shift and go to state 40
+
+
+state 36
+
+    (2) instruction -> DEF ID LPAREN parameters . RPAREN instructionBody END
+
+    RPAREN          shift and go to state 41
+
+
+state 37
+
+    (3) instruction -> DEF ID LPAREN RPAREN . END
+
+    END             shift and go to state 42
+
+
+state 38
+
+    (24) condition -> number comparator number .
+
+    $end            reduce using rule 24 (condition -> number comparator number .)
+    ID              reduce using rule 24 (condition -> number comparator number .)
+    PRINT           reduce using rule 24 (condition -> number comparator number .)
+    END             reduce using rule 24 (condition -> number comparator number .)
+
+
+state 39
+
+    (5) instruction -> WHILE condition instructionBody END .
+
+    $end            reduce using rule 5 (instruction -> WHILE condition instructionBody END .)
+
+
+state 40
+
+    (17) parameters -> ID COMMA . ID
+
+    ID              shift and go to state 43
+
+
+state 41
+
+    (2) instruction -> DEF ID LPAREN parameters RPAREN . instructionBody END
+    (9) instructionBody -> . bodyLine
+    (10) instructionBody -> . bodyLine instructionBody
+    (6) bodyLine -> . ID ASSIGNMENT number
+    (7) bodyLine -> . ID ASSIGNMENT STRING
+    (8) bodyLine -> . PRINT printBody
+
+    ID              shift and go to state 4
+    PRINT           shift and go to state 8
+
+    instructionBody                shift and go to state 44
+    bodyLine                       shift and go to state 7
+
+state 42
 
     (3) instruction -> DEF ID LPAREN RPAREN END .
 
     $end            reduce using rule 3 (instruction -> DEF ID LPAREN RPAREN END .)
 
 
-state 32
+state 43
 
-    (12) parameters -> ID COMMA ID .
+    (17) parameters -> ID COMMA ID .
 
-    RPAREN          reduce using rule 12 (parameters -> ID COMMA ID .)
+    RPAREN          reduce using rule 17 (parameters -> ID COMMA ID .)
 
 
-state 33
+state 44
 
-    (2) instruction -> DEF ID LPAREN parameters RPAREN END .
+    (2) instruction -> DEF ID LPAREN parameters RPAREN instructionBody . END
 
-    $end            reduce using rule 2 (instruction -> DEF ID LPAREN parameters RPAREN END .)
+    END             shift and go to state 45
 
-WARNING: 
-WARNING: Conflicts:
-WARNING: 
-WARNING: reduce/reduce conflict in state 8 resolved using rule (printBody -> TRUE)
-WARNING: rejected rule (condition -> TRUE) in state 8
-WARNING: reduce/reduce conflict in state 9 resolved using rule (printBody -> FALSE)
-WARNING: rejected rule (condition -> FALSE) in state 9
+
+state 45
+
+    (2) instruction -> DEF ID LPAREN parameters RPAREN instructionBody END .
+
+    $end            reduce using rule 2 (instruction -> DEF ID LPAREN parameters RPAREN instructionBody END .)
+

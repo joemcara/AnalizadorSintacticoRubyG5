@@ -17,6 +17,7 @@ tokens = (
   'AND',
   'GREATEROREQUALS',
   'ID',
+  'LESSOREQUALS',
   #Nick
   'ASSIGNMENT',
   'ASSIGNINCREMENT',
@@ -44,6 +45,7 @@ t_EQUALS = r'=='
 t_GREATEROREQUALS = r'>='
 t_STRING =r'"[^"]*"'
 t_AND = r'&&'
+t_LESSOREQUALS = r'<='
 
 #Nick
 t_ASSIGNMENT = r'='

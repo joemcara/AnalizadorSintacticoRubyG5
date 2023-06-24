@@ -4,12 +4,33 @@ import ply.yacc as yacc
 #Intructions
 
 def p_instruction(p):
-  'instruction : PRINT printBody'
+  'instruction : instructionBody'
 
 def p_instructionFunction(p):
   '''
-  instruction : DEF ID LPAREN parameters RPAREN END
+  instruction : DEF ID LPAREN parameters RPAREN instructionBody END
               | DEF ID LPAREN RPAREN END
+  '''
+
+def p_instructionConditional(p):
+  '''  
+    instruction : IF condition 
+  '''
+
+def p_instructionLoop(p):
+  '''
+    instruction : WHILE condition instructionBody END
+  '''
+def p_bodyLine(p):
+  '''
+    bodyLine : ID ASSIGNMENT number
+                    | ID ASSIGNMENT STRING
+                    | PRINT printBody  
+  '''
+def p_instructionBody(p):
+  '''
+    instructionBody : bodyLine
+                    | bodyLine instructionBody 
   '''
 
 def p_printBody(p):
@@ -19,15 +40,6 @@ def p_printBody(p):
               | FALSE 
               | dataType
               | condition
-  '''
-
-def p_instructionConditional(p):
-  '''  
-    instruction : IF condition 
-  '''
-def p_instructionLoop(p):
-  '''
-    instruction : WHILE condition END
   '''
 #Parameters
 def p_parameters(p):
@@ -40,28 +52,34 @@ def p_parameters(p):
 
 
 #Operations
-def p_operationsArithmetic(p):
+def p_arithmeticOperator(p):
 
   '''
-    arithmetic : PLUS
-              | MINUS
-              | POWER
-              | MULTIPLICATION 
-              | DIVISION
+    arithmaticOperator : PLUS
+                        | MINUS
+                        | POWER
+                        | MULTIPLICATION 
+                        | DIVISION
   '''
 
 def p_operations(p):
   '''
-    operations : dataType arithmetic dataType
-               | arithmetic dataType 
+    operations : dataType arithmaticOperator dataType
   '''
 #DataTypes
 
 def p_condition(p):
   '''
-    condition : TRUE
-               | FALSE
-               | number GREATEROREQUALS number
+    condition : number comparator number
+  '''
+
+def p_comparator(p):
+  '''
+    comparator : GREATERTHAN
+               | LESSTHAN
+               | EQUALS
+               | GREATEROREQUALS
+               | LESSOREQUALS
   '''
 
 def p_number(p):
