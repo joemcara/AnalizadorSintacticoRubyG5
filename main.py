@@ -4,13 +4,12 @@ import ply.yacc as yacc
 #Intructions
 
 def p_instruction(p):
-  '''instruction : PRINT printBody
-  '''
+  'instruction : PRINT printBody'
 
 def p_instructionFunction(p):
   '''
   instruction : DEF ID LPAREN parameters RPAREN END
-                  | DEF ID LPAREN RPAREN END
+              | DEF ID LPAREN RPAREN END
   '''
 
 def p_printBody(p):
@@ -20,7 +19,6 @@ def p_printBody(p):
               | FALSE 
               | dataType
               | condition
-              | STRING
   '''
 
 def p_instructionConditional(p):
@@ -56,20 +54,26 @@ def p_operations(p):
   '''
     operations : dataType arithmetic dataType
                | arithmetic dataType 
-
   '''
 #DataTypes
 
 def p_condition(p):
   '''
     condition : TRUE
-               | FALSE 
+               | FALSE
+               | number GREATEROREQUALS number
   '''
+
+def p_number(p):
+    '''
+      number : FLOAT
+             | INTEGER
+    '''
 
 def p_dataType(p):
   '''
-  dataType : FLOAT
-           | INTEGER
+  dataType : STRING
+           | number
   '''
 
 def p_error(p):

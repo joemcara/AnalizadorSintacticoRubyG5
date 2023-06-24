@@ -17,7 +17,6 @@ Unused terminals:
     EQUALS
     FOR
     GETS
-    GREATEROREQUALS
     GREATERTHAN
     IN
     LESSTHAN
@@ -33,6 +32,7 @@ Rule 0     S' -> instruction
 Rule 1     instruction -> PRINT printBody
 Rule 2     instruction -> DEF ID LPAREN parameters RPAREN END
 Rule 3     instruction -> DEF ID LPAREN RPAREN END
+<<<<<<< Updated upstream
 Rule 4     printBody -> ID
 Rule 5     printBody -> TRUE
 Rule 6     printBody -> FALSE
@@ -54,6 +54,27 @@ Rule 21    condition -> TRUE
 Rule 22    condition -> FALSE
 Rule 23    dataType -> FLOAT
 Rule 24    dataType -> INTEGER
+=======
+Rule 4     instruction -> IF condition
+Rule 5     instruction -> WHILE condition END
+Rule 6     parameters -> ID
+Rule 7     parameters -> ID COMMA ID
+Rule 8     arithmetic -> PLUS
+Rule 9     arithmetic -> MINUS
+Rule 10    arithmetic -> POWER
+Rule 11    arithmetic -> MULTIPLICATION
+Rule 12    arithmetic -> DIVISION
+Rule 13    operations -> dataType arithmetic dataType
+Rule 14    operations -> arithmetic dataType
+Rule 15    condition -> TRUE
+Rule 16    condition -> FALSE
+Rule 17    condition -> number GREATEROREQUALS number
+Rule 18    condition -> <empty>
+Rule 19    number -> FLOAT
+Rule 20    number -> INTEGER
+Rule 21    dataType -> STRING
+Rule 22    dataType -> number
+>>>>>>> Stashed changes
 
 Terminals, with rules where they appear
 
@@ -74,16 +95,25 @@ ELSE                 :
 ELSIF                : 
 END                  : 2 3 11
 EQUALS               : 
+<<<<<<< Updated upstream
 FALSE                : 6 22
 FLOAT                : 23
+=======
+FALSE                : 16
+FLOAT                : 19
+>>>>>>> Stashed changes
 FOR                  : 
 GETS                 : 
-GREATEROREQUALS      : 
+GREATEROREQUALS      : 17
 GREATERTHAN          : 
 ID                   : 2 3 4 12 13 13
 IF                   : 10
 IN                   : 
+<<<<<<< Updated upstream
 INTEGER              : 24
+=======
+INTEGER              : 20
+>>>>>>> Stashed changes
 LESSTHAN             : 
 LPAREN               : 2 3
 MINUS                : 15
@@ -94,7 +124,11 @@ POWER                : 16
 PRINT                : 1
 PUTS                 : 
 RPAREN               : 2 3
+<<<<<<< Updated upstream
 STRING               : 9
+=======
+STRING               : 21
+>>>>>>> Stashed changes
 THEN                 : 
 TO_F                 : 
 TO_I                 : 
@@ -108,6 +142,7 @@ arithmetic           : 19 20
 condition            : 8 10 11
 dataType             : 7 19 19 20
 instruction          : 0
+number               : 17 17 22
 operations           : 
 parameters           : 2
 printBody            : 1
@@ -171,6 +206,7 @@ state 3
 
 state 4
 
+<<<<<<< Updated upstream
     (10) instruction -> IF . condition
     (21) condition -> . TRUE
     (22) condition -> . FALSE
@@ -190,6 +226,43 @@ state 5
     FALSE           shift and go to state 18
 
     condition                      shift and go to state 19
+=======
+    (4) instruction -> IF . condition
+    (15) condition -> . TRUE
+    (16) condition -> . FALSE
+    (17) condition -> . number GREATEROREQUALS number
+    (18) condition -> .
+    (19) number -> . FLOAT
+    (20) number -> . INTEGER
+
+    TRUE            shift and go to state 9
+    FALSE           shift and go to state 10
+    $end            reduce using rule 18 (condition -> .)
+    FLOAT           shift and go to state 12
+    INTEGER         shift and go to state 13
+
+    condition                      shift and go to state 8
+    number                         shift and go to state 11
+
+state 5
+
+    (5) instruction -> WHILE . condition END
+    (15) condition -> . TRUE
+    (16) condition -> . FALSE
+    (17) condition -> . number GREATEROREQUALS number
+    (18) condition -> .
+    (19) number -> . FLOAT
+    (20) number -> . INTEGER
+
+    TRUE            shift and go to state 9
+    FALSE           shift and go to state 10
+    END             reduce using rule 18 (condition -> .)
+    FLOAT           shift and go to state 12
+    INTEGER         shift and go to state 13
+
+    condition                      shift and go to state 14
+    number                         shift and go to state 11
+>>>>>>> Stashed changes
 
 state 6
 
@@ -202,7 +275,11 @@ state 7
 
     (4) printBody -> ID .
 
+<<<<<<< Updated upstream
     $end            reduce using rule 4 (printBody -> ID .)
+=======
+    LPAREN          shift and go to state 15
+>>>>>>> Stashed changes
 
 
 state 8
@@ -236,29 +313,84 @@ state 10
 
 state 11
 
+<<<<<<< Updated upstream
     (8) printBody -> condition .
 
     $end            reduce using rule 8 (printBody -> condition .)
+=======
+    (17) condition -> number . GREATEROREQUALS number
+
+    GREATEROREQUALS shift and go to state 16
+>>>>>>> Stashed changes
 
 
 state 12
 
+<<<<<<< Updated upstream
     (9) printBody -> STRING .
 
     $end            reduce using rule 9 (printBody -> STRING .)
 
+=======
+    (19) number -> FLOAT .
+
+    GREATEROREQUALS reduce using rule 19 (number -> FLOAT .)
+    $end            reduce using rule 19 (number -> FLOAT .)
+    END             reduce using rule 19 (number -> FLOAT .)
+
 
 state 13
+
+    (20) number -> INTEGER .
+
+    GREATEROREQUALS reduce using rule 20 (number -> INTEGER .)
+    $end            reduce using rule 20 (number -> INTEGER .)
+    END             reduce using rule 20 (number -> INTEGER .)
+
+
+state 14
+
+    (5) instruction -> WHILE condition . END
+
+    END             shift and go to state 17
+
+
+state 15
+
+    (2) instruction -> DEF ID LPAREN . parameters RPAREN END
+    (3) instruction -> DEF ID LPAREN . RPAREN END
+    (6) parameters -> . ID
+    (7) parameters -> . ID COMMA ID
+
+    RPAREN          shift and go to state 20
+    ID              shift and go to state 18
+
+    parameters                     shift and go to state 19
+>>>>>>> Stashed changes
+
+state 16
+
+    (17) condition -> number GREATEROREQUALS . number
+    (19) number -> . FLOAT
+    (20) number -> . INTEGER
+
+    FLOAT           shift and go to state 12
+    INTEGER         shift and go to state 13
+
+    number                         shift and go to state 21
+
+state 17
 
     (23) dataType -> FLOAT .
 
     $end            reduce using rule 23 (dataType -> FLOAT .)
 
 
-state 14
+state 18
 
     (24) dataType -> INTEGER .
 
+<<<<<<< Updated upstream
     $end            reduce using rule 24 (dataType -> INTEGER .)
 
 
@@ -298,6 +430,10 @@ state 19
     (11) instruction -> WHILE condition . END
 
     END             shift and go to state 21
+=======
+    RPAREN          reduce using rule 6 (parameters -> ID .)
+    COMMA           shift and go to state 22
+>>>>>>> Stashed changes
 
 
 state 20
@@ -358,19 +494,63 @@ state 26
 
 state 27
 
+    (2) instruction -> DEF ID LPAREN parameters . RPAREN END
+
+    RPAREN          shift and go to state 23
+
+
+state 20
+
+    (3) instruction -> DEF ID LPAREN RPAREN . END
+
+    END             shift and go to state 24
+
+
+state 21
+
+    (17) condition -> number GREATEROREQUALS number .
+
+    $end            reduce using rule 17 (condition -> number GREATEROREQUALS number .)
+    END             reduce using rule 17 (condition -> number GREATEROREQUALS number .)
+
+
+state 22
+
+    (7) parameters -> ID COMMA . ID
+
+    ID              shift and go to state 25
+
+
+state 23
+
+    (2) instruction -> DEF ID LPAREN parameters RPAREN . END
+
+    END             shift and go to state 26
+
+
+state 24
+
     (3) instruction -> DEF ID LPAREN RPAREN END .
 
     $end            reduce using rule 3 (instruction -> DEF ID LPAREN RPAREN END .)
 
 
+<<<<<<< Updated upstream
 state 28
+=======
+state 25
+>>>>>>> Stashed changes
 
     (13) parameters -> ID COMMA ID .
 
     RPAREN          reduce using rule 13 (parameters -> ID COMMA ID .)
 
 
+<<<<<<< Updated upstream
 state 29
+=======
+state 26
+>>>>>>> Stashed changes
 
     (2) instruction -> DEF ID LPAREN parameters RPAREN END .
 
