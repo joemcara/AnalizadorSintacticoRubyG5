@@ -18,23 +18,14 @@ def p_instructionConditional(p):
   '''
 def p_conditional(p):
   '''
-    conditional : IF condition conditionalBody END
-                | IF condition conditionalBody conditionalElsif END
-                | IF condition conditionalBody ELSE conditionalBody END
-                | IF condition conditionalBody conditionalElsif ELSE conditionalBody END
+    conditional : IF condition instructionBody END
+                | IF condition instructionBody conditionalElsif END
+                | IF condition instructionBody ELSE instructionBody END
+                | IF condition instructionBody conditionalElsif ELSE instructionBody END
   '''
 def p_elsif(p):
   '''
-  elsif : ELSIF condition conditionalBody 
-  '''
-
-def p_conditionalBody(p):
-  '''
-    conditionalBody : instructionBody
-                    | instructionBody nestedConditional
-                    | nestedConditional instructionBody
-                    | nestedConditional
-                    | instructionBody nestedConditional instructionBody
+  elsif : ELSIF condition instructionBody 
   '''
 def p_nestedConditional(p):
   '''
@@ -56,17 +47,9 @@ def p_instructionLoop(p):
 
 def p_whileLoop(P):
   '''
-  whileLoop : WHILE condition whileBody END
+  whileLoop : WHILE condition instructionBody END
   '''
 
-def p_whileBody(p):
-  '''
-    whileBody : instructionBody
-                    | instructionBody nestedWhile
-                    | nestedWhile instructionBody
-                    | nestedWhile
-                    | instructionBody nestedWhile instructionBody
-  '''
 def p_nestedWhile(p):
   '''
     nestedWhile : whileLoop
@@ -78,7 +61,9 @@ def p_bodyLine(p):
   '''
     bodyLine : ID ASSIGNMENT number
                     | ID ASSIGNMENT STRING
-                    | PRINT printBody  
+                    | PRINT printBody 
+                    | nestedConditional
+                    | nestedWhile
   '''
 def p_instructionBody(p):
   '''
@@ -121,9 +106,15 @@ def p_operation(p):
   '''
 #DataTypes
 
+def p_conditionValue(p):
+  '''
+    conditionValue : ID
+                   | number
+  '''
+
 def p_condition(p):
   '''
-    condition : number comparator number
+    condition : conditionValue comparator conditionValue
   '''
 
 def p_comparator(p):

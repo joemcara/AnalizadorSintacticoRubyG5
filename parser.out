@@ -27,127 +27,120 @@ Rule 1     instruction -> instructionBody
 Rule 2     instruction -> DEF ID LPAREN parameters RPAREN instructionBody END
 Rule 3     instruction -> DEF ID LPAREN RPAREN END
 Rule 4     instruction -> conditional
-Rule 5     conditional -> IF condition conditionalBody END
-Rule 6     conditional -> IF condition conditionalBody conditionalElsif END
-Rule 7     conditional -> IF condition conditionalBody ELSE conditionalBody END
-Rule 8     conditional -> IF condition conditionalBody conditionalElsif ELSE conditionalBody END
-Rule 9     elsif -> ELSIF condition conditionalBody
-Rule 10    conditionalBody -> instructionBody
-Rule 11    conditionalBody -> instructionBody nestedConditional
-Rule 12    conditionalBody -> nestedConditional instructionBody
-Rule 13    conditionalBody -> nestedConditional
-Rule 14    conditionalBody -> instructionBody nestedConditional instructionBody
-Rule 15    nestedConditional -> conditional
-Rule 16    nestedConditional -> conditional nestedConditional
-Rule 17    conditionalElsif -> elsif
-Rule 18    conditionalElsif -> elsif conditionalElsif
-Rule 19    instruction -> whileLoop
-Rule 20    whileLoop -> WHILE condition whileBody END
-Rule 21    whileBody -> instructionBody
-Rule 22    whileBody -> instructionBody nestedWhile
-Rule 23    whileBody -> nestedWhile instructionBody
-Rule 24    whileBody -> nestedWhile
-Rule 25    whileBody -> instructionBody nestedWhile instructionBody
-Rule 26    nestedWhile -> whileLoop
-Rule 27    nestedWhile -> whileLoop nestedWhile
-Rule 28    bodyLine -> ID ASSIGNMENT number
-Rule 29    bodyLine -> ID ASSIGNMENT STRING
-Rule 30    bodyLine -> PRINT printBody
-Rule 31    instructionBody -> bodyLine
-Rule 32    instructionBody -> bodyLine instructionBody
-Rule 33    printBody -> ID
-Rule 34    printBody -> TRUE
-Rule 35    printBody -> FALSE
-Rule 36    printBody -> dataType
-Rule 37    printBody -> condition
-Rule 38    parameters -> ID
-Rule 39    parameters -> ID COMMA ID
-Rule 40    arithmaticOperator -> PLUS
-Rule 41    arithmaticOperator -> MINUS
-Rule 42    arithmaticOperator -> POWER
-Rule 43    arithmaticOperator -> MULTIPLICATION
-Rule 44    arithmaticOperator -> DIVISION
-Rule 45    operations -> number arithmaticOperator number
-Rule 46    condition -> number comparator number
-Rule 47    comparator -> GREATERTHAN
-Rule 48    comparator -> LESSTHAN
-Rule 49    comparator -> EQUALS
-Rule 50    comparator -> GREATEROREQUALS
-Rule 51    comparator -> LESSOREQUALS
-Rule 52    number -> FLOAT
-Rule 53    number -> INTEGER
-Rule 54    dataType -> STRING
-Rule 55    dataType -> number
+Rule 5     conditional -> IF condition instructionBody END
+Rule 6     conditional -> IF condition instructionBody conditionalElsif END
+Rule 7     conditional -> IF condition instructionBody ELSE instructionBody END
+Rule 8     conditional -> IF condition instructionBody conditionalElsif ELSE instructionBody END
+Rule 9     elsif -> ELSIF condition instructionBody
+Rule 10    nestedConditional -> conditional
+Rule 11    nestedConditional -> conditional nestedConditional
+Rule 12    conditionalElsif -> elsif
+Rule 13    conditionalElsif -> elsif conditionalElsif
+Rule 14    instruction -> whileLoop
+Rule 15    whileLoop -> WHILE condition instructionBody END
+Rule 16    nestedWhile -> whileLoop
+Rule 17    nestedWhile -> whileLoop nestedWhile
+Rule 18    bodyLine -> ID ASSIGNMENT number
+Rule 19    bodyLine -> ID ASSIGNMENT STRING
+Rule 20    bodyLine -> PRINT printBody
+Rule 21    bodyLine -> nestedConditional
+Rule 22    bodyLine -> nestedWhile
+Rule 23    instructionBody -> bodyLine
+Rule 24    instructionBody -> bodyLine instructionBody
+Rule 25    printBody -> ID
+Rule 26    printBody -> TRUE
+Rule 27    printBody -> FALSE
+Rule 28    printBody -> dataType
+Rule 29    printBody -> condition
+Rule 30    parameters -> ID
+Rule 31    parameters -> ID COMMA ID
+Rule 32    arithmaticOperator -> PLUS
+Rule 33    arithmaticOperator -> MINUS
+Rule 34    arithmaticOperator -> POWER
+Rule 35    arithmaticOperator -> MULTIPLICATION
+Rule 36    arithmaticOperator -> DIVISION
+Rule 37    operations -> number arithmaticOperator number
+Rule 38    conditionValue -> ID
+Rule 39    conditionValue -> number
+Rule 40    condition -> conditionValue comparator conditionValue
+Rule 41    comparator -> GREATERTHAN
+Rule 42    comparator -> LESSTHAN
+Rule 43    comparator -> EQUALS
+Rule 44    comparator -> GREATEROREQUALS
+Rule 45    comparator -> LESSOREQUALS
+Rule 46    number -> FLOAT
+Rule 47    number -> INTEGER
+Rule 48    dataType -> STRING
+Rule 49    dataType -> number
 
 Terminals, with rules where they appear
 
 AND                  : 
 ASSIGNDECREMENT      : 
 ASSIGNINCREMENT      : 
-ASSIGNMENT           : 28 29
+ASSIGNMENT           : 18 19
 BREAK                : 
 CASE                 : 
 CHOMP                : 
 CLASS                : 
 CLOSEDBRACKET        : 
-COMMA                : 39
+COMMA                : 31
 DEF                  : 2 3
-DIVISION             : 44
+DIVISION             : 36
 DOT                  : 
 ELSE                 : 7 8
 ELSIF                : 9
-END                  : 2 3 5 6 7 8 20
-EQUALS               : 49
-FALSE                : 35
-FLOAT                : 52
+END                  : 2 3 5 6 7 8 15
+EQUALS               : 43
+FALSE                : 27
+FLOAT                : 46
 FOR                  : 
 GETS                 : 
-GREATEROREQUALS      : 50
-GREATERTHAN          : 47
-ID                   : 2 3 28 29 33 38 39 39
+GREATEROREQUALS      : 44
+GREATERTHAN          : 41
+ID                   : 2 3 18 19 25 30 31 31 38
 IF                   : 5 6 7 8
 IN                   : 
-INTEGER              : 53
-LESSOREQUALS         : 51
-LESSTHAN             : 48
+INTEGER              : 47
+LESSOREQUALS         : 45
+LESSTHAN             : 42
 LPAREN               : 2 3
-MINUS                : 41
-MULTIPLICATION       : 43
+MINUS                : 33
+MULTIPLICATION       : 35
 OPENBRACKET          : 
-PLUS                 : 40
-POWER                : 42
-PRINT                : 30
+PLUS                 : 32
+POWER                : 34
+PRINT                : 20
 PUTS                 : 
 RPAREN               : 2 3
-STRING               : 29 54
+STRING               : 19 48
 THEN                 : 
 TO_F                 : 
 TO_I                 : 
-TRUE                 : 34
-WHILE                : 20
+TRUE                 : 26
+WHILE                : 15
 error                : 
 
 Nonterminals, with rules where they appear
 
-arithmaticOperator   : 45
-bodyLine             : 31 32
-comparator           : 46
-condition            : 5 6 7 8 9 20 37
-conditional          : 4 15 16
-conditionalBody      : 5 6 7 7 8 8 9
-conditionalElsif     : 6 8 18
-dataType             : 36
-elsif                : 17 18
+arithmaticOperator   : 37
+bodyLine             : 23 24
+comparator           : 40
+condition            : 5 6 7 8 9 15 29
+conditionValue       : 40 40
+conditional          : 4 10 11
+conditionalElsif     : 6 8 13
+dataType             : 28
+elsif                : 12 13
 instruction          : 0
-instructionBody      : 1 2 10 11 12 14 14 21 22 23 25 25 32
-nestedConditional    : 11 12 13 14 16
-nestedWhile          : 22 23 24 25 27
-number               : 28 45 45 46 46 55
+instructionBody      : 1 2 5 6 7 7 8 8 9 15 24
+nestedConditional    : 11 21
+nestedWhile          : 17 22
+number               : 18 37 37 39 49
 operations           : 
 parameters           : 2
-printBody            : 30
-whileBody            : 20
-whileLoop            : 19 26 27
+printBody            : 20
+whileLoop            : 14 16 17
 
 Parsing method: LALR
 
@@ -158,17 +151,23 @@ state 0
     (2) instruction -> . DEF ID LPAREN parameters RPAREN instructionBody END
     (3) instruction -> . DEF ID LPAREN RPAREN END
     (4) instruction -> . conditional
-    (19) instruction -> . whileLoop
-    (31) instructionBody -> . bodyLine
-    (32) instructionBody -> . bodyLine instructionBody
-    (5) conditional -> . IF condition conditionalBody END
-    (6) conditional -> . IF condition conditionalBody conditionalElsif END
-    (7) conditional -> . IF condition conditionalBody ELSE conditionalBody END
-    (8) conditional -> . IF condition conditionalBody conditionalElsif ELSE conditionalBody END
-    (20) whileLoop -> . WHILE condition whileBody END
-    (28) bodyLine -> . ID ASSIGNMENT number
-    (29) bodyLine -> . ID ASSIGNMENT STRING
-    (30) bodyLine -> . PRINT printBody
+    (14) instruction -> . whileLoop
+    (23) instructionBody -> . bodyLine
+    (24) instructionBody -> . bodyLine instructionBody
+    (5) conditional -> . IF condition instructionBody END
+    (6) conditional -> . IF condition instructionBody conditionalElsif END
+    (7) conditional -> . IF condition instructionBody ELSE instructionBody END
+    (8) conditional -> . IF condition instructionBody conditionalElsif ELSE instructionBody END
+    (15) whileLoop -> . WHILE condition instructionBody END
+    (18) bodyLine -> . ID ASSIGNMENT number
+    (19) bodyLine -> . ID ASSIGNMENT STRING
+    (20) bodyLine -> . PRINT printBody
+    (21) bodyLine -> . nestedConditional
+    (22) bodyLine -> . nestedWhile
+    (10) nestedConditional -> . conditional
+    (11) nestedConditional -> . conditional nestedConditional
+    (16) nestedWhile -> . whileLoop
+    (17) nestedWhile -> . whileLoop nestedWhile
 
     DEF             shift and go to state 3
     IF              shift and go to state 8
@@ -181,6 +180,8 @@ state 0
     conditional                    shift and go to state 5
     whileLoop                      shift and go to state 6
     bodyLine                       shift and go to state 7
+    nestedConditional              shift and go to state 11
+    nestedWhile                    shift and go to state 12
 
 state 1
 
@@ -200,995 +201,1062 @@ state 3
     (2) instruction -> DEF . ID LPAREN parameters RPAREN instructionBody END
     (3) instruction -> DEF . ID LPAREN RPAREN END
 
-    ID              shift and go to state 11
+    ID              shift and go to state 13
 
 
 state 4
 
-    (28) bodyLine -> ID . ASSIGNMENT number
-    (29) bodyLine -> ID . ASSIGNMENT STRING
+    (18) bodyLine -> ID . ASSIGNMENT number
+    (19) bodyLine -> ID . ASSIGNMENT STRING
 
-    ASSIGNMENT      shift and go to state 12
+    ASSIGNMENT      shift and go to state 14
 
 
 state 5
 
     (4) instruction -> conditional .
+    (10) nestedConditional -> conditional .
+    (11) nestedConditional -> conditional . nestedConditional
+    (10) nestedConditional -> . conditional
+    (11) nestedConditional -> . conditional nestedConditional
+    (5) conditional -> . IF condition instructionBody END
+    (6) conditional -> . IF condition instructionBody conditionalElsif END
+    (7) conditional -> . IF condition instructionBody ELSE instructionBody END
+    (8) conditional -> . IF condition instructionBody conditionalElsif ELSE instructionBody END
 
+  ! reduce/reduce conflict for $end resolved using rule 4 (instruction -> conditional .)
+  ! shift/reduce conflict for IF resolved as shift
     $end            reduce using rule 4 (instruction -> conditional .)
+    ID              reduce using rule 10 (nestedConditional -> conditional .)
+    PRINT           reduce using rule 10 (nestedConditional -> conditional .)
+    WHILE           reduce using rule 10 (nestedConditional -> conditional .)
+    IF              shift and go to state 8
 
+  ! IF              [ reduce using rule 10 (nestedConditional -> conditional .) ]
+  ! $end            [ reduce using rule 10 (nestedConditional -> conditional .) ]
+
+    conditional                    shift and go to state 15
+    nestedConditional              shift and go to state 16
 
 state 6
 
-    (19) instruction -> whileLoop .
+    (14) instruction -> whileLoop .
+    (16) nestedWhile -> whileLoop .
+    (17) nestedWhile -> whileLoop . nestedWhile
+    (16) nestedWhile -> . whileLoop
+    (17) nestedWhile -> . whileLoop nestedWhile
+    (15) whileLoop -> . WHILE condition instructionBody END
 
-    $end            reduce using rule 19 (instruction -> whileLoop .)
+  ! reduce/reduce conflict for $end resolved using rule 14 (instruction -> whileLoop .)
+  ! shift/reduce conflict for WHILE resolved as shift
+    $end            reduce using rule 14 (instruction -> whileLoop .)
+    ID              reduce using rule 16 (nestedWhile -> whileLoop .)
+    PRINT           reduce using rule 16 (nestedWhile -> whileLoop .)
+    IF              reduce using rule 16 (nestedWhile -> whileLoop .)
+    WHILE           shift and go to state 9
 
+  ! WHILE           [ reduce using rule 16 (nestedWhile -> whileLoop .) ]
+  ! $end            [ reduce using rule 16 (nestedWhile -> whileLoop .) ]
+
+    whileLoop                      shift and go to state 17
+    nestedWhile                    shift and go to state 18
 
 state 7
 
-    (31) instructionBody -> bodyLine .
-    (32) instructionBody -> bodyLine . instructionBody
-    (31) instructionBody -> . bodyLine
-    (32) instructionBody -> . bodyLine instructionBody
-    (28) bodyLine -> . ID ASSIGNMENT number
-    (29) bodyLine -> . ID ASSIGNMENT STRING
-    (30) bodyLine -> . PRINT printBody
+    (23) instructionBody -> bodyLine .
+    (24) instructionBody -> bodyLine . instructionBody
+    (23) instructionBody -> . bodyLine
+    (24) instructionBody -> . bodyLine instructionBody
+    (18) bodyLine -> . ID ASSIGNMENT number
+    (19) bodyLine -> . ID ASSIGNMENT STRING
+    (20) bodyLine -> . PRINT printBody
+    (21) bodyLine -> . nestedConditional
+    (22) bodyLine -> . nestedWhile
+    (10) nestedConditional -> . conditional
+    (11) nestedConditional -> . conditional nestedConditional
+    (16) nestedWhile -> . whileLoop
+    (17) nestedWhile -> . whileLoop nestedWhile
+    (5) conditional -> . IF condition instructionBody END
+    (6) conditional -> . IF condition instructionBody conditionalElsif END
+    (7) conditional -> . IF condition instructionBody ELSE instructionBody END
+    (8) conditional -> . IF condition instructionBody conditionalElsif ELSE instructionBody END
+    (15) whileLoop -> . WHILE condition instructionBody END
 
-    $end            reduce using rule 31 (instructionBody -> bodyLine .)
-    IF              reduce using rule 31 (instructionBody -> bodyLine .)
-    END             reduce using rule 31 (instructionBody -> bodyLine .)
-    ELSE            reduce using rule 31 (instructionBody -> bodyLine .)
-    ELSIF           reduce using rule 31 (instructionBody -> bodyLine .)
-    WHILE           reduce using rule 31 (instructionBody -> bodyLine .)
+    $end            reduce using rule 23 (instructionBody -> bodyLine .)
+    END             reduce using rule 23 (instructionBody -> bodyLine .)
+    ELSE            reduce using rule 23 (instructionBody -> bodyLine .)
+    ELSIF           reduce using rule 23 (instructionBody -> bodyLine .)
     ID              shift and go to state 4
     PRINT           shift and go to state 10
+    IF              shift and go to state 8
+    WHILE           shift and go to state 9
 
     bodyLine                       shift and go to state 7
-    instructionBody                shift and go to state 13
+    instructionBody                shift and go to state 19
+    nestedConditional              shift and go to state 11
+    nestedWhile                    shift and go to state 12
+    conditional                    shift and go to state 15
+    whileLoop                      shift and go to state 17
 
 state 8
 
-    (5) conditional -> IF . condition conditionalBody END
-    (6) conditional -> IF . condition conditionalBody conditionalElsif END
-    (7) conditional -> IF . condition conditionalBody ELSE conditionalBody END
-    (8) conditional -> IF . condition conditionalBody conditionalElsif ELSE conditionalBody END
-    (46) condition -> . number comparator number
-    (52) number -> . FLOAT
-    (53) number -> . INTEGER
+    (5) conditional -> IF . condition instructionBody END
+    (6) conditional -> IF . condition instructionBody conditionalElsif END
+    (7) conditional -> IF . condition instructionBody ELSE instructionBody END
+    (8) conditional -> IF . condition instructionBody conditionalElsif ELSE instructionBody END
+    (40) condition -> . conditionValue comparator conditionValue
+    (38) conditionValue -> . ID
+    (39) conditionValue -> . number
+    (46) number -> . FLOAT
+    (47) number -> . INTEGER
 
-    FLOAT           shift and go to state 16
-    INTEGER         shift and go to state 17
+    ID              shift and go to state 22
+    FLOAT           shift and go to state 24
+    INTEGER         shift and go to state 25
 
-    condition                      shift and go to state 14
-    number                         shift and go to state 15
+    condition                      shift and go to state 20
+    conditionValue                 shift and go to state 21
+    number                         shift and go to state 23
 
 state 9
 
-    (20) whileLoop -> WHILE . condition whileBody END
-    (46) condition -> . number comparator number
-    (52) number -> . FLOAT
-    (53) number -> . INTEGER
+    (15) whileLoop -> WHILE . condition instructionBody END
+    (40) condition -> . conditionValue comparator conditionValue
+    (38) conditionValue -> . ID
+    (39) conditionValue -> . number
+    (46) number -> . FLOAT
+    (47) number -> . INTEGER
 
-    FLOAT           shift and go to state 16
-    INTEGER         shift and go to state 17
+    ID              shift and go to state 22
+    FLOAT           shift and go to state 24
+    INTEGER         shift and go to state 25
 
-    condition                      shift and go to state 18
-    number                         shift and go to state 15
+    condition                      shift and go to state 26
+    conditionValue                 shift and go to state 21
+    number                         shift and go to state 23
 
 state 10
 
-    (30) bodyLine -> PRINT . printBody
-    (33) printBody -> . ID
-    (34) printBody -> . TRUE
-    (35) printBody -> . FALSE
-    (36) printBody -> . dataType
-    (37) printBody -> . condition
-    (54) dataType -> . STRING
-    (55) dataType -> . number
-    (46) condition -> . number comparator number
-    (52) number -> . FLOAT
-    (53) number -> . INTEGER
+    (20) bodyLine -> PRINT . printBody
+    (25) printBody -> . ID
+    (26) printBody -> . TRUE
+    (27) printBody -> . FALSE
+    (28) printBody -> . dataType
+    (29) printBody -> . condition
+    (48) dataType -> . STRING
+    (49) dataType -> . number
+    (40) condition -> . conditionValue comparator conditionValue
+    (46) number -> . FLOAT
+    (47) number -> . INTEGER
+    (38) conditionValue -> . ID
+    (39) conditionValue -> . number
 
-    ID              shift and go to state 20
-    TRUE            shift and go to state 21
-    FALSE           shift and go to state 22
-    STRING          shift and go to state 25
-    FLOAT           shift and go to state 16
-    INTEGER         shift and go to state 17
+    ID              shift and go to state 28
+    TRUE            shift and go to state 29
+    FALSE           shift and go to state 30
+    STRING          shift and go to state 33
+    FLOAT           shift and go to state 24
+    INTEGER         shift and go to state 25
 
-    printBody                      shift and go to state 19
-    dataType                       shift and go to state 23
-    condition                      shift and go to state 24
-    number                         shift and go to state 26
+    printBody                      shift and go to state 27
+    dataType                       shift and go to state 31
+    condition                      shift and go to state 32
+    number                         shift and go to state 34
+    conditionValue                 shift and go to state 21
 
 state 11
 
-    (2) instruction -> DEF ID . LPAREN parameters RPAREN instructionBody END
-    (3) instruction -> DEF ID . LPAREN RPAREN END
+    (21) bodyLine -> nestedConditional .
 
-    LPAREN          shift and go to state 27
+    ID              reduce using rule 21 (bodyLine -> nestedConditional .)
+    PRINT           reduce using rule 21 (bodyLine -> nestedConditional .)
+    IF              reduce using rule 21 (bodyLine -> nestedConditional .)
+    WHILE           reduce using rule 21 (bodyLine -> nestedConditional .)
+    $end            reduce using rule 21 (bodyLine -> nestedConditional .)
+    END             reduce using rule 21 (bodyLine -> nestedConditional .)
+    ELSE            reduce using rule 21 (bodyLine -> nestedConditional .)
+    ELSIF           reduce using rule 21 (bodyLine -> nestedConditional .)
 
 
 state 12
 
-    (28) bodyLine -> ID ASSIGNMENT . number
-    (29) bodyLine -> ID ASSIGNMENT . STRING
-    (52) number -> . FLOAT
-    (53) number -> . INTEGER
+    (22) bodyLine -> nestedWhile .
 
-    STRING          shift and go to state 29
-    FLOAT           shift and go to state 16
-    INTEGER         shift and go to state 17
+    ID              reduce using rule 22 (bodyLine -> nestedWhile .)
+    PRINT           reduce using rule 22 (bodyLine -> nestedWhile .)
+    IF              reduce using rule 22 (bodyLine -> nestedWhile .)
+    WHILE           reduce using rule 22 (bodyLine -> nestedWhile .)
+    $end            reduce using rule 22 (bodyLine -> nestedWhile .)
+    END             reduce using rule 22 (bodyLine -> nestedWhile .)
+    ELSE            reduce using rule 22 (bodyLine -> nestedWhile .)
+    ELSIF           reduce using rule 22 (bodyLine -> nestedWhile .)
 
-    number                         shift and go to state 28
 
 state 13
 
-    (32) instructionBody -> bodyLine instructionBody .
+    (2) instruction -> DEF ID . LPAREN parameters RPAREN instructionBody END
+    (3) instruction -> DEF ID . LPAREN RPAREN END
 
-    $end            reduce using rule 32 (instructionBody -> bodyLine instructionBody .)
-    IF              reduce using rule 32 (instructionBody -> bodyLine instructionBody .)
-    END             reduce using rule 32 (instructionBody -> bodyLine instructionBody .)
-    ELSE            reduce using rule 32 (instructionBody -> bodyLine instructionBody .)
-    ELSIF           reduce using rule 32 (instructionBody -> bodyLine instructionBody .)
-    WHILE           reduce using rule 32 (instructionBody -> bodyLine instructionBody .)
+    LPAREN          shift and go to state 35
 
 
 state 14
 
-    (5) conditional -> IF condition . conditionalBody END
-    (6) conditional -> IF condition . conditionalBody conditionalElsif END
-    (7) conditional -> IF condition . conditionalBody ELSE conditionalBody END
-    (8) conditional -> IF condition . conditionalBody conditionalElsif ELSE conditionalBody END
-    (10) conditionalBody -> . instructionBody
-    (11) conditionalBody -> . instructionBody nestedConditional
-    (12) conditionalBody -> . nestedConditional instructionBody
-    (13) conditionalBody -> . nestedConditional
-    (14) conditionalBody -> . instructionBody nestedConditional instructionBody
-    (31) instructionBody -> . bodyLine
-    (32) instructionBody -> . bodyLine instructionBody
-    (15) nestedConditional -> . conditional
-    (16) nestedConditional -> . conditional nestedConditional
-    (28) bodyLine -> . ID ASSIGNMENT number
-    (29) bodyLine -> . ID ASSIGNMENT STRING
-    (30) bodyLine -> . PRINT printBody
-    (5) conditional -> . IF condition conditionalBody END
-    (6) conditional -> . IF condition conditionalBody conditionalElsif END
-    (7) conditional -> . IF condition conditionalBody ELSE conditionalBody END
-    (8) conditional -> . IF condition conditionalBody conditionalElsif ELSE conditionalBody END
+    (18) bodyLine -> ID ASSIGNMENT . number
+    (19) bodyLine -> ID ASSIGNMENT . STRING
+    (46) number -> . FLOAT
+    (47) number -> . INTEGER
 
-    ID              shift and go to state 4
-    PRINT           shift and go to state 10
-    IF              shift and go to state 8
+    STRING          shift and go to state 37
+    FLOAT           shift and go to state 24
+    INTEGER         shift and go to state 25
 
-    conditionalBody                shift and go to state 30
-    instructionBody                shift and go to state 31
-    nestedConditional              shift and go to state 32
-    bodyLine                       shift and go to state 7
-    conditional                    shift and go to state 33
+    number                         shift and go to state 36
 
 state 15
 
-    (46) condition -> number . comparator number
-    (47) comparator -> . GREATERTHAN
-    (48) comparator -> . LESSTHAN
-    (49) comparator -> . EQUALS
-    (50) comparator -> . GREATEROREQUALS
-    (51) comparator -> . LESSOREQUALS
+    (10) nestedConditional -> conditional .
+    (11) nestedConditional -> conditional . nestedConditional
+    (10) nestedConditional -> . conditional
+    (11) nestedConditional -> . conditional nestedConditional
+    (5) conditional -> . IF condition instructionBody END
+    (6) conditional -> . IF condition instructionBody conditionalElsif END
+    (7) conditional -> . IF condition instructionBody ELSE instructionBody END
+    (8) conditional -> . IF condition instructionBody conditionalElsif ELSE instructionBody END
 
-    GREATERTHAN     shift and go to state 35
-    LESSTHAN        shift and go to state 36
-    EQUALS          shift and go to state 37
-    GREATEROREQUALS shift and go to state 38
-    LESSOREQUALS    shift and go to state 39
+  ! shift/reduce conflict for IF resolved as shift
+    ID              reduce using rule 10 (nestedConditional -> conditional .)
+    PRINT           reduce using rule 10 (nestedConditional -> conditional .)
+    WHILE           reduce using rule 10 (nestedConditional -> conditional .)
+    $end            reduce using rule 10 (nestedConditional -> conditional .)
+    END             reduce using rule 10 (nestedConditional -> conditional .)
+    ELSE            reduce using rule 10 (nestedConditional -> conditional .)
+    ELSIF           reduce using rule 10 (nestedConditional -> conditional .)
+    IF              shift and go to state 8
 
-    comparator                     shift and go to state 34
+  ! IF              [ reduce using rule 10 (nestedConditional -> conditional .) ]
+
+    conditional                    shift and go to state 15
+    nestedConditional              shift and go to state 16
 
 state 16
 
-    (52) number -> FLOAT .
+    (11) nestedConditional -> conditional nestedConditional .
 
-    GREATERTHAN     reduce using rule 52 (number -> FLOAT .)
-    LESSTHAN        reduce using rule 52 (number -> FLOAT .)
-    EQUALS          reduce using rule 52 (number -> FLOAT .)
-    GREATEROREQUALS reduce using rule 52 (number -> FLOAT .)
-    LESSOREQUALS    reduce using rule 52 (number -> FLOAT .)
-    ID              reduce using rule 52 (number -> FLOAT .)
-    PRINT           reduce using rule 52 (number -> FLOAT .)
-    $end            reduce using rule 52 (number -> FLOAT .)
-    IF              reduce using rule 52 (number -> FLOAT .)
-    END             reduce using rule 52 (number -> FLOAT .)
-    ELSE            reduce using rule 52 (number -> FLOAT .)
-    ELSIF           reduce using rule 52 (number -> FLOAT .)
-    WHILE           reduce using rule 52 (number -> FLOAT .)
+    ID              reduce using rule 11 (nestedConditional -> conditional nestedConditional .)
+    PRINT           reduce using rule 11 (nestedConditional -> conditional nestedConditional .)
+    IF              reduce using rule 11 (nestedConditional -> conditional nestedConditional .)
+    WHILE           reduce using rule 11 (nestedConditional -> conditional nestedConditional .)
+    $end            reduce using rule 11 (nestedConditional -> conditional nestedConditional .)
+    END             reduce using rule 11 (nestedConditional -> conditional nestedConditional .)
+    ELSE            reduce using rule 11 (nestedConditional -> conditional nestedConditional .)
+    ELSIF           reduce using rule 11 (nestedConditional -> conditional nestedConditional .)
 
 
 state 17
 
-    (53) number -> INTEGER .
+    (16) nestedWhile -> whileLoop .
+    (17) nestedWhile -> whileLoop . nestedWhile
+    (16) nestedWhile -> . whileLoop
+    (17) nestedWhile -> . whileLoop nestedWhile
+    (15) whileLoop -> . WHILE condition instructionBody END
 
-    GREATERTHAN     reduce using rule 53 (number -> INTEGER .)
-    LESSTHAN        reduce using rule 53 (number -> INTEGER .)
-    EQUALS          reduce using rule 53 (number -> INTEGER .)
-    GREATEROREQUALS reduce using rule 53 (number -> INTEGER .)
-    LESSOREQUALS    reduce using rule 53 (number -> INTEGER .)
-    ID              reduce using rule 53 (number -> INTEGER .)
-    PRINT           reduce using rule 53 (number -> INTEGER .)
-    $end            reduce using rule 53 (number -> INTEGER .)
-    IF              reduce using rule 53 (number -> INTEGER .)
-    END             reduce using rule 53 (number -> INTEGER .)
-    ELSE            reduce using rule 53 (number -> INTEGER .)
-    ELSIF           reduce using rule 53 (number -> INTEGER .)
-    WHILE           reduce using rule 53 (number -> INTEGER .)
+  ! shift/reduce conflict for WHILE resolved as shift
+    ID              reduce using rule 16 (nestedWhile -> whileLoop .)
+    PRINT           reduce using rule 16 (nestedWhile -> whileLoop .)
+    IF              reduce using rule 16 (nestedWhile -> whileLoop .)
+    $end            reduce using rule 16 (nestedWhile -> whileLoop .)
+    END             reduce using rule 16 (nestedWhile -> whileLoop .)
+    ELSE            reduce using rule 16 (nestedWhile -> whileLoop .)
+    ELSIF           reduce using rule 16 (nestedWhile -> whileLoop .)
+    WHILE           shift and go to state 9
 
+  ! WHILE           [ reduce using rule 16 (nestedWhile -> whileLoop .) ]
+
+    whileLoop                      shift and go to state 17
+    nestedWhile                    shift and go to state 18
 
 state 18
 
-    (20) whileLoop -> WHILE condition . whileBody END
-    (21) whileBody -> . instructionBody
-    (22) whileBody -> . instructionBody nestedWhile
-    (23) whileBody -> . nestedWhile instructionBody
-    (24) whileBody -> . nestedWhile
-    (25) whileBody -> . instructionBody nestedWhile instructionBody
-    (31) instructionBody -> . bodyLine
-    (32) instructionBody -> . bodyLine instructionBody
-    (26) nestedWhile -> . whileLoop
-    (27) nestedWhile -> . whileLoop nestedWhile
-    (28) bodyLine -> . ID ASSIGNMENT number
-    (29) bodyLine -> . ID ASSIGNMENT STRING
-    (30) bodyLine -> . PRINT printBody
-    (20) whileLoop -> . WHILE condition whileBody END
+    (17) nestedWhile -> whileLoop nestedWhile .
 
-    ID              shift and go to state 4
-    PRINT           shift and go to state 10
-    WHILE           shift and go to state 9
+    ID              reduce using rule 17 (nestedWhile -> whileLoop nestedWhile .)
+    PRINT           reduce using rule 17 (nestedWhile -> whileLoop nestedWhile .)
+    IF              reduce using rule 17 (nestedWhile -> whileLoop nestedWhile .)
+    WHILE           reduce using rule 17 (nestedWhile -> whileLoop nestedWhile .)
+    $end            reduce using rule 17 (nestedWhile -> whileLoop nestedWhile .)
+    END             reduce using rule 17 (nestedWhile -> whileLoop nestedWhile .)
+    ELSE            reduce using rule 17 (nestedWhile -> whileLoop nestedWhile .)
+    ELSIF           reduce using rule 17 (nestedWhile -> whileLoop nestedWhile .)
 
-    whileBody                      shift and go to state 40
-    instructionBody                shift and go to state 41
-    nestedWhile                    shift and go to state 42
-    bodyLine                       shift and go to state 7
-    whileLoop                      shift and go to state 43
 
 state 19
 
-    (30) bodyLine -> PRINT printBody .
+    (24) instructionBody -> bodyLine instructionBody .
 
-    ID              reduce using rule 30 (bodyLine -> PRINT printBody .)
-    PRINT           reduce using rule 30 (bodyLine -> PRINT printBody .)
-    $end            reduce using rule 30 (bodyLine -> PRINT printBody .)
-    IF              reduce using rule 30 (bodyLine -> PRINT printBody .)
-    END             reduce using rule 30 (bodyLine -> PRINT printBody .)
-    ELSE            reduce using rule 30 (bodyLine -> PRINT printBody .)
-    ELSIF           reduce using rule 30 (bodyLine -> PRINT printBody .)
-    WHILE           reduce using rule 30 (bodyLine -> PRINT printBody .)
+    $end            reduce using rule 24 (instructionBody -> bodyLine instructionBody .)
+    END             reduce using rule 24 (instructionBody -> bodyLine instructionBody .)
+    ELSE            reduce using rule 24 (instructionBody -> bodyLine instructionBody .)
+    ELSIF           reduce using rule 24 (instructionBody -> bodyLine instructionBody .)
 
 
 state 20
 
-    (33) printBody -> ID .
+    (5) conditional -> IF condition . instructionBody END
+    (6) conditional -> IF condition . instructionBody conditionalElsif END
+    (7) conditional -> IF condition . instructionBody ELSE instructionBody END
+    (8) conditional -> IF condition . instructionBody conditionalElsif ELSE instructionBody END
+    (23) instructionBody -> . bodyLine
+    (24) instructionBody -> . bodyLine instructionBody
+    (18) bodyLine -> . ID ASSIGNMENT number
+    (19) bodyLine -> . ID ASSIGNMENT STRING
+    (20) bodyLine -> . PRINT printBody
+    (21) bodyLine -> . nestedConditional
+    (22) bodyLine -> . nestedWhile
+    (10) nestedConditional -> . conditional
+    (11) nestedConditional -> . conditional nestedConditional
+    (16) nestedWhile -> . whileLoop
+    (17) nestedWhile -> . whileLoop nestedWhile
+    (5) conditional -> . IF condition instructionBody END
+    (6) conditional -> . IF condition instructionBody conditionalElsif END
+    (7) conditional -> . IF condition instructionBody ELSE instructionBody END
+    (8) conditional -> . IF condition instructionBody conditionalElsif ELSE instructionBody END
+    (15) whileLoop -> . WHILE condition instructionBody END
 
-    ID              reduce using rule 33 (printBody -> ID .)
-    PRINT           reduce using rule 33 (printBody -> ID .)
-    $end            reduce using rule 33 (printBody -> ID .)
-    IF              reduce using rule 33 (printBody -> ID .)
-    END             reduce using rule 33 (printBody -> ID .)
-    ELSE            reduce using rule 33 (printBody -> ID .)
-    ELSIF           reduce using rule 33 (printBody -> ID .)
-    WHILE           reduce using rule 33 (printBody -> ID .)
+    ID              shift and go to state 4
+    PRINT           shift and go to state 10
+    IF              shift and go to state 8
+    WHILE           shift and go to state 9
 
+    instructionBody                shift and go to state 38
+    bodyLine                       shift and go to state 7
+    nestedConditional              shift and go to state 11
+    nestedWhile                    shift and go to state 12
+    conditional                    shift and go to state 15
+    whileLoop                      shift and go to state 17
 
 state 21
 
-    (34) printBody -> TRUE .
+    (40) condition -> conditionValue . comparator conditionValue
+    (41) comparator -> . GREATERTHAN
+    (42) comparator -> . LESSTHAN
+    (43) comparator -> . EQUALS
+    (44) comparator -> . GREATEROREQUALS
+    (45) comparator -> . LESSOREQUALS
 
-    ID              reduce using rule 34 (printBody -> TRUE .)
-    PRINT           reduce using rule 34 (printBody -> TRUE .)
-    $end            reduce using rule 34 (printBody -> TRUE .)
-    IF              reduce using rule 34 (printBody -> TRUE .)
-    END             reduce using rule 34 (printBody -> TRUE .)
-    ELSE            reduce using rule 34 (printBody -> TRUE .)
-    ELSIF           reduce using rule 34 (printBody -> TRUE .)
-    WHILE           reduce using rule 34 (printBody -> TRUE .)
+    GREATERTHAN     shift and go to state 40
+    LESSTHAN        shift and go to state 41
+    EQUALS          shift and go to state 42
+    GREATEROREQUALS shift and go to state 43
+    LESSOREQUALS    shift and go to state 44
 
+    comparator                     shift and go to state 39
 
 state 22
 
-    (35) printBody -> FALSE .
+    (38) conditionValue -> ID .
 
-    ID              reduce using rule 35 (printBody -> FALSE .)
-    PRINT           reduce using rule 35 (printBody -> FALSE .)
-    $end            reduce using rule 35 (printBody -> FALSE .)
-    IF              reduce using rule 35 (printBody -> FALSE .)
-    END             reduce using rule 35 (printBody -> FALSE .)
-    ELSE            reduce using rule 35 (printBody -> FALSE .)
-    ELSIF           reduce using rule 35 (printBody -> FALSE .)
-    WHILE           reduce using rule 35 (printBody -> FALSE .)
+    GREATERTHAN     reduce using rule 38 (conditionValue -> ID .)
+    LESSTHAN        reduce using rule 38 (conditionValue -> ID .)
+    EQUALS          reduce using rule 38 (conditionValue -> ID .)
+    GREATEROREQUALS reduce using rule 38 (conditionValue -> ID .)
+    LESSOREQUALS    reduce using rule 38 (conditionValue -> ID .)
+    ID              reduce using rule 38 (conditionValue -> ID .)
+    PRINT           reduce using rule 38 (conditionValue -> ID .)
+    IF              reduce using rule 38 (conditionValue -> ID .)
+    WHILE           reduce using rule 38 (conditionValue -> ID .)
+    $end            reduce using rule 38 (conditionValue -> ID .)
+    END             reduce using rule 38 (conditionValue -> ID .)
+    ELSE            reduce using rule 38 (conditionValue -> ID .)
+    ELSIF           reduce using rule 38 (conditionValue -> ID .)
 
 
 state 23
 
-    (36) printBody -> dataType .
+    (39) conditionValue -> number .
 
-    ID              reduce using rule 36 (printBody -> dataType .)
-    PRINT           reduce using rule 36 (printBody -> dataType .)
-    $end            reduce using rule 36 (printBody -> dataType .)
-    IF              reduce using rule 36 (printBody -> dataType .)
-    END             reduce using rule 36 (printBody -> dataType .)
-    ELSE            reduce using rule 36 (printBody -> dataType .)
-    ELSIF           reduce using rule 36 (printBody -> dataType .)
-    WHILE           reduce using rule 36 (printBody -> dataType .)
+    GREATERTHAN     reduce using rule 39 (conditionValue -> number .)
+    LESSTHAN        reduce using rule 39 (conditionValue -> number .)
+    EQUALS          reduce using rule 39 (conditionValue -> number .)
+    GREATEROREQUALS reduce using rule 39 (conditionValue -> number .)
+    LESSOREQUALS    reduce using rule 39 (conditionValue -> number .)
+    ID              reduce using rule 39 (conditionValue -> number .)
+    PRINT           reduce using rule 39 (conditionValue -> number .)
+    IF              reduce using rule 39 (conditionValue -> number .)
+    WHILE           reduce using rule 39 (conditionValue -> number .)
+    $end            reduce using rule 39 (conditionValue -> number .)
+    END             reduce using rule 39 (conditionValue -> number .)
+    ELSE            reduce using rule 39 (conditionValue -> number .)
+    ELSIF           reduce using rule 39 (conditionValue -> number .)
 
 
 state 24
 
-    (37) printBody -> condition .
+    (46) number -> FLOAT .
 
-    ID              reduce using rule 37 (printBody -> condition .)
-    PRINT           reduce using rule 37 (printBody -> condition .)
-    $end            reduce using rule 37 (printBody -> condition .)
-    IF              reduce using rule 37 (printBody -> condition .)
-    END             reduce using rule 37 (printBody -> condition .)
-    ELSE            reduce using rule 37 (printBody -> condition .)
-    ELSIF           reduce using rule 37 (printBody -> condition .)
-    WHILE           reduce using rule 37 (printBody -> condition .)
+    GREATERTHAN     reduce using rule 46 (number -> FLOAT .)
+    LESSTHAN        reduce using rule 46 (number -> FLOAT .)
+    EQUALS          reduce using rule 46 (number -> FLOAT .)
+    GREATEROREQUALS reduce using rule 46 (number -> FLOAT .)
+    LESSOREQUALS    reduce using rule 46 (number -> FLOAT .)
+    ID              reduce using rule 46 (number -> FLOAT .)
+    PRINT           reduce using rule 46 (number -> FLOAT .)
+    IF              reduce using rule 46 (number -> FLOAT .)
+    WHILE           reduce using rule 46 (number -> FLOAT .)
+    $end            reduce using rule 46 (number -> FLOAT .)
+    END             reduce using rule 46 (number -> FLOAT .)
+    ELSE            reduce using rule 46 (number -> FLOAT .)
+    ELSIF           reduce using rule 46 (number -> FLOAT .)
 
 
 state 25
 
-    (54) dataType -> STRING .
+    (47) number -> INTEGER .
 
-    ID              reduce using rule 54 (dataType -> STRING .)
-    PRINT           reduce using rule 54 (dataType -> STRING .)
-    $end            reduce using rule 54 (dataType -> STRING .)
-    IF              reduce using rule 54 (dataType -> STRING .)
-    END             reduce using rule 54 (dataType -> STRING .)
-    ELSE            reduce using rule 54 (dataType -> STRING .)
-    ELSIF           reduce using rule 54 (dataType -> STRING .)
-    WHILE           reduce using rule 54 (dataType -> STRING .)
+    GREATERTHAN     reduce using rule 47 (number -> INTEGER .)
+    LESSTHAN        reduce using rule 47 (number -> INTEGER .)
+    EQUALS          reduce using rule 47 (number -> INTEGER .)
+    GREATEROREQUALS reduce using rule 47 (number -> INTEGER .)
+    LESSOREQUALS    reduce using rule 47 (number -> INTEGER .)
+    ID              reduce using rule 47 (number -> INTEGER .)
+    PRINT           reduce using rule 47 (number -> INTEGER .)
+    IF              reduce using rule 47 (number -> INTEGER .)
+    WHILE           reduce using rule 47 (number -> INTEGER .)
+    $end            reduce using rule 47 (number -> INTEGER .)
+    END             reduce using rule 47 (number -> INTEGER .)
+    ELSE            reduce using rule 47 (number -> INTEGER .)
+    ELSIF           reduce using rule 47 (number -> INTEGER .)
 
 
 state 26
 
-    (55) dataType -> number .
-    (46) condition -> number . comparator number
-    (47) comparator -> . GREATERTHAN
-    (48) comparator -> . LESSTHAN
-    (49) comparator -> . EQUALS
-    (50) comparator -> . GREATEROREQUALS
-    (51) comparator -> . LESSOREQUALS
+    (15) whileLoop -> WHILE condition . instructionBody END
+    (23) instructionBody -> . bodyLine
+    (24) instructionBody -> . bodyLine instructionBody
+    (18) bodyLine -> . ID ASSIGNMENT number
+    (19) bodyLine -> . ID ASSIGNMENT STRING
+    (20) bodyLine -> . PRINT printBody
+    (21) bodyLine -> . nestedConditional
+    (22) bodyLine -> . nestedWhile
+    (10) nestedConditional -> . conditional
+    (11) nestedConditional -> . conditional nestedConditional
+    (16) nestedWhile -> . whileLoop
+    (17) nestedWhile -> . whileLoop nestedWhile
+    (5) conditional -> . IF condition instructionBody END
+    (6) conditional -> . IF condition instructionBody conditionalElsif END
+    (7) conditional -> . IF condition instructionBody ELSE instructionBody END
+    (8) conditional -> . IF condition instructionBody conditionalElsif ELSE instructionBody END
+    (15) whileLoop -> . WHILE condition instructionBody END
 
-    ID              reduce using rule 55 (dataType -> number .)
-    PRINT           reduce using rule 55 (dataType -> number .)
-    $end            reduce using rule 55 (dataType -> number .)
-    IF              reduce using rule 55 (dataType -> number .)
-    END             reduce using rule 55 (dataType -> number .)
-    ELSE            reduce using rule 55 (dataType -> number .)
-    ELSIF           reduce using rule 55 (dataType -> number .)
-    WHILE           reduce using rule 55 (dataType -> number .)
-    GREATERTHAN     shift and go to state 35
-    LESSTHAN        shift and go to state 36
-    EQUALS          shift and go to state 37
-    GREATEROREQUALS shift and go to state 38
-    LESSOREQUALS    shift and go to state 39
+    ID              shift and go to state 4
+    PRINT           shift and go to state 10
+    IF              shift and go to state 8
+    WHILE           shift and go to state 9
 
-    comparator                     shift and go to state 34
+    instructionBody                shift and go to state 45
+    bodyLine                       shift and go to state 7
+    nestedConditional              shift and go to state 11
+    nestedWhile                    shift and go to state 12
+    conditional                    shift and go to state 15
+    whileLoop                      shift and go to state 17
 
 state 27
 
-    (2) instruction -> DEF ID LPAREN . parameters RPAREN instructionBody END
-    (3) instruction -> DEF ID LPAREN . RPAREN END
-    (38) parameters -> . ID
-    (39) parameters -> . ID COMMA ID
+    (20) bodyLine -> PRINT printBody .
 
-    RPAREN          shift and go to state 46
-    ID              shift and go to state 44
+    ID              reduce using rule 20 (bodyLine -> PRINT printBody .)
+    PRINT           reduce using rule 20 (bodyLine -> PRINT printBody .)
+    IF              reduce using rule 20 (bodyLine -> PRINT printBody .)
+    WHILE           reduce using rule 20 (bodyLine -> PRINT printBody .)
+    $end            reduce using rule 20 (bodyLine -> PRINT printBody .)
+    END             reduce using rule 20 (bodyLine -> PRINT printBody .)
+    ELSE            reduce using rule 20 (bodyLine -> PRINT printBody .)
+    ELSIF           reduce using rule 20 (bodyLine -> PRINT printBody .)
 
-    parameters                     shift and go to state 45
 
 state 28
 
-    (28) bodyLine -> ID ASSIGNMENT number .
+    (25) printBody -> ID .
+    (38) conditionValue -> ID .
 
-    ID              reduce using rule 28 (bodyLine -> ID ASSIGNMENT number .)
-    PRINT           reduce using rule 28 (bodyLine -> ID ASSIGNMENT number .)
-    $end            reduce using rule 28 (bodyLine -> ID ASSIGNMENT number .)
-    IF              reduce using rule 28 (bodyLine -> ID ASSIGNMENT number .)
-    END             reduce using rule 28 (bodyLine -> ID ASSIGNMENT number .)
-    ELSE            reduce using rule 28 (bodyLine -> ID ASSIGNMENT number .)
-    ELSIF           reduce using rule 28 (bodyLine -> ID ASSIGNMENT number .)
-    WHILE           reduce using rule 28 (bodyLine -> ID ASSIGNMENT number .)
+    ID              reduce using rule 25 (printBody -> ID .)
+    PRINT           reduce using rule 25 (printBody -> ID .)
+    IF              reduce using rule 25 (printBody -> ID .)
+    WHILE           reduce using rule 25 (printBody -> ID .)
+    $end            reduce using rule 25 (printBody -> ID .)
+    END             reduce using rule 25 (printBody -> ID .)
+    ELSE            reduce using rule 25 (printBody -> ID .)
+    ELSIF           reduce using rule 25 (printBody -> ID .)
+    GREATERTHAN     reduce using rule 38 (conditionValue -> ID .)
+    LESSTHAN        reduce using rule 38 (conditionValue -> ID .)
+    EQUALS          reduce using rule 38 (conditionValue -> ID .)
+    GREATEROREQUALS reduce using rule 38 (conditionValue -> ID .)
+    LESSOREQUALS    reduce using rule 38 (conditionValue -> ID .)
 
 
 state 29
 
-    (29) bodyLine -> ID ASSIGNMENT STRING .
+    (26) printBody -> TRUE .
 
-    ID              reduce using rule 29 (bodyLine -> ID ASSIGNMENT STRING .)
-    PRINT           reduce using rule 29 (bodyLine -> ID ASSIGNMENT STRING .)
-    $end            reduce using rule 29 (bodyLine -> ID ASSIGNMENT STRING .)
-    IF              reduce using rule 29 (bodyLine -> ID ASSIGNMENT STRING .)
-    END             reduce using rule 29 (bodyLine -> ID ASSIGNMENT STRING .)
-    ELSE            reduce using rule 29 (bodyLine -> ID ASSIGNMENT STRING .)
-    ELSIF           reduce using rule 29 (bodyLine -> ID ASSIGNMENT STRING .)
-    WHILE           reduce using rule 29 (bodyLine -> ID ASSIGNMENT STRING .)
+    ID              reduce using rule 26 (printBody -> TRUE .)
+    PRINT           reduce using rule 26 (printBody -> TRUE .)
+    IF              reduce using rule 26 (printBody -> TRUE .)
+    WHILE           reduce using rule 26 (printBody -> TRUE .)
+    $end            reduce using rule 26 (printBody -> TRUE .)
+    END             reduce using rule 26 (printBody -> TRUE .)
+    ELSE            reduce using rule 26 (printBody -> TRUE .)
+    ELSIF           reduce using rule 26 (printBody -> TRUE .)
 
 
 state 30
 
-    (5) conditional -> IF condition conditionalBody . END
-    (6) conditional -> IF condition conditionalBody . conditionalElsif END
-    (7) conditional -> IF condition conditionalBody . ELSE conditionalBody END
-    (8) conditional -> IF condition conditionalBody . conditionalElsif ELSE conditionalBody END
-    (17) conditionalElsif -> . elsif
-    (18) conditionalElsif -> . elsif conditionalElsif
-    (9) elsif -> . ELSIF condition conditionalBody
+    (27) printBody -> FALSE .
 
-    END             shift and go to state 47
-    ELSE            shift and go to state 49
-    ELSIF           shift and go to state 51
+    ID              reduce using rule 27 (printBody -> FALSE .)
+    PRINT           reduce using rule 27 (printBody -> FALSE .)
+    IF              reduce using rule 27 (printBody -> FALSE .)
+    WHILE           reduce using rule 27 (printBody -> FALSE .)
+    $end            reduce using rule 27 (printBody -> FALSE .)
+    END             reduce using rule 27 (printBody -> FALSE .)
+    ELSE            reduce using rule 27 (printBody -> FALSE .)
+    ELSIF           reduce using rule 27 (printBody -> FALSE .)
 
-    conditionalElsif               shift and go to state 48
-    elsif                          shift and go to state 50
 
 state 31
 
-    (10) conditionalBody -> instructionBody .
-    (11) conditionalBody -> instructionBody . nestedConditional
-    (14) conditionalBody -> instructionBody . nestedConditional instructionBody
-    (15) nestedConditional -> . conditional
-    (16) nestedConditional -> . conditional nestedConditional
-    (5) conditional -> . IF condition conditionalBody END
-    (6) conditional -> . IF condition conditionalBody conditionalElsif END
-    (7) conditional -> . IF condition conditionalBody ELSE conditionalBody END
-    (8) conditional -> . IF condition conditionalBody conditionalElsif ELSE conditionalBody END
+    (28) printBody -> dataType .
 
-    END             reduce using rule 10 (conditionalBody -> instructionBody .)
-    ELSE            reduce using rule 10 (conditionalBody -> instructionBody .)
-    ELSIF           reduce using rule 10 (conditionalBody -> instructionBody .)
-    IF              shift and go to state 8
+    ID              reduce using rule 28 (printBody -> dataType .)
+    PRINT           reduce using rule 28 (printBody -> dataType .)
+    IF              reduce using rule 28 (printBody -> dataType .)
+    WHILE           reduce using rule 28 (printBody -> dataType .)
+    $end            reduce using rule 28 (printBody -> dataType .)
+    END             reduce using rule 28 (printBody -> dataType .)
+    ELSE            reduce using rule 28 (printBody -> dataType .)
+    ELSIF           reduce using rule 28 (printBody -> dataType .)
 
-    nestedConditional              shift and go to state 52
-    conditional                    shift and go to state 33
 
 state 32
 
-    (12) conditionalBody -> nestedConditional . instructionBody
-    (13) conditionalBody -> nestedConditional .
-    (31) instructionBody -> . bodyLine
-    (32) instructionBody -> . bodyLine instructionBody
-    (28) bodyLine -> . ID ASSIGNMENT number
-    (29) bodyLine -> . ID ASSIGNMENT STRING
-    (30) bodyLine -> . PRINT printBody
+    (29) printBody -> condition .
 
-    END             reduce using rule 13 (conditionalBody -> nestedConditional .)
-    ELSE            reduce using rule 13 (conditionalBody -> nestedConditional .)
-    ELSIF           reduce using rule 13 (conditionalBody -> nestedConditional .)
-    ID              shift and go to state 4
-    PRINT           shift and go to state 10
+    ID              reduce using rule 29 (printBody -> condition .)
+    PRINT           reduce using rule 29 (printBody -> condition .)
+    IF              reduce using rule 29 (printBody -> condition .)
+    WHILE           reduce using rule 29 (printBody -> condition .)
+    $end            reduce using rule 29 (printBody -> condition .)
+    END             reduce using rule 29 (printBody -> condition .)
+    ELSE            reduce using rule 29 (printBody -> condition .)
+    ELSIF           reduce using rule 29 (printBody -> condition .)
 
-    instructionBody                shift and go to state 53
-    bodyLine                       shift and go to state 7
 
 state 33
 
-    (15) nestedConditional -> conditional .
-    (16) nestedConditional -> conditional . nestedConditional
-    (15) nestedConditional -> . conditional
-    (16) nestedConditional -> . conditional nestedConditional
-    (5) conditional -> . IF condition conditionalBody END
-    (6) conditional -> . IF condition conditionalBody conditionalElsif END
-    (7) conditional -> . IF condition conditionalBody ELSE conditionalBody END
-    (8) conditional -> . IF condition conditionalBody conditionalElsif ELSE conditionalBody END
+    (48) dataType -> STRING .
 
-    ID              reduce using rule 15 (nestedConditional -> conditional .)
-    PRINT           reduce using rule 15 (nestedConditional -> conditional .)
-    END             reduce using rule 15 (nestedConditional -> conditional .)
-    ELSE            reduce using rule 15 (nestedConditional -> conditional .)
-    ELSIF           reduce using rule 15 (nestedConditional -> conditional .)
-    IF              shift and go to state 8
+    ID              reduce using rule 48 (dataType -> STRING .)
+    PRINT           reduce using rule 48 (dataType -> STRING .)
+    IF              reduce using rule 48 (dataType -> STRING .)
+    WHILE           reduce using rule 48 (dataType -> STRING .)
+    $end            reduce using rule 48 (dataType -> STRING .)
+    END             reduce using rule 48 (dataType -> STRING .)
+    ELSE            reduce using rule 48 (dataType -> STRING .)
+    ELSIF           reduce using rule 48 (dataType -> STRING .)
 
-    conditional                    shift and go to state 33
-    nestedConditional              shift and go to state 54
 
 state 34
 
-    (46) condition -> number comparator . number
-    (52) number -> . FLOAT
-    (53) number -> . INTEGER
+    (49) dataType -> number .
+    (39) conditionValue -> number .
 
-    FLOAT           shift and go to state 16
-    INTEGER         shift and go to state 17
+    ID              reduce using rule 49 (dataType -> number .)
+    PRINT           reduce using rule 49 (dataType -> number .)
+    IF              reduce using rule 49 (dataType -> number .)
+    WHILE           reduce using rule 49 (dataType -> number .)
+    $end            reduce using rule 49 (dataType -> number .)
+    END             reduce using rule 49 (dataType -> number .)
+    ELSE            reduce using rule 49 (dataType -> number .)
+    ELSIF           reduce using rule 49 (dataType -> number .)
+    GREATERTHAN     reduce using rule 39 (conditionValue -> number .)
+    LESSTHAN        reduce using rule 39 (conditionValue -> number .)
+    EQUALS          reduce using rule 39 (conditionValue -> number .)
+    GREATEROREQUALS reduce using rule 39 (conditionValue -> number .)
+    LESSOREQUALS    reduce using rule 39 (conditionValue -> number .)
 
-    number                         shift and go to state 55
 
 state 35
 
-    (47) comparator -> GREATERTHAN .
+    (2) instruction -> DEF ID LPAREN . parameters RPAREN instructionBody END
+    (3) instruction -> DEF ID LPAREN . RPAREN END
+    (30) parameters -> . ID
+    (31) parameters -> . ID COMMA ID
 
-    FLOAT           reduce using rule 47 (comparator -> GREATERTHAN .)
-    INTEGER         reduce using rule 47 (comparator -> GREATERTHAN .)
+    RPAREN          shift and go to state 48
+    ID              shift and go to state 46
 
+    parameters                     shift and go to state 47
 
 state 36
 
-    (48) comparator -> LESSTHAN .
+    (18) bodyLine -> ID ASSIGNMENT number .
 
-    FLOAT           reduce using rule 48 (comparator -> LESSTHAN .)
-    INTEGER         reduce using rule 48 (comparator -> LESSTHAN .)
+    ID              reduce using rule 18 (bodyLine -> ID ASSIGNMENT number .)
+    PRINT           reduce using rule 18 (bodyLine -> ID ASSIGNMENT number .)
+    IF              reduce using rule 18 (bodyLine -> ID ASSIGNMENT number .)
+    WHILE           reduce using rule 18 (bodyLine -> ID ASSIGNMENT number .)
+    $end            reduce using rule 18 (bodyLine -> ID ASSIGNMENT number .)
+    END             reduce using rule 18 (bodyLine -> ID ASSIGNMENT number .)
+    ELSE            reduce using rule 18 (bodyLine -> ID ASSIGNMENT number .)
+    ELSIF           reduce using rule 18 (bodyLine -> ID ASSIGNMENT number .)
 
 
 state 37
 
-    (49) comparator -> EQUALS .
+    (19) bodyLine -> ID ASSIGNMENT STRING .
 
-    FLOAT           reduce using rule 49 (comparator -> EQUALS .)
-    INTEGER         reduce using rule 49 (comparator -> EQUALS .)
+    ID              reduce using rule 19 (bodyLine -> ID ASSIGNMENT STRING .)
+    PRINT           reduce using rule 19 (bodyLine -> ID ASSIGNMENT STRING .)
+    IF              reduce using rule 19 (bodyLine -> ID ASSIGNMENT STRING .)
+    WHILE           reduce using rule 19 (bodyLine -> ID ASSIGNMENT STRING .)
+    $end            reduce using rule 19 (bodyLine -> ID ASSIGNMENT STRING .)
+    END             reduce using rule 19 (bodyLine -> ID ASSIGNMENT STRING .)
+    ELSE            reduce using rule 19 (bodyLine -> ID ASSIGNMENT STRING .)
+    ELSIF           reduce using rule 19 (bodyLine -> ID ASSIGNMENT STRING .)
 
 
 state 38
 
-    (50) comparator -> GREATEROREQUALS .
+    (5) conditional -> IF condition instructionBody . END
+    (6) conditional -> IF condition instructionBody . conditionalElsif END
+    (7) conditional -> IF condition instructionBody . ELSE instructionBody END
+    (8) conditional -> IF condition instructionBody . conditionalElsif ELSE instructionBody END
+    (12) conditionalElsif -> . elsif
+    (13) conditionalElsif -> . elsif conditionalElsif
+    (9) elsif -> . ELSIF condition instructionBody
 
-    FLOAT           reduce using rule 50 (comparator -> GREATEROREQUALS .)
-    INTEGER         reduce using rule 50 (comparator -> GREATEROREQUALS .)
+    END             shift and go to state 49
+    ELSE            shift and go to state 51
+    ELSIF           shift and go to state 53
 
+    conditionalElsif               shift and go to state 50
+    elsif                          shift and go to state 52
 
 state 39
 
-    (51) comparator -> LESSOREQUALS .
+    (40) condition -> conditionValue comparator . conditionValue
+    (38) conditionValue -> . ID
+    (39) conditionValue -> . number
+    (46) number -> . FLOAT
+    (47) number -> . INTEGER
 
-    FLOAT           reduce using rule 51 (comparator -> LESSOREQUALS .)
-    INTEGER         reduce using rule 51 (comparator -> LESSOREQUALS .)
+    ID              shift and go to state 22
+    FLOAT           shift and go to state 24
+    INTEGER         shift and go to state 25
 
+    conditionValue                 shift and go to state 54
+    number                         shift and go to state 23
 
 state 40
 
-    (20) whileLoop -> WHILE condition whileBody . END
+    (41) comparator -> GREATERTHAN .
 
-    END             shift and go to state 56
+    ID              reduce using rule 41 (comparator -> GREATERTHAN .)
+    FLOAT           reduce using rule 41 (comparator -> GREATERTHAN .)
+    INTEGER         reduce using rule 41 (comparator -> GREATERTHAN .)
 
 
 state 41
 
-    (21) whileBody -> instructionBody .
-    (22) whileBody -> instructionBody . nestedWhile
-    (25) whileBody -> instructionBody . nestedWhile instructionBody
-    (26) nestedWhile -> . whileLoop
-    (27) nestedWhile -> . whileLoop nestedWhile
-    (20) whileLoop -> . WHILE condition whileBody END
+    (42) comparator -> LESSTHAN .
 
-    END             reduce using rule 21 (whileBody -> instructionBody .)
-    WHILE           shift and go to state 9
+    ID              reduce using rule 42 (comparator -> LESSTHAN .)
+    FLOAT           reduce using rule 42 (comparator -> LESSTHAN .)
+    INTEGER         reduce using rule 42 (comparator -> LESSTHAN .)
 
-    nestedWhile                    shift and go to state 57
-    whileLoop                      shift and go to state 43
 
 state 42
 
-    (23) whileBody -> nestedWhile . instructionBody
-    (24) whileBody -> nestedWhile .
-    (31) instructionBody -> . bodyLine
-    (32) instructionBody -> . bodyLine instructionBody
-    (28) bodyLine -> . ID ASSIGNMENT number
-    (29) bodyLine -> . ID ASSIGNMENT STRING
-    (30) bodyLine -> . PRINT printBody
+    (43) comparator -> EQUALS .
 
-    END             reduce using rule 24 (whileBody -> nestedWhile .)
-    ID              shift and go to state 4
-    PRINT           shift and go to state 10
+    ID              reduce using rule 43 (comparator -> EQUALS .)
+    FLOAT           reduce using rule 43 (comparator -> EQUALS .)
+    INTEGER         reduce using rule 43 (comparator -> EQUALS .)
 
-    instructionBody                shift and go to state 58
-    bodyLine                       shift and go to state 7
 
 state 43
 
-    (26) nestedWhile -> whileLoop .
-    (27) nestedWhile -> whileLoop . nestedWhile
-    (26) nestedWhile -> . whileLoop
-    (27) nestedWhile -> . whileLoop nestedWhile
-    (20) whileLoop -> . WHILE condition whileBody END
+    (44) comparator -> GREATEROREQUALS .
 
-    ID              reduce using rule 26 (nestedWhile -> whileLoop .)
-    PRINT           reduce using rule 26 (nestedWhile -> whileLoop .)
-    END             reduce using rule 26 (nestedWhile -> whileLoop .)
-    WHILE           shift and go to state 9
+    ID              reduce using rule 44 (comparator -> GREATEROREQUALS .)
+    FLOAT           reduce using rule 44 (comparator -> GREATEROREQUALS .)
+    INTEGER         reduce using rule 44 (comparator -> GREATEROREQUALS .)
 
-    whileLoop                      shift and go to state 43
-    nestedWhile                    shift and go to state 59
 
 state 44
 
-    (38) parameters -> ID .
-    (39) parameters -> ID . COMMA ID
+    (45) comparator -> LESSOREQUALS .
 
-    RPAREN          reduce using rule 38 (parameters -> ID .)
-    COMMA           shift and go to state 60
+    ID              reduce using rule 45 (comparator -> LESSOREQUALS .)
+    FLOAT           reduce using rule 45 (comparator -> LESSOREQUALS .)
+    INTEGER         reduce using rule 45 (comparator -> LESSOREQUALS .)
 
 
 state 45
 
-    (2) instruction -> DEF ID LPAREN parameters . RPAREN instructionBody END
+    (15) whileLoop -> WHILE condition instructionBody . END
 
-    RPAREN          shift and go to state 61
+    END             shift and go to state 55
 
 
 state 46
 
-    (3) instruction -> DEF ID LPAREN RPAREN . END
+    (30) parameters -> ID .
+    (31) parameters -> ID . COMMA ID
 
-    END             shift and go to state 62
+    RPAREN          reduce using rule 30 (parameters -> ID .)
+    COMMA           shift and go to state 56
 
 
 state 47
 
-    (5) conditional -> IF condition conditionalBody END .
+    (2) instruction -> DEF ID LPAREN parameters . RPAREN instructionBody END
 
-    $end            reduce using rule 5 (conditional -> IF condition conditionalBody END .)
-    IF              reduce using rule 5 (conditional -> IF condition conditionalBody END .)
-    ID              reduce using rule 5 (conditional -> IF condition conditionalBody END .)
-    PRINT           reduce using rule 5 (conditional -> IF condition conditionalBody END .)
-    END             reduce using rule 5 (conditional -> IF condition conditionalBody END .)
-    ELSE            reduce using rule 5 (conditional -> IF condition conditionalBody END .)
-    ELSIF           reduce using rule 5 (conditional -> IF condition conditionalBody END .)
+    RPAREN          shift and go to state 57
 
 
 state 48
 
-    (6) conditional -> IF condition conditionalBody conditionalElsif . END
-    (8) conditional -> IF condition conditionalBody conditionalElsif . ELSE conditionalBody END
+    (3) instruction -> DEF ID LPAREN RPAREN . END
 
-    END             shift and go to state 63
-    ELSE            shift and go to state 64
+    END             shift and go to state 58
 
 
 state 49
 
-    (7) conditional -> IF condition conditionalBody ELSE . conditionalBody END
-    (10) conditionalBody -> . instructionBody
-    (11) conditionalBody -> . instructionBody nestedConditional
-    (12) conditionalBody -> . nestedConditional instructionBody
-    (13) conditionalBody -> . nestedConditional
-    (14) conditionalBody -> . instructionBody nestedConditional instructionBody
-    (31) instructionBody -> . bodyLine
-    (32) instructionBody -> . bodyLine instructionBody
-    (15) nestedConditional -> . conditional
-    (16) nestedConditional -> . conditional nestedConditional
-    (28) bodyLine -> . ID ASSIGNMENT number
-    (29) bodyLine -> . ID ASSIGNMENT STRING
-    (30) bodyLine -> . PRINT printBody
-    (5) conditional -> . IF condition conditionalBody END
-    (6) conditional -> . IF condition conditionalBody conditionalElsif END
-    (7) conditional -> . IF condition conditionalBody ELSE conditionalBody END
-    (8) conditional -> . IF condition conditionalBody conditionalElsif ELSE conditionalBody END
+    (5) conditional -> IF condition instructionBody END .
+
+    IF              reduce using rule 5 (conditional -> IF condition instructionBody END .)
+    $end            reduce using rule 5 (conditional -> IF condition instructionBody END .)
+    ID              reduce using rule 5 (conditional -> IF condition instructionBody END .)
+    PRINT           reduce using rule 5 (conditional -> IF condition instructionBody END .)
+    WHILE           reduce using rule 5 (conditional -> IF condition instructionBody END .)
+    END             reduce using rule 5 (conditional -> IF condition instructionBody END .)
+    ELSE            reduce using rule 5 (conditional -> IF condition instructionBody END .)
+    ELSIF           reduce using rule 5 (conditional -> IF condition instructionBody END .)
+
+
+state 50
+
+    (6) conditional -> IF condition instructionBody conditionalElsif . END
+    (8) conditional -> IF condition instructionBody conditionalElsif . ELSE instructionBody END
+
+    END             shift and go to state 59
+    ELSE            shift and go to state 60
+
+
+state 51
+
+    (7) conditional -> IF condition instructionBody ELSE . instructionBody END
+    (23) instructionBody -> . bodyLine
+    (24) instructionBody -> . bodyLine instructionBody
+    (18) bodyLine -> . ID ASSIGNMENT number
+    (19) bodyLine -> . ID ASSIGNMENT STRING
+    (20) bodyLine -> . PRINT printBody
+    (21) bodyLine -> . nestedConditional
+    (22) bodyLine -> . nestedWhile
+    (10) nestedConditional -> . conditional
+    (11) nestedConditional -> . conditional nestedConditional
+    (16) nestedWhile -> . whileLoop
+    (17) nestedWhile -> . whileLoop nestedWhile
+    (5) conditional -> . IF condition instructionBody END
+    (6) conditional -> . IF condition instructionBody conditionalElsif END
+    (7) conditional -> . IF condition instructionBody ELSE instructionBody END
+    (8) conditional -> . IF condition instructionBody conditionalElsif ELSE instructionBody END
+    (15) whileLoop -> . WHILE condition instructionBody END
 
     ID              shift and go to state 4
     PRINT           shift and go to state 10
     IF              shift and go to state 8
+    WHILE           shift and go to state 9
 
-    conditionalBody                shift and go to state 65
-    instructionBody                shift and go to state 31
-    nestedConditional              shift and go to state 32
+    instructionBody                shift and go to state 61
     bodyLine                       shift and go to state 7
-    conditional                    shift and go to state 33
-
-state 50
-
-    (17) conditionalElsif -> elsif .
-    (18) conditionalElsif -> elsif . conditionalElsif
-    (17) conditionalElsif -> . elsif
-    (18) conditionalElsif -> . elsif conditionalElsif
-    (9) elsif -> . ELSIF condition conditionalBody
-
-    END             reduce using rule 17 (conditionalElsif -> elsif .)
-    ELSE            reduce using rule 17 (conditionalElsif -> elsif .)
-    ELSIF           shift and go to state 51
-
-    elsif                          shift and go to state 50
-    conditionalElsif               shift and go to state 66
-
-state 51
-
-    (9) elsif -> ELSIF . condition conditionalBody
-    (46) condition -> . number comparator number
-    (52) number -> . FLOAT
-    (53) number -> . INTEGER
-
-    FLOAT           shift and go to state 16
-    INTEGER         shift and go to state 17
-
-    condition                      shift and go to state 67
-    number                         shift and go to state 15
+    nestedConditional              shift and go to state 11
+    nestedWhile                    shift and go to state 12
+    conditional                    shift and go to state 15
+    whileLoop                      shift and go to state 17
 
 state 52
 
-    (11) conditionalBody -> instructionBody nestedConditional .
-    (14) conditionalBody -> instructionBody nestedConditional . instructionBody
-    (31) instructionBody -> . bodyLine
-    (32) instructionBody -> . bodyLine instructionBody
-    (28) bodyLine -> . ID ASSIGNMENT number
-    (29) bodyLine -> . ID ASSIGNMENT STRING
-    (30) bodyLine -> . PRINT printBody
+    (12) conditionalElsif -> elsif .
+    (13) conditionalElsif -> elsif . conditionalElsif
+    (12) conditionalElsif -> . elsif
+    (13) conditionalElsif -> . elsif conditionalElsif
+    (9) elsif -> . ELSIF condition instructionBody
 
-    END             reduce using rule 11 (conditionalBody -> instructionBody nestedConditional .)
-    ELSE            reduce using rule 11 (conditionalBody -> instructionBody nestedConditional .)
-    ELSIF           reduce using rule 11 (conditionalBody -> instructionBody nestedConditional .)
-    ID              shift and go to state 4
-    PRINT           shift and go to state 10
+    END             reduce using rule 12 (conditionalElsif -> elsif .)
+    ELSE            reduce using rule 12 (conditionalElsif -> elsif .)
+    ELSIF           shift and go to state 53
 
-    instructionBody                shift and go to state 68
-    bodyLine                       shift and go to state 7
+    elsif                          shift and go to state 52
+    conditionalElsif               shift and go to state 62
 
 state 53
 
-    (12) conditionalBody -> nestedConditional instructionBody .
+    (9) elsif -> ELSIF . condition instructionBody
+    (40) condition -> . conditionValue comparator conditionValue
+    (38) conditionValue -> . ID
+    (39) conditionValue -> . number
+    (46) number -> . FLOAT
+    (47) number -> . INTEGER
 
-    END             reduce using rule 12 (conditionalBody -> nestedConditional instructionBody .)
-    ELSE            reduce using rule 12 (conditionalBody -> nestedConditional instructionBody .)
-    ELSIF           reduce using rule 12 (conditionalBody -> nestedConditional instructionBody .)
+    ID              shift and go to state 22
+    FLOAT           shift and go to state 24
+    INTEGER         shift and go to state 25
 
+    condition                      shift and go to state 63
+    conditionValue                 shift and go to state 21
+    number                         shift and go to state 23
 
 state 54
 
-    (16) nestedConditional -> conditional nestedConditional .
+    (40) condition -> conditionValue comparator conditionValue .
 
-    ID              reduce using rule 16 (nestedConditional -> conditional nestedConditional .)
-    PRINT           reduce using rule 16 (nestedConditional -> conditional nestedConditional .)
-    END             reduce using rule 16 (nestedConditional -> conditional nestedConditional .)
-    ELSE            reduce using rule 16 (nestedConditional -> conditional nestedConditional .)
-    ELSIF           reduce using rule 16 (nestedConditional -> conditional nestedConditional .)
+    ID              reduce using rule 40 (condition -> conditionValue comparator conditionValue .)
+    PRINT           reduce using rule 40 (condition -> conditionValue comparator conditionValue .)
+    IF              reduce using rule 40 (condition -> conditionValue comparator conditionValue .)
+    WHILE           reduce using rule 40 (condition -> conditionValue comparator conditionValue .)
+    $end            reduce using rule 40 (condition -> conditionValue comparator conditionValue .)
+    END             reduce using rule 40 (condition -> conditionValue comparator conditionValue .)
+    ELSE            reduce using rule 40 (condition -> conditionValue comparator conditionValue .)
+    ELSIF           reduce using rule 40 (condition -> conditionValue comparator conditionValue .)
 
 
 state 55
 
-    (46) condition -> number comparator number .
+    (15) whileLoop -> WHILE condition instructionBody END .
 
-    ID              reduce using rule 46 (condition -> number comparator number .)
-    PRINT           reduce using rule 46 (condition -> number comparator number .)
-    IF              reduce using rule 46 (condition -> number comparator number .)
-    WHILE           reduce using rule 46 (condition -> number comparator number .)
-    $end            reduce using rule 46 (condition -> number comparator number .)
-    END             reduce using rule 46 (condition -> number comparator number .)
-    ELSE            reduce using rule 46 (condition -> number comparator number .)
-    ELSIF           reduce using rule 46 (condition -> number comparator number .)
+    WHILE           reduce using rule 15 (whileLoop -> WHILE condition instructionBody END .)
+    $end            reduce using rule 15 (whileLoop -> WHILE condition instructionBody END .)
+    ID              reduce using rule 15 (whileLoop -> WHILE condition instructionBody END .)
+    PRINT           reduce using rule 15 (whileLoop -> WHILE condition instructionBody END .)
+    IF              reduce using rule 15 (whileLoop -> WHILE condition instructionBody END .)
+    END             reduce using rule 15 (whileLoop -> WHILE condition instructionBody END .)
+    ELSE            reduce using rule 15 (whileLoop -> WHILE condition instructionBody END .)
+    ELSIF           reduce using rule 15 (whileLoop -> WHILE condition instructionBody END .)
 
 
 state 56
 
-    (20) whileLoop -> WHILE condition whileBody END .
+    (31) parameters -> ID COMMA . ID
 
-    $end            reduce using rule 20 (whileLoop -> WHILE condition whileBody END .)
-    WHILE           reduce using rule 20 (whileLoop -> WHILE condition whileBody END .)
-    ID              reduce using rule 20 (whileLoop -> WHILE condition whileBody END .)
-    PRINT           reduce using rule 20 (whileLoop -> WHILE condition whileBody END .)
-    END             reduce using rule 20 (whileLoop -> WHILE condition whileBody END .)
+    ID              shift and go to state 64
 
 
 state 57
 
-    (22) whileBody -> instructionBody nestedWhile .
-    (25) whileBody -> instructionBody nestedWhile . instructionBody
-    (31) instructionBody -> . bodyLine
-    (32) instructionBody -> . bodyLine instructionBody
-    (28) bodyLine -> . ID ASSIGNMENT number
-    (29) bodyLine -> . ID ASSIGNMENT STRING
-    (30) bodyLine -> . PRINT printBody
+    (2) instruction -> DEF ID LPAREN parameters RPAREN . instructionBody END
+    (23) instructionBody -> . bodyLine
+    (24) instructionBody -> . bodyLine instructionBody
+    (18) bodyLine -> . ID ASSIGNMENT number
+    (19) bodyLine -> . ID ASSIGNMENT STRING
+    (20) bodyLine -> . PRINT printBody
+    (21) bodyLine -> . nestedConditional
+    (22) bodyLine -> . nestedWhile
+    (10) nestedConditional -> . conditional
+    (11) nestedConditional -> . conditional nestedConditional
+    (16) nestedWhile -> . whileLoop
+    (17) nestedWhile -> . whileLoop nestedWhile
+    (5) conditional -> . IF condition instructionBody END
+    (6) conditional -> . IF condition instructionBody conditionalElsif END
+    (7) conditional -> . IF condition instructionBody ELSE instructionBody END
+    (8) conditional -> . IF condition instructionBody conditionalElsif ELSE instructionBody END
+    (15) whileLoop -> . WHILE condition instructionBody END
 
-    END             reduce using rule 22 (whileBody -> instructionBody nestedWhile .)
     ID              shift and go to state 4
     PRINT           shift and go to state 10
+    IF              shift and go to state 8
+    WHILE           shift and go to state 9
 
-    instructionBody                shift and go to state 69
+    instructionBody                shift and go to state 65
     bodyLine                       shift and go to state 7
+    nestedConditional              shift and go to state 11
+    nestedWhile                    shift and go to state 12
+    conditional                    shift and go to state 15
+    whileLoop                      shift and go to state 17
 
 state 58
-
-    (23) whileBody -> nestedWhile instructionBody .
-
-    END             reduce using rule 23 (whileBody -> nestedWhile instructionBody .)
-
-
-state 59
-
-    (27) nestedWhile -> whileLoop nestedWhile .
-
-    ID              reduce using rule 27 (nestedWhile -> whileLoop nestedWhile .)
-    PRINT           reduce using rule 27 (nestedWhile -> whileLoop nestedWhile .)
-    END             reduce using rule 27 (nestedWhile -> whileLoop nestedWhile .)
-
-
-state 60
-
-    (39) parameters -> ID COMMA . ID
-
-    ID              shift and go to state 70
-
-
-state 61
-
-    (2) instruction -> DEF ID LPAREN parameters RPAREN . instructionBody END
-    (31) instructionBody -> . bodyLine
-    (32) instructionBody -> . bodyLine instructionBody
-    (28) bodyLine -> . ID ASSIGNMENT number
-    (29) bodyLine -> . ID ASSIGNMENT STRING
-    (30) bodyLine -> . PRINT printBody
-
-    ID              shift and go to state 4
-    PRINT           shift and go to state 10
-
-    instructionBody                shift and go to state 71
-    bodyLine                       shift and go to state 7
-
-state 62
 
     (3) instruction -> DEF ID LPAREN RPAREN END .
 
     $end            reduce using rule 3 (instruction -> DEF ID LPAREN RPAREN END .)
 
 
-state 63
+state 59
 
-    (6) conditional -> IF condition conditionalBody conditionalElsif END .
+    (6) conditional -> IF condition instructionBody conditionalElsif END .
 
-    $end            reduce using rule 6 (conditional -> IF condition conditionalBody conditionalElsif END .)
-    IF              reduce using rule 6 (conditional -> IF condition conditionalBody conditionalElsif END .)
-    ID              reduce using rule 6 (conditional -> IF condition conditionalBody conditionalElsif END .)
-    PRINT           reduce using rule 6 (conditional -> IF condition conditionalBody conditionalElsif END .)
-    END             reduce using rule 6 (conditional -> IF condition conditionalBody conditionalElsif END .)
-    ELSE            reduce using rule 6 (conditional -> IF condition conditionalBody conditionalElsif END .)
-    ELSIF           reduce using rule 6 (conditional -> IF condition conditionalBody conditionalElsif END .)
+    IF              reduce using rule 6 (conditional -> IF condition instructionBody conditionalElsif END .)
+    $end            reduce using rule 6 (conditional -> IF condition instructionBody conditionalElsif END .)
+    ID              reduce using rule 6 (conditional -> IF condition instructionBody conditionalElsif END .)
+    PRINT           reduce using rule 6 (conditional -> IF condition instructionBody conditionalElsif END .)
+    WHILE           reduce using rule 6 (conditional -> IF condition instructionBody conditionalElsif END .)
+    END             reduce using rule 6 (conditional -> IF condition instructionBody conditionalElsif END .)
+    ELSE            reduce using rule 6 (conditional -> IF condition instructionBody conditionalElsif END .)
+    ELSIF           reduce using rule 6 (conditional -> IF condition instructionBody conditionalElsif END .)
 
 
-state 64
+state 60
 
-    (8) conditional -> IF condition conditionalBody conditionalElsif ELSE . conditionalBody END
-    (10) conditionalBody -> . instructionBody
-    (11) conditionalBody -> . instructionBody nestedConditional
-    (12) conditionalBody -> . nestedConditional instructionBody
-    (13) conditionalBody -> . nestedConditional
-    (14) conditionalBody -> . instructionBody nestedConditional instructionBody
-    (31) instructionBody -> . bodyLine
-    (32) instructionBody -> . bodyLine instructionBody
-    (15) nestedConditional -> . conditional
-    (16) nestedConditional -> . conditional nestedConditional
-    (28) bodyLine -> . ID ASSIGNMENT number
-    (29) bodyLine -> . ID ASSIGNMENT STRING
-    (30) bodyLine -> . PRINT printBody
-    (5) conditional -> . IF condition conditionalBody END
-    (6) conditional -> . IF condition conditionalBody conditionalElsif END
-    (7) conditional -> . IF condition conditionalBody ELSE conditionalBody END
-    (8) conditional -> . IF condition conditionalBody conditionalElsif ELSE conditionalBody END
+    (8) conditional -> IF condition instructionBody conditionalElsif ELSE . instructionBody END
+    (23) instructionBody -> . bodyLine
+    (24) instructionBody -> . bodyLine instructionBody
+    (18) bodyLine -> . ID ASSIGNMENT number
+    (19) bodyLine -> . ID ASSIGNMENT STRING
+    (20) bodyLine -> . PRINT printBody
+    (21) bodyLine -> . nestedConditional
+    (22) bodyLine -> . nestedWhile
+    (10) nestedConditional -> . conditional
+    (11) nestedConditional -> . conditional nestedConditional
+    (16) nestedWhile -> . whileLoop
+    (17) nestedWhile -> . whileLoop nestedWhile
+    (5) conditional -> . IF condition instructionBody END
+    (6) conditional -> . IF condition instructionBody conditionalElsif END
+    (7) conditional -> . IF condition instructionBody ELSE instructionBody END
+    (8) conditional -> . IF condition instructionBody conditionalElsif ELSE instructionBody END
+    (15) whileLoop -> . WHILE condition instructionBody END
 
     ID              shift and go to state 4
     PRINT           shift and go to state 10
     IF              shift and go to state 8
+    WHILE           shift and go to state 9
 
-    conditionalBody                shift and go to state 72
-    instructionBody                shift and go to state 31
-    nestedConditional              shift and go to state 32
+    instructionBody                shift and go to state 66
     bodyLine                       shift and go to state 7
-    conditional                    shift and go to state 33
+    nestedConditional              shift and go to state 11
+    nestedWhile                    shift and go to state 12
+    conditional                    shift and go to state 15
+    whileLoop                      shift and go to state 17
+
+state 61
+
+    (7) conditional -> IF condition instructionBody ELSE instructionBody . END
+
+    END             shift and go to state 67
+
+
+state 62
+
+    (13) conditionalElsif -> elsif conditionalElsif .
+
+    END             reduce using rule 13 (conditionalElsif -> elsif conditionalElsif .)
+    ELSE            reduce using rule 13 (conditionalElsif -> elsif conditionalElsif .)
+
+
+state 63
+
+    (9) elsif -> ELSIF condition . instructionBody
+    (23) instructionBody -> . bodyLine
+    (24) instructionBody -> . bodyLine instructionBody
+    (18) bodyLine -> . ID ASSIGNMENT number
+    (19) bodyLine -> . ID ASSIGNMENT STRING
+    (20) bodyLine -> . PRINT printBody
+    (21) bodyLine -> . nestedConditional
+    (22) bodyLine -> . nestedWhile
+    (10) nestedConditional -> . conditional
+    (11) nestedConditional -> . conditional nestedConditional
+    (16) nestedWhile -> . whileLoop
+    (17) nestedWhile -> . whileLoop nestedWhile
+    (5) conditional -> . IF condition instructionBody END
+    (6) conditional -> . IF condition instructionBody conditionalElsif END
+    (7) conditional -> . IF condition instructionBody ELSE instructionBody END
+    (8) conditional -> . IF condition instructionBody conditionalElsif ELSE instructionBody END
+    (15) whileLoop -> . WHILE condition instructionBody END
+
+    ID              shift and go to state 4
+    PRINT           shift and go to state 10
+    IF              shift and go to state 8
+    WHILE           shift and go to state 9
+
+    instructionBody                shift and go to state 68
+    bodyLine                       shift and go to state 7
+    nestedConditional              shift and go to state 11
+    nestedWhile                    shift and go to state 12
+    conditional                    shift and go to state 15
+    whileLoop                      shift and go to state 17
+
+state 64
+
+    (31) parameters -> ID COMMA ID .
+
+    RPAREN          reduce using rule 31 (parameters -> ID COMMA ID .)
+
 
 state 65
 
-    (7) conditional -> IF condition conditionalBody ELSE conditionalBody . END
+    (2) instruction -> DEF ID LPAREN parameters RPAREN instructionBody . END
 
-    END             shift and go to state 73
+    END             shift and go to state 69
 
 
 state 66
 
-    (18) conditionalElsif -> elsif conditionalElsif .
+    (8) conditional -> IF condition instructionBody conditionalElsif ELSE instructionBody . END
 
-    END             reduce using rule 18 (conditionalElsif -> elsif conditionalElsif .)
-    ELSE            reduce using rule 18 (conditionalElsif -> elsif conditionalElsif .)
+    END             shift and go to state 70
 
 
 state 67
 
-    (9) elsif -> ELSIF condition . conditionalBody
-    (10) conditionalBody -> . instructionBody
-    (11) conditionalBody -> . instructionBody nestedConditional
-    (12) conditionalBody -> . nestedConditional instructionBody
-    (13) conditionalBody -> . nestedConditional
-    (14) conditionalBody -> . instructionBody nestedConditional instructionBody
-    (31) instructionBody -> . bodyLine
-    (32) instructionBody -> . bodyLine instructionBody
-    (15) nestedConditional -> . conditional
-    (16) nestedConditional -> . conditional nestedConditional
-    (28) bodyLine -> . ID ASSIGNMENT number
-    (29) bodyLine -> . ID ASSIGNMENT STRING
-    (30) bodyLine -> . PRINT printBody
-    (5) conditional -> . IF condition conditionalBody END
-    (6) conditional -> . IF condition conditionalBody conditionalElsif END
-    (7) conditional -> . IF condition conditionalBody ELSE conditionalBody END
-    (8) conditional -> . IF condition conditionalBody conditionalElsif ELSE conditionalBody END
+    (7) conditional -> IF condition instructionBody ELSE instructionBody END .
 
-    ID              shift and go to state 4
-    PRINT           shift and go to state 10
-    IF              shift and go to state 8
+    IF              reduce using rule 7 (conditional -> IF condition instructionBody ELSE instructionBody END .)
+    $end            reduce using rule 7 (conditional -> IF condition instructionBody ELSE instructionBody END .)
+    ID              reduce using rule 7 (conditional -> IF condition instructionBody ELSE instructionBody END .)
+    PRINT           reduce using rule 7 (conditional -> IF condition instructionBody ELSE instructionBody END .)
+    WHILE           reduce using rule 7 (conditional -> IF condition instructionBody ELSE instructionBody END .)
+    END             reduce using rule 7 (conditional -> IF condition instructionBody ELSE instructionBody END .)
+    ELSE            reduce using rule 7 (conditional -> IF condition instructionBody ELSE instructionBody END .)
+    ELSIF           reduce using rule 7 (conditional -> IF condition instructionBody ELSE instructionBody END .)
 
-    conditionalBody                shift and go to state 74
-    instructionBody                shift and go to state 31
-    nestedConditional              shift and go to state 32
-    bodyLine                       shift and go to state 7
-    conditional                    shift and go to state 33
 
 state 68
 
-    (14) conditionalBody -> instructionBody nestedConditional instructionBody .
+    (9) elsif -> ELSIF condition instructionBody .
 
-    END             reduce using rule 14 (conditionalBody -> instructionBody nestedConditional instructionBody .)
-    ELSE            reduce using rule 14 (conditionalBody -> instructionBody nestedConditional instructionBody .)
-    ELSIF           reduce using rule 14 (conditionalBody -> instructionBody nestedConditional instructionBody .)
+    ELSIF           reduce using rule 9 (elsif -> ELSIF condition instructionBody .)
+    END             reduce using rule 9 (elsif -> ELSIF condition instructionBody .)
+    ELSE            reduce using rule 9 (elsif -> ELSIF condition instructionBody .)
 
 
 state 69
-
-    (25) whileBody -> instructionBody nestedWhile instructionBody .
-
-    END             reduce using rule 25 (whileBody -> instructionBody nestedWhile instructionBody .)
-
-
-state 70
-
-    (39) parameters -> ID COMMA ID .
-
-    RPAREN          reduce using rule 39 (parameters -> ID COMMA ID .)
-
-
-state 71
-
-    (2) instruction -> DEF ID LPAREN parameters RPAREN instructionBody . END
-
-    END             shift and go to state 75
-
-
-state 72
-
-    (8) conditional -> IF condition conditionalBody conditionalElsif ELSE conditionalBody . END
-
-    END             shift and go to state 76
-
-
-state 73
-
-    (7) conditional -> IF condition conditionalBody ELSE conditionalBody END .
-
-    $end            reduce using rule 7 (conditional -> IF condition conditionalBody ELSE conditionalBody END .)
-    IF              reduce using rule 7 (conditional -> IF condition conditionalBody ELSE conditionalBody END .)
-    ID              reduce using rule 7 (conditional -> IF condition conditionalBody ELSE conditionalBody END .)
-    PRINT           reduce using rule 7 (conditional -> IF condition conditionalBody ELSE conditionalBody END .)
-    END             reduce using rule 7 (conditional -> IF condition conditionalBody ELSE conditionalBody END .)
-    ELSE            reduce using rule 7 (conditional -> IF condition conditionalBody ELSE conditionalBody END .)
-    ELSIF           reduce using rule 7 (conditional -> IF condition conditionalBody ELSE conditionalBody END .)
-
-
-state 74
-
-    (9) elsif -> ELSIF condition conditionalBody .
-
-    ELSIF           reduce using rule 9 (elsif -> ELSIF condition conditionalBody .)
-    END             reduce using rule 9 (elsif -> ELSIF condition conditionalBody .)
-    ELSE            reduce using rule 9 (elsif -> ELSIF condition conditionalBody .)
-
-
-state 75
 
     (2) instruction -> DEF ID LPAREN parameters RPAREN instructionBody END .
 
     $end            reduce using rule 2 (instruction -> DEF ID LPAREN parameters RPAREN instructionBody END .)
 
 
-state 76
+state 70
 
-    (8) conditional -> IF condition conditionalBody conditionalElsif ELSE conditionalBody END .
+    (8) conditional -> IF condition instructionBody conditionalElsif ELSE instructionBody END .
 
-    $end            reduce using rule 8 (conditional -> IF condition conditionalBody conditionalElsif ELSE conditionalBody END .)
-    IF              reduce using rule 8 (conditional -> IF condition conditionalBody conditionalElsif ELSE conditionalBody END .)
-    ID              reduce using rule 8 (conditional -> IF condition conditionalBody conditionalElsif ELSE conditionalBody END .)
-    PRINT           reduce using rule 8 (conditional -> IF condition conditionalBody conditionalElsif ELSE conditionalBody END .)
-    END             reduce using rule 8 (conditional -> IF condition conditionalBody conditionalElsif ELSE conditionalBody END .)
-    ELSE            reduce using rule 8 (conditional -> IF condition conditionalBody conditionalElsif ELSE conditionalBody END .)
-    ELSIF           reduce using rule 8 (conditional -> IF condition conditionalBody conditionalElsif ELSE conditionalBody END .)
+    IF              reduce using rule 8 (conditional -> IF condition instructionBody conditionalElsif ELSE instructionBody END .)
+    $end            reduce using rule 8 (conditional -> IF condition instructionBody conditionalElsif ELSE instructionBody END .)
+    ID              reduce using rule 8 (conditional -> IF condition instructionBody conditionalElsif ELSE instructionBody END .)
+    PRINT           reduce using rule 8 (conditional -> IF condition instructionBody conditionalElsif ELSE instructionBody END .)
+    WHILE           reduce using rule 8 (conditional -> IF condition instructionBody conditionalElsif ELSE instructionBody END .)
+    END             reduce using rule 8 (conditional -> IF condition instructionBody conditionalElsif ELSE instructionBody END .)
+    ELSE            reduce using rule 8 (conditional -> IF condition instructionBody conditionalElsif ELSE instructionBody END .)
+    ELSIF           reduce using rule 8 (conditional -> IF condition instructionBody conditionalElsif ELSE instructionBody END .)
 
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for IF in state 5 resolved as shift
+WARNING: shift/reduce conflict for WHILE in state 6 resolved as shift
+WARNING: shift/reduce conflict for IF in state 15 resolved as shift
+WARNING: shift/reduce conflict for WHILE in state 17 resolved as shift
+WARNING: reduce/reduce conflict in state 5 resolved using rule (instruction -> conditional)
+WARNING: rejected rule (nestedConditional -> conditional) in state 5
+WARNING: reduce/reduce conflict in state 6 resolved using rule (instruction -> whileLoop)
+WARNING: rejected rule (nestedWhile -> whileLoop) in state 6
