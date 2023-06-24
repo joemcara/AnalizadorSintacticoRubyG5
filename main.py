@@ -4,7 +4,9 @@ import ply.yacc as yacc
 #Intructions
 
 def p_instuction(p):
-  'instruction : ID ASSIGNMENT dataType'
+  '''instruction : ID ASSIGNMENT dataType 
+                | ID ASSIGNMENT condition 
+  '''
 
 def p_instructionFunction(p):
   '''
@@ -23,9 +25,26 @@ def p_parameters(p):
 
 def p_instructionConditional(p):
   '''  
-    instructionConditional : IF LPAREN condition RPAREN
+    instructionConditional : IF condition 
   '''
 
+#Operations
+def p_operationsArithmetic(p):
+
+  '''
+    arithmetic : PLUS
+              | MINUS
+              | POWER
+              | MULTIPLICATION 
+              | DIVISION
+  '''
+
+def p_operations(p):
+  '''
+    operations : dataType arithmetic dataType
+               | arithmetic dataType 
+
+  '''
 #DataTypes
 
 def p_condition(p):
@@ -38,8 +57,6 @@ def p_dataType(p):
   '''
   dataType : FLOAT
            | INTEGER
-           | TRUE
-           | FALSE
   '''
 
 def p_error(p):
