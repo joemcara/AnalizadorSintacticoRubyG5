@@ -27,6 +27,7 @@ def p_elsif(p):
   '''
   elsif : ELSIF condition conditionalBody 
   '''
+
 def p_conditionalBody(p):
   '''
     conditionalBody : instructionBody
@@ -49,8 +50,28 @@ def p_conditionalElsif(p):
 
 def p_instructionLoop(p):
   '''
-    instruction : WHILE condition instructionBody END
+    instruction : whileLoop 
   '''
+
+def p_whileLoop(P):
+  '''
+  whileLoop : WHILE condition whileBody END
+  '''
+
+def p_whileBody(p):
+  '''
+    whileBody : instructionBody
+                    | instructionBody nestedWhile
+                    | nestedWhile instructionBody
+                    | nestedWhile
+  '''
+def p_nestedWhile(p):
+  '''
+    nestedWhile : whileLoop
+                | whileLoop nestedWhile
+  '''
+
+
 def p_bodyLine(p):
   '''
     bodyLine : ID ASSIGNMENT number
