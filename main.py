@@ -3,9 +3,8 @@ import ply.yacc as yacc
 
 #Intructions
 
-def p_instuction(p):
-  '''instruction : ID ASSIGNMENT dataType 
-                | ID ASSIGNMENT condition 
+def p_instruction(p):
+  '''instruction : PRINT ID
   '''
 
 def p_instructionFunction(p):
@@ -14,6 +13,14 @@ def p_instructionFunction(p):
                   | DEF ID LPAREN RPAREN END
   '''
 
+def p_instructionConditional(p):
+  '''  
+    instruction : IF condition 
+  '''
+def p_instructionLoop(p):
+  '''
+    instruction : WHILE condition END
+  '''
 #Parameters
 def p_parameters(p):
   '''
@@ -23,10 +30,6 @@ def p_parameters(p):
 
 #StructureData
 
-def p_instructionConditional(p):
-  '''  
-    instructionConditional : IF condition 
-  '''
 
 #Operations
 def p_operationsArithmetic(p):

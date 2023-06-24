@@ -39,7 +39,6 @@ tokens = (
 ) + tuple(reserved.values())
 
 #Andres
-
 t_GREATERTHAN = r'>'
 t_EQUALS = r'=='
 t_GREATEROREQUALS = r'>='
@@ -47,7 +46,6 @@ t_STRING =r'"[^"]*"'
 t_AND = r'&&'
 
 #Nick
-
 t_ASSIGNMENT = r'='
 t_ASSIGNINCREMENT = r'\+='
 t_ASSIGNDECREMENT = r'-='
@@ -57,9 +55,7 @@ t_INTEGER = r'\d+'
 t_DOT = r'\.'
 t_OPENBRACKET = r'\['
 t_CLOSEDBRACKET = r'\]'
-
 #Joseph
-
 t_DIVISION = r'\/'
 t_PLUS = r'\+'
 t_COMMA = r'\,'
@@ -73,7 +69,7 @@ t_ignore = ' \t'
 
 #Andres
 def t_ID(t):
-  r'(\$|@)?[a-zA-Z_]+[0-9-a-zA-Z]+'
+  r'(\$|@)?[a-zA-Z_]+[0-9-a-zA-Z]*'
   t.type = reserved.get(t.value, 'ID')
   return t
 
