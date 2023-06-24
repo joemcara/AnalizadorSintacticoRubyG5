@@ -34,6 +34,7 @@ def p_conditionalBody(p):
                     | instructionBody nestedConditional
                     | nestedConditional instructionBody
                     | nestedConditional
+                    | instructionBody nestedConditional instructionBody
   '''
 def p_nestedConditional(p):
   '''
@@ -64,6 +65,7 @@ def p_whileBody(p):
                     | instructionBody nestedWhile
                     | nestedWhile instructionBody
                     | nestedWhile
+                    | instructionBody nestedWhile instructionBody
   '''
 def p_nestedWhile(p):
   '''
