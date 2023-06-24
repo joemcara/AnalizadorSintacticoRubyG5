@@ -23,7 +23,6 @@ Unused terminals:
     LESSTHAN
     OPENBRACKET
     PUTS
-    STRING
     THEN
     TO_F
     TO_I
@@ -31,24 +30,30 @@ Unused terminals:
 Grammar
 
 Rule 0     S' -> instruction
-Rule 1     instruction -> PRINT ID
+Rule 1     instruction -> PRINT printBody
 Rule 2     instruction -> DEF ID LPAREN parameters RPAREN END
 Rule 3     instruction -> DEF ID LPAREN RPAREN END
-Rule 4     instruction -> IF condition
-Rule 5     instruction -> WHILE condition END
-Rule 6     parameters -> ID
-Rule 7     parameters -> ID COMMA ID
-Rule 8     arithmetic -> PLUS
-Rule 9     arithmetic -> MINUS
-Rule 10    arithmetic -> POWER
-Rule 11    arithmetic -> MULTIPLICATION
-Rule 12    arithmetic -> DIVISION
-Rule 13    operations -> dataType arithmetic dataType
-Rule 14    operations -> arithmetic dataType
-Rule 15    condition -> TRUE
-Rule 16    condition -> FALSE
-Rule 17    dataType -> FLOAT
-Rule 18    dataType -> INTEGER
+Rule 4     printBody -> ID
+Rule 5     printBody -> TRUE
+Rule 6     printBody -> FALSE
+Rule 7     printBody -> dataType
+Rule 8     printBody -> condition
+Rule 9     printBody -> STRING
+Rule 10    instruction -> IF condition
+Rule 11    instruction -> WHILE condition END
+Rule 12    parameters -> ID
+Rule 13    parameters -> ID COMMA ID
+Rule 14    arithmetic -> PLUS
+Rule 15    arithmetic -> MINUS
+Rule 16    arithmetic -> POWER
+Rule 17    arithmetic -> MULTIPLICATION
+Rule 18    arithmetic -> DIVISION
+Rule 19    operations -> dataType arithmetic dataType
+Rule 20    operations -> arithmetic dataType
+Rule 21    condition -> TRUE
+Rule 22    condition -> FALSE
+Rule 23    dataType -> FLOAT
+Rule 24    dataType -> INTEGER
 
 Terminals, with rules where they appear
 
@@ -61,61 +66,62 @@ CASE                 :
 CHOMP                : 
 CLASS                : 
 CLOSEDBRACKET        : 
-COMMA                : 7
+COMMA                : 13
 DEF                  : 2 3
-DIVISION             : 12
+DIVISION             : 18
 DOT                  : 
 ELSE                 : 
 ELSIF                : 
-END                  : 2 3 5
+END                  : 2 3 11
 EQUALS               : 
-FALSE                : 16
-FLOAT                : 17
+FALSE                : 6 22
+FLOAT                : 23
 FOR                  : 
 GETS                 : 
 GREATEROREQUALS      : 
 GREATERTHAN          : 
-ID                   : 1 2 3 6 7 7
-IF                   : 4
+ID                   : 2 3 4 12 13 13
+IF                   : 10
 IN                   : 
-INTEGER              : 18
+INTEGER              : 24
 LESSTHAN             : 
 LPAREN               : 2 3
-MINUS                : 9
-MULTIPLICATION       : 11
+MINUS                : 15
+MULTIPLICATION       : 17
 OPENBRACKET          : 
-PLUS                 : 8
-POWER                : 10
+PLUS                 : 14
+POWER                : 16
 PRINT                : 1
 PUTS                 : 
 RPAREN               : 2 3
-STRING               : 
+STRING               : 9
 THEN                 : 
 TO_F                 : 
 TO_I                 : 
-TRUE                 : 15
-WHILE                : 5
+TRUE                 : 5 21
+WHILE                : 11
 error                : 
 
 Nonterminals, with rules where they appear
 
-arithmetic           : 13 14
-condition            : 4 5
-dataType             : 13 13 14
+arithmetic           : 19 20
+condition            : 8 10 11
+dataType             : 7 19 19 20
 instruction          : 0
 operations           : 
 parameters           : 2
+printBody            : 1
 
 Parsing method: LALR
 
 state 0
 
     (0) S' -> . instruction
-    (1) instruction -> . PRINT ID
+    (1) instruction -> . PRINT printBody
     (2) instruction -> . DEF ID LPAREN parameters RPAREN END
     (3) instruction -> . DEF ID LPAREN RPAREN END
-    (4) instruction -> . IF condition
-    (5) instruction -> . WHILE condition END
+    (10) instruction -> . IF condition
+    (11) instruction -> . WHILE condition END
 
     PRINT           shift and go to state 2
     DEF             shift and go to state 3
@@ -132,159 +138,248 @@ state 1
 
 state 2
 
-    (1) instruction -> PRINT . ID
+    (1) instruction -> PRINT . printBody
+    (4) printBody -> . ID
+    (5) printBody -> . TRUE
+    (6) printBody -> . FALSE
+    (7) printBody -> . dataType
+    (8) printBody -> . condition
+    (9) printBody -> . STRING
+    (23) dataType -> . FLOAT
+    (24) dataType -> . INTEGER
+    (21) condition -> . TRUE
+    (22) condition -> . FALSE
 
-    ID              shift and go to state 6
+    ID              shift and go to state 7
+    TRUE            shift and go to state 8
+    FALSE           shift and go to state 9
+    STRING          shift and go to state 12
+    FLOAT           shift and go to state 13
+    INTEGER         shift and go to state 14
 
+    printBody                      shift and go to state 6
+    dataType                       shift and go to state 10
+    condition                      shift and go to state 11
 
 state 3
 
     (2) instruction -> DEF . ID LPAREN parameters RPAREN END
     (3) instruction -> DEF . ID LPAREN RPAREN END
 
-    ID              shift and go to state 7
+    ID              shift and go to state 15
 
 
 state 4
 
-    (4) instruction -> IF . condition
-    (15) condition -> . TRUE
-    (16) condition -> . FALSE
+    (10) instruction -> IF . condition
+    (21) condition -> . TRUE
+    (22) condition -> . FALSE
 
-    TRUE            shift and go to state 9
-    FALSE           shift and go to state 10
+    TRUE            shift and go to state 17
+    FALSE           shift and go to state 18
 
-    condition                      shift and go to state 8
+    condition                      shift and go to state 16
 
 state 5
 
-    (5) instruction -> WHILE . condition END
-    (15) condition -> . TRUE
-    (16) condition -> . FALSE
+    (11) instruction -> WHILE . condition END
+    (21) condition -> . TRUE
+    (22) condition -> . FALSE
 
-    TRUE            shift and go to state 9
-    FALSE           shift and go to state 10
+    TRUE            shift and go to state 17
+    FALSE           shift and go to state 18
 
-    condition                      shift and go to state 11
+    condition                      shift and go to state 19
 
 state 6
 
-    (1) instruction -> PRINT ID .
+    (1) instruction -> PRINT printBody .
 
-    $end            reduce using rule 1 (instruction -> PRINT ID .)
+    $end            reduce using rule 1 (instruction -> PRINT printBody .)
 
 
 state 7
 
-    (2) instruction -> DEF ID . LPAREN parameters RPAREN END
-    (3) instruction -> DEF ID . LPAREN RPAREN END
+    (4) printBody -> ID .
 
-    LPAREN          shift and go to state 12
+    $end            reduce using rule 4 (printBody -> ID .)
 
 
 state 8
 
-    (4) instruction -> IF condition .
+    (5) printBody -> TRUE .
+    (21) condition -> TRUE .
 
-    $end            reduce using rule 4 (instruction -> IF condition .)
+  ! reduce/reduce conflict for $end resolved using rule 5 (printBody -> TRUE .)
+    $end            reduce using rule 5 (printBody -> TRUE .)
+
+  ! $end            [ reduce using rule 21 (condition -> TRUE .) ]
 
 
 state 9
 
-    (15) condition -> TRUE .
+    (6) printBody -> FALSE .
+    (22) condition -> FALSE .
 
-    $end            reduce using rule 15 (condition -> TRUE .)
-    END             reduce using rule 15 (condition -> TRUE .)
+  ! reduce/reduce conflict for $end resolved using rule 6 (printBody -> FALSE .)
+    $end            reduce using rule 6 (printBody -> FALSE .)
+
+  ! $end            [ reduce using rule 22 (condition -> FALSE .) ]
 
 
 state 10
 
-    (16) condition -> FALSE .
+    (7) printBody -> dataType .
 
-    $end            reduce using rule 16 (condition -> FALSE .)
-    END             reduce using rule 16 (condition -> FALSE .)
+    $end            reduce using rule 7 (printBody -> dataType .)
 
 
 state 11
 
-    (5) instruction -> WHILE condition . END
+    (8) printBody -> condition .
 
-    END             shift and go to state 13
+    $end            reduce using rule 8 (printBody -> condition .)
 
 
 state 12
 
-    (2) instruction -> DEF ID LPAREN . parameters RPAREN END
-    (3) instruction -> DEF ID LPAREN . RPAREN END
-    (6) parameters -> . ID
-    (7) parameters -> . ID COMMA ID
+    (9) printBody -> STRING .
 
-    RPAREN          shift and go to state 16
-    ID              shift and go to state 14
+    $end            reduce using rule 9 (printBody -> STRING .)
 
-    parameters                     shift and go to state 15
 
 state 13
 
-    (5) instruction -> WHILE condition END .
+    (23) dataType -> FLOAT .
 
-    $end            reduce using rule 5 (instruction -> WHILE condition END .)
+    $end            reduce using rule 23 (dataType -> FLOAT .)
 
 
 state 14
 
-    (6) parameters -> ID .
-    (7) parameters -> ID . COMMA ID
+    (24) dataType -> INTEGER .
 
-    RPAREN          reduce using rule 6 (parameters -> ID .)
-    COMMA           shift and go to state 17
+    $end            reduce using rule 24 (dataType -> INTEGER .)
 
 
 state 15
 
-    (2) instruction -> DEF ID LPAREN parameters . RPAREN END
+    (2) instruction -> DEF ID . LPAREN parameters RPAREN END
+    (3) instruction -> DEF ID . LPAREN RPAREN END
 
-    RPAREN          shift and go to state 18
+    LPAREN          shift and go to state 20
 
 
 state 16
 
-    (3) instruction -> DEF ID LPAREN RPAREN . END
+    (10) instruction -> IF condition .
 
-    END             shift and go to state 19
+    $end            reduce using rule 10 (instruction -> IF condition .)
 
 
 state 17
 
-    (7) parameters -> ID COMMA . ID
+    (21) condition -> TRUE .
 
-    ID              shift and go to state 20
+    $end            reduce using rule 21 (condition -> TRUE .)
+    END             reduce using rule 21 (condition -> TRUE .)
 
 
 state 18
 
-    (2) instruction -> DEF ID LPAREN parameters RPAREN . END
+    (22) condition -> FALSE .
+
+    $end            reduce using rule 22 (condition -> FALSE .)
+    END             reduce using rule 22 (condition -> FALSE .)
+
+
+state 19
+
+    (11) instruction -> WHILE condition . END
 
     END             shift and go to state 21
 
 
-state 19
+state 20
+
+    (2) instruction -> DEF ID LPAREN . parameters RPAREN END
+    (3) instruction -> DEF ID LPAREN . RPAREN END
+    (12) parameters -> . ID
+    (13) parameters -> . ID COMMA ID
+
+    RPAREN          shift and go to state 24
+    ID              shift and go to state 22
+
+    parameters                     shift and go to state 23
+
+state 21
+
+    (11) instruction -> WHILE condition END .
+
+    $end            reduce using rule 11 (instruction -> WHILE condition END .)
+
+
+state 22
+
+    (12) parameters -> ID .
+    (13) parameters -> ID . COMMA ID
+
+    RPAREN          reduce using rule 12 (parameters -> ID .)
+    COMMA           shift and go to state 25
+
+
+state 23
+
+    (2) instruction -> DEF ID LPAREN parameters . RPAREN END
+
+    RPAREN          shift and go to state 26
+
+
+state 24
+
+    (3) instruction -> DEF ID LPAREN RPAREN . END
+
+    END             shift and go to state 27
+
+
+state 25
+
+    (13) parameters -> ID COMMA . ID
+
+    ID              shift and go to state 28
+
+
+state 26
+
+    (2) instruction -> DEF ID LPAREN parameters RPAREN . END
+
+    END             shift and go to state 29
+
+
+state 27
 
     (3) instruction -> DEF ID LPAREN RPAREN END .
 
     $end            reduce using rule 3 (instruction -> DEF ID LPAREN RPAREN END .)
 
 
-state 20
+state 28
 
-    (7) parameters -> ID COMMA ID .
+    (13) parameters -> ID COMMA ID .
 
-    RPAREN          reduce using rule 7 (parameters -> ID COMMA ID .)
+    RPAREN          reduce using rule 13 (parameters -> ID COMMA ID .)
 
 
-state 21
+state 29
 
     (2) instruction -> DEF ID LPAREN parameters RPAREN END .
 
     $end            reduce using rule 2 (instruction -> DEF ID LPAREN parameters RPAREN END .)
 
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: reduce/reduce conflict in state 8 resolved using rule (printBody -> TRUE)
+WARNING: rejected rule (condition -> TRUE) in state 8
+WARNING: reduce/reduce conflict in state 9 resolved using rule (printBody -> FALSE)
+WARNING: rejected rule (condition -> FALSE) in state 9

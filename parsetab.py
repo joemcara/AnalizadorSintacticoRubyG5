@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'AND ASSIGNDECREMENT ASSIGNINCREMENT ASSIGNMENT BREAK BREAK BREAK CASE CASE CASE CHOMP CHOMP CHOMP CLASS CLASS CLASS CLOSEDBRACKET COMMA DEF DEF DEF DIVISION DOT ELSE ELSE ELSE ELSIF ELSIF ELSIF END END END EQUALS FALSE FALSE FALSE FLOAT FOR FOR FOR GETS GETS GETS GREATEROREQUALS GREATERTHAN ID IF IF IF IN IN IN INTEGER LESSTHAN LPAREN MINUS MULTIPLICATION OPENBRACKET PLUS POWER PRINT PRINT PRINT PUTS PUTS PUTS RPAREN STRING THEN THEN THEN TO_F TO_F TO_F TO_I TO_I TO_I TRUE TRUE TRUE WHILE WHILE WHILEinstruction : PRINT ID\n  \n  instruction : DEF ID LPAREN parameters RPAREN END\n                  | DEF ID LPAREN RPAREN END\n    \n    instruction : IF condition \n  \n    instruction : WHILE condition END\n  \n    parameters : ID \n               | ID COMMA ID \n  \n    arithmetic : PLUS\n              | MINUS\n              | POWER\n              | MULTIPLICATION \n              | DIVISION\n  \n    operations : dataType arithmetic dataType\n               | arithmetic dataType \n\n  \n    condition : TRUE\n               | FALSE \n  \n  dataType : FLOAT\n           | INTEGER\n  '
+_lr_signature = 'AND ASSIGNDECREMENT ASSIGNINCREMENT ASSIGNMENT BREAK BREAK BREAK CASE CASE CASE CHOMP CHOMP CHOMP CLASS CLASS CLASS CLOSEDBRACKET COMMA DEF DEF DEF DIVISION DOT ELSE ELSE ELSE ELSIF ELSIF ELSIF END END END EQUALS FALSE FALSE FALSE FLOAT FOR FOR FOR GETS GETS GETS GREATEROREQUALS GREATERTHAN ID IF IF IF IN IN IN INTEGER LESSTHAN LPAREN MINUS MULTIPLICATION OPENBRACKET PLUS POWER PRINT PRINT PRINT PUTS PUTS PUTS RPAREN STRING THEN THEN THEN TO_F TO_F TO_F TO_I TO_I TO_I TRUE TRUE TRUE WHILE WHILE WHILEinstruction : PRINT printBody\n  \n  instruction : DEF ID LPAREN parameters RPAREN END\n                  | DEF ID LPAREN RPAREN END\n  \n  printBody : ID \n              | TRUE  \n              | FALSE \n              | dataType\n              | condition\n              | STRING\n    \n    instruction : IF condition \n  \n    instruction : WHILE condition END\n  \n    parameters : ID \n               | ID COMMA ID \n  \n    arithmetic : PLUS\n              | MINUS\n              | POWER\n              | MULTIPLICATION \n              | DIVISION\n  \n    operations : dataType arithmetic dataType\n               | arithmetic dataType \n\n  \n    condition : TRUE\n               | FALSE \n  \n  dataType : FLOAT\n           | INTEGER\n  '
     
-_lr_action_items = {'PRINT':([0,],[2,]),'DEF':([0,],[3,]),'IF':([0,],[4,]),'WHILE':([0,],[5,]),'$end':([1,6,8,9,10,13,19,21,],[0,-1,-4,-15,-16,-5,-3,-2,]),'ID':([2,3,12,17,],[6,7,14,20,]),'TRUE':([4,5,],[9,9,]),'FALSE':([4,5,],[10,10,]),'LPAREN':([7,],[12,]),'END':([9,10,11,16,18,],[-15,-16,13,19,21,]),'RPAREN':([12,14,15,20,],[16,-6,18,-7,]),'COMMA':([14,],[17,]),}
+_lr_action_items = {'PRINT':([0,],[2,]),'DEF':([0,],[3,]),'IF':([0,],[4,]),'WHILE':([0,],[5,]),'$end':([1,6,7,8,9,10,11,12,13,14,16,17,18,21,27,29,],[0,-1,-4,-5,-6,-7,-8,-9,-23,-24,-10,-21,-22,-11,-3,-2,]),'ID':([2,3,20,25,],[7,15,22,28,]),'TRUE':([2,4,5,],[8,17,17,]),'FALSE':([2,4,5,],[9,18,18,]),'STRING':([2,],[12,]),'FLOAT':([2,],[13,]),'INTEGER':([2,],[14,]),'LPAREN':([15,],[20,]),'END':([17,18,19,24,26,],[-21,-22,21,27,29,]),'RPAREN':([20,22,23,28,],[24,-12,26,-13,]),'COMMA':([22,],[25,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'instruction':([0,],[1,]),'condition':([4,5,],[8,11,]),'parameters':([12,],[15,]),}
+_lr_goto_items = {'instruction':([0,],[1,]),'printBody':([2,],[6,]),'dataType':([2,],[10,]),'condition':([2,4,5,],[11,16,19,]),'parameters':([20,],[23,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -27,22 +27,28 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> instruction","S'",1,None,None,None),
-  ('instruction -> PRINT ID','instruction',2,'p_instruction','main.py',7),
+  ('instruction -> PRINT printBody','instruction',2,'p_instruction','main.py',7),
   ('instruction -> DEF ID LPAREN parameters RPAREN END','instruction',6,'p_instructionFunction','main.py',12),
   ('instruction -> DEF ID LPAREN RPAREN END','instruction',5,'p_instructionFunction','main.py',13),
-  ('instruction -> IF condition','instruction',2,'p_instructionConditional','main.py',18),
-  ('instruction -> WHILE condition END','instruction',3,'p_instructionLoop','main.py',22),
-  ('parameters -> ID','parameters',1,'p_parameters','main.py',27),
-  ('parameters -> ID COMMA ID','parameters',3,'p_parameters','main.py',28),
-  ('arithmetic -> PLUS','arithmetic',1,'p_operationsArithmetic','main.py',37),
-  ('arithmetic -> MINUS','arithmetic',1,'p_operationsArithmetic','main.py',38),
-  ('arithmetic -> POWER','arithmetic',1,'p_operationsArithmetic','main.py',39),
-  ('arithmetic -> MULTIPLICATION','arithmetic',1,'p_operationsArithmetic','main.py',40),
-  ('arithmetic -> DIVISION','arithmetic',1,'p_operationsArithmetic','main.py',41),
-  ('operations -> dataType arithmetic dataType','operations',3,'p_operations','main.py',47),
-  ('operations -> arithmetic dataType','operations',2,'p_operations','main.py',48),
-  ('condition -> TRUE','condition',1,'p_condition','main.py',55),
-  ('condition -> FALSE','condition',1,'p_condition','main.py',56),
-  ('dataType -> FLOAT','dataType',1,'p_dataType','main.py',61),
-  ('dataType -> INTEGER','dataType',1,'p_dataType','main.py',62),
+  ('printBody -> ID','printBody',1,'p_printBody','main.py',18),
+  ('printBody -> TRUE','printBody',1,'p_printBody','main.py',19),
+  ('printBody -> FALSE','printBody',1,'p_printBody','main.py',20),
+  ('printBody -> dataType','printBody',1,'p_printBody','main.py',21),
+  ('printBody -> condition','printBody',1,'p_printBody','main.py',22),
+  ('printBody -> STRING','printBody',1,'p_printBody','main.py',23),
+  ('instruction -> IF condition','instruction',2,'p_instructionConditional','main.py',28),
+  ('instruction -> WHILE condition END','instruction',3,'p_instructionLoop','main.py',32),
+  ('parameters -> ID','parameters',1,'p_parameters','main.py',37),
+  ('parameters -> ID COMMA ID','parameters',3,'p_parameters','main.py',38),
+  ('arithmetic -> PLUS','arithmetic',1,'p_operationsArithmetic','main.py',47),
+  ('arithmetic -> MINUS','arithmetic',1,'p_operationsArithmetic','main.py',48),
+  ('arithmetic -> POWER','arithmetic',1,'p_operationsArithmetic','main.py',49),
+  ('arithmetic -> MULTIPLICATION','arithmetic',1,'p_operationsArithmetic','main.py',50),
+  ('arithmetic -> DIVISION','arithmetic',1,'p_operationsArithmetic','main.py',51),
+  ('operations -> dataType arithmetic dataType','operations',3,'p_operations','main.py',57),
+  ('operations -> arithmetic dataType','operations',2,'p_operations','main.py',58),
+  ('condition -> TRUE','condition',1,'p_condition','main.py',65),
+  ('condition -> FALSE','condition',1,'p_condition','main.py',66),
+  ('dataType -> FLOAT','dataType',1,'p_dataType','main.py',71),
+  ('dataType -> INTEGER','dataType',1,'p_dataType','main.py',72),
 ]

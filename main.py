@@ -4,13 +4,23 @@ import ply.yacc as yacc
 #Intructions
 
 def p_instruction(p):
-  '''instruction : PRINT ID
+  '''instruction : PRINT printBody
   '''
 
 def p_instructionFunction(p):
   '''
   instruction : DEF ID LPAREN parameters RPAREN END
                   | DEF ID LPAREN RPAREN END
+  '''
+
+def p_printBody(p):
+  '''
+  printBody : ID 
+              | TRUE  
+              | FALSE 
+              | dataType
+              | condition
+              | STRING
   '''
 
 def p_instructionConditional(p):
