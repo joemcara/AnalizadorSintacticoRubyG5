@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'AND ASSIGNDECREMENT ASSIGNINCREMENT ASSIGNMENT BREAK BREAK BREAK CASE CASE CASE CHOMP CHOMP CHOMP CLASS CLASS CLASS CLOSEDBRACKET COMMA DEF DEF DEF DIVISION DOT ELSE ELSE ELSE ELSIF ELSIF ELSIF END END END EQUALS FALSE FALSE FALSE FLOAT FOR FOR FOR GETS GETS GETS GREATEROREQUALS GREATERTHAN ID IF IF IF IN IN IN INTEGER LESSOREQUALS LESSTHAN LPAREN MINUS MULTIPLICATION OPENBRACKET PLUS POWER PRINT PRINT PRINT PUTS PUTS PUTS RPAREN STRING THEN THEN THEN TO_F TO_F TO_F TO_I TO_I TO_I TRUE TRUE TRUE WHILE WHILE WHILEinstruction : instructionBody\n  instruction : DEF ID LPAREN parameters RPAREN instructionBody END\n              | DEF ID LPAREN RPAREN END\n    \n    instruction : conditional\n  \n    conditional : IF condition instructionBody END\n                | IF condition instructionBody conditionalElsif END\n                | IF condition instructionBody ELSE instructionBody END\n                | IF condition instructionBody conditionalElsif ELSE instructionBody END\n  \n  elsif : ELSIF condition instructionBody \n  \n    nestedConditional : conditional\n                      | conditional nestedConditional\n  \n  conditionalElsif : elsif \n                  | elsif  conditionalElsif\n  \n    instruction : whileLoop \n  \n  whileLoop : WHILE condition instructionBody END\n  \n    nestedWhile : whileLoop\n                | whileLoop nestedWhile\n  \n    bodyLine : ID ASSIGNMENT number\n                    | ID ASSIGNMENT STRING\n                    | PRINT printBody \n                    | nestedConditional\n                    | nestedWhile\n  \n    instructionBody : bodyLine\n                    | bodyLine instructionBody \n  \n  printBody : ID \n              | TRUE  \n              | FALSE \n              | dataType\n              | condition\n  \n    parameters : ID \n               | ID COMMA ID \n  \n    arithmaticOperator : PLUS\n                        | MINUS\n                        | POWER\n                        | MULTIPLICATION \n                        | DIVISION\n  \n    operations : number arithmaticOperator number\n  \n    conditionValue : ID\n                   | number\n  \n    condition : conditionValue comparator conditionValue\n  \n    comparator : GREATERTHAN\n               | LESSTHAN\n               | EQUALS\n               | GREATEROREQUALS\n               | LESSOREQUALS\n  \n      number : FLOAT\n             | INTEGER\n    \n  dataType : STRING\n           | number\n  '
+_lr_signature = 'AND ASSIGNDECREMENT ASSIGNINCREMENT ASSIGNMENT BREAK BREAK BREAK CASE CASE CASE CHOMP CHOMP CHOMP CLASS CLASS CLASS CLOSEDBRACKET COMMA DEF DEF DEF DIVISION DOT ELSE ELSE ELSE ELSIF ELSIF ELSIF END END END EQUALS FALSE FALSE FALSE FLOAT FOR FOR FOR GETS GETS GETS GREATEROREQUALS GREATERTHAN ID IF IF IF IN IN IN INTEGER LESSOREQUALS LESSTHAN LPAREN MINUS MULTIPLICATION OPENBRACKET PLUS POWER PRINT PRINT PRINT PUTS PUTS PUTS RPAREN STRING THEN THEN THEN TO_F TO_F TO_F TO_I TO_I TO_I TRUE TRUE TRUE WHILE WHILE WHILEinstruction : instructionBody\n  instruction : DEF ID LPAREN parameters RPAREN instructionBody END\n              | DEF ID LPAREN RPAREN END\n    \n    instruction : conditional\n  \n    conditional : IF condition instructionBody END\n                | IF condition instructionBody conditionalElsif END\n                | IF condition instructionBody ELSE instructionBody END\n                | IF condition instructionBody conditionalElsif ELSE instructionBody END\n  \n  elsif : ELSIF condition instructionBody \n  \n    nestedConditional : conditional\n                      | conditional nestedConditional\n  \n  conditionalElsif : elsif \n                  | elsif  conditionalElsif\n  \n    instruction : whileLoop \n  \n  whileLoop : WHILE condition instructionBody END\n  \n    nestedWhile : whileLoop\n                | whileLoop nestedWhile\n  \n    assignmentRule : ID ASSIGNMENT number\n                    | ID ASSIGNMENT ID\n                    | ID ASSIGNMENT condition\n                    | ID ASSIGNMENT TRUE\n                    | ID ASSIGNMENT FALSE\n  \n    bodyLine : assignmentRule\n              | PRINT printBody \n              | nestedConditional\n              | nestedWhile\n  \n    instructionBody : bodyLine\n                    | bodyLine instructionBody \n  \n  printBody : ID \n              | TRUE  \n              | FALSE \n              | dataType\n              | condition\n  \n    parameters : ID \n               | ID COMMA ID \n  \n    arithmeticOperator : PLUS\n                        | MINUS\n                        | POWER\n                        | MULTIPLICATION \n                        | DIVISION\n  \n    operations : number arithmeticOperator number\n  \n    conditionValue : ID\n                   | number\n  \n    condition : conditionValue comparator conditionValue\n  \n    comparator : GREATERTHAN\n               | LESSTHAN\n               | EQUALS\n               | GREATEROREQUALS\n               | LESSOREQUALS\n  \n      number : FLOAT\n             | INTEGER\n    \n  dataType : STRING\n           | number\n  '
     
-_lr_action_items = {'DEF':([0,],[3,]),'IF':([0,5,6,7,11,12,15,16,17,18,20,22,23,24,25,26,27,28,29,30,31,32,33,34,36,37,49,51,54,55,57,59,60,63,67,70,],[8,8,-16,8,-21,-22,8,-11,-16,-17,8,-38,-39,-46,-47,8,-20,-25,-26,-27,-28,-29,-48,-49,-18,-19,-5,8,-40,-15,8,-6,8,8,-7,-8,]),'WHILE':([0,5,6,7,11,12,15,16,17,18,20,22,23,24,25,26,27,28,29,30,31,32,33,34,36,37,49,51,54,55,57,59,60,63,67,70,],[9,-10,9,9,-21,-22,-10,-11,9,-17,9,-38,-39,-46,-47,9,-20,-25,-26,-27,-28,-29,-48,-49,-18,-19,-5,9,-40,-15,9,-6,9,9,-7,-8,]),'ID':([0,3,5,6,7,8,9,10,11,12,15,16,17,18,20,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,39,40,41,42,43,44,49,51,53,54,55,56,57,59,60,63,67,70,],[4,13,-10,-16,4,22,22,28,-21,-22,-10,-11,-16,-17,4,-38,-39,-46,-47,4,-20,-25,-26,-27,-28,-29,-48,-49,46,-18,-19,22,-41,-42,-43,-44,-45,-5,4,22,-40,-15,64,4,-6,4,4,-7,-8,]),'PRINT':([0,5,6,7,11,12,15,16,17,18,20,22,23,24,25,26,27,28,29,30,31,32,33,34,36,37,49,51,54,55,57,59,60,63,67,70,],[10,-10,-16,10,-21,-22,-10,-11,-16,-17,10,-38,-39,-46,-47,10,-20,-25,-26,-27,-28,-29,-48,-49,-18,-19,-5,10,-40,-15,10,-6,10,10,-7,-8,]),'$end':([1,2,5,6,7,11,12,15,16,17,18,19,22,23,24,25,27,28,29,30,31,32,33,34,36,37,49,54,55,58,59,67,69,70,],[0,-1,-4,-14,-23,-21,-22,-10,-11,-16,-17,-24,-38,-39,-46,-47,-20,-25,-26,-27,-28,-29,-48,-49,-18,-19,-5,-40,-15,-3,-6,-7,-2,-8,]),'ASSIGNMENT':([4,],[14,]),'END':([7,11,12,15,16,17,18,19,22,23,24,25,27,28,29,30,31,32,33,34,36,37,38,45,48,49,50,52,54,55,59,61,62,65,66,67,68,70,],[-23,-21,-22,-10,-11,-16,-17,-24,-38,-39,-46,-47,-20,-25,-26,-27,-28,-29,-48,-49,-18,-19,49,55,58,-5,59,-12,-40,-15,-6,67,-13,69,70,-7,-9,-8,]),'ELSE':([7,11,12,15,16,17,18,19,22,23,24,25,27,28,29,30,31,32,33,34,36,37,38,49,50,52,54,55,59,62,67,68,70,],[-23,-21,-22,-10,-11,-16,-17,-24,-38,-39,-46,-47,-20,-25,-26,-27,-28,-29,-48,-49,-18,-19,51,-5,60,-12,-40,-15,-6,-13,-7,-9,-8,]),'ELSIF':([7,11,12,15,16,17,18,19,22,23,24,25,27,28,29,30,31,32,33,34,36,37,38,49,52,54,55,59,67,68,70,],[-23,-21,-22,-10,-11,-16,-17,-24,-38,-39,-46,-47,-20,-25,-26,-27,-28,-29,-48,-49,-18,-19,53,-5,53,-40,-15,-6,-7,-9,-8,]),'FLOAT':([8,9,10,14,39,40,41,42,43,44,53,],[24,24,24,24,24,-41,-42,-43,-44,-45,24,]),'INTEGER':([8,9,10,14,39,40,41,42,43,44,53,],[25,25,25,25,25,-41,-42,-43,-44,-45,25,]),'TRUE':([10,],[29,]),'FALSE':([10,],[30,]),'STRING':([10,14,],[33,37,]),'LPAREN':([13,],[35,]),'GREATERTHAN':([21,22,23,24,25,28,34,],[40,-38,-39,-46,-47,-38,-39,]),'LESSTHAN':([21,22,23,24,25,28,34,],[41,-38,-39,-46,-47,-38,-39,]),'EQUALS':([21,22,23,24,25,28,34,],[42,-38,-39,-46,-47,-38,-39,]),'GREATEROREQUALS':([21,22,23,24,25,28,34,],[43,-38,-39,-46,-47,-38,-39,]),'LESSOREQUALS':([21,22,23,24,25,28,34,],[44,-38,-39,-46,-47,-38,-39,]),'RPAREN':([35,46,47,64,],[48,-30,57,-31,]),'COMMA':([46,],[56,]),}
+_lr_action_items = {'DEF':([0,],[3,]),'IF':([0,5,6,7,10,12,13,16,17,18,19,21,23,24,25,26,27,28,29,30,31,32,33,34,35,37,38,39,40,41,53,55,58,59,61,63,64,67,71,74,],[8,8,-16,8,-23,-25,-26,8,-11,-16,-17,8,-42,-43,-50,-51,8,-24,-29,-30,-31,-32,-33,-52,-53,-19,-18,-20,-21,-22,-5,8,-44,-15,8,-6,8,8,-7,-8,]),'WHILE':([0,5,6,7,10,12,13,16,17,18,19,21,23,24,25,26,27,28,29,30,31,32,33,34,35,37,38,39,40,41,53,55,58,59,61,63,64,67,71,74,],[9,-10,9,9,-23,-25,-26,-10,-11,9,-17,9,-42,-43,-50,-51,9,-24,-29,-30,-31,-32,-33,-52,-53,-19,-18,-20,-21,-22,-5,9,-44,-15,9,-6,9,9,-7,-8,]),'PRINT':([0,5,6,7,10,12,13,16,17,18,19,21,23,24,25,26,27,28,29,30,31,32,33,34,35,37,38,39,40,41,53,55,58,59,61,63,64,67,71,74,],[11,-10,-16,11,-23,-25,-26,-10,-11,-16,-17,11,-42,-43,-50,-51,11,-24,-29,-30,-31,-32,-33,-52,-53,-19,-18,-20,-21,-22,-5,11,-44,-15,11,-6,11,11,-7,-8,]),'ID':([0,3,5,6,7,8,9,10,11,12,13,15,16,17,18,19,21,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,43,44,45,46,47,48,53,55,57,58,59,60,61,63,64,67,71,74,],[4,14,-10,-16,4,23,23,-23,29,-25,-26,37,-10,-11,-16,-17,4,-42,-43,-50,-51,4,-24,-29,-30,-31,-32,-33,-52,-53,50,-19,-18,-20,-21,-22,23,-45,-46,-47,-48,-49,-5,4,23,-44,-15,68,4,-6,4,4,-7,-8,]),'$end':([1,2,5,6,7,10,12,13,16,17,18,19,20,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,53,58,59,62,63,71,73,74,],[0,-1,-4,-14,-27,-23,-25,-26,-10,-11,-16,-17,-28,-42,-43,-50,-51,-24,-29,-30,-31,-32,-33,-52,-53,-19,-18,-20,-21,-22,-5,-44,-15,-3,-6,-7,-2,-8,]),'ASSIGNMENT':([4,],[15,]),'END':([7,10,12,13,16,17,18,19,20,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,49,52,53,54,56,58,59,63,65,66,69,70,71,72,74,],[-27,-23,-25,-26,-10,-11,-16,-17,-28,-42,-43,-50,-51,-24,-29,-30,-31,-32,-33,-52,-53,-19,-18,-20,-21,-22,53,59,62,-5,63,-12,-44,-15,-6,71,-13,73,74,-7,-9,-8,]),'ELSE':([7,10,12,13,16,17,18,19,20,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,53,54,56,58,59,63,66,71,72,74,],[-27,-23,-25,-26,-10,-11,-16,-17,-28,-42,-43,-50,-51,-24,-29,-30,-31,-32,-33,-52,-53,-19,-18,-20,-21,-22,55,-5,64,-12,-44,-15,-6,-13,-7,-9,-8,]),'ELSIF':([7,10,12,13,16,17,18,19,20,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,53,56,58,59,63,71,72,74,],[-27,-23,-25,-26,-10,-11,-16,-17,-28,-42,-43,-50,-51,-24,-29,-30,-31,-32,-33,-52,-53,-19,-18,-20,-21,-22,57,-5,57,-44,-15,-6,-7,-9,-8,]),'FLOAT':([8,9,11,15,43,44,45,46,47,48,57,],[25,25,25,25,25,-45,-46,-47,-48,-49,25,]),'INTEGER':([8,9,11,15,43,44,45,46,47,48,57,],[26,26,26,26,26,-45,-46,-47,-48,-49,26,]),'TRUE':([11,15,],[30,40,]),'FALSE':([11,15,],[31,41,]),'STRING':([11,],[34,]),'LPAREN':([14,],[36,]),'GREATERTHAN':([22,23,24,25,26,29,35,37,38,],[44,-42,-43,-50,-51,-42,-43,-42,-43,]),'LESSTHAN':([22,23,24,25,26,29,35,37,38,],[45,-42,-43,-50,-51,-42,-43,-42,-43,]),'EQUALS':([22,23,24,25,26,29,35,37,38,],[46,-42,-43,-50,-51,-42,-43,-42,-43,]),'GREATEROREQUALS':([22,23,24,25,26,29,35,37,38,],[47,-42,-43,-50,-51,-42,-43,-42,-43,]),'LESSOREQUALS':([22,23,24,25,26,29,35,37,38,],[48,-42,-43,-50,-51,-42,-43,-42,-43,]),'RPAREN':([36,50,51,68,],[52,-34,61,-35,]),'COMMA':([50,],[60,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'instruction':([0,],[1,]),'instructionBody':([0,7,20,26,51,57,60,63,],[2,19,38,45,61,65,66,68,]),'conditional':([0,5,7,15,20,26,51,57,60,63,],[5,15,15,15,15,15,15,15,15,15,]),'whileLoop':([0,6,7,17,20,26,51,57,60,63,],[6,17,17,17,17,17,17,17,17,17,]),'bodyLine':([0,7,20,26,51,57,60,63,],[7,7,7,7,7,7,7,7,]),'nestedConditional':([0,5,7,15,20,26,51,57,60,63,],[11,16,11,16,11,11,11,11,11,11,]),'nestedWhile':([0,6,7,17,20,26,51,57,60,63,],[12,18,12,18,12,12,12,12,12,12,]),'condition':([8,9,10,53,],[20,26,32,63,]),'conditionValue':([8,9,10,39,53,],[21,21,21,54,21,]),'number':([8,9,10,14,39,53,],[23,23,34,36,23,23,]),'printBody':([10,],[27,]),'dataType':([10,],[31,]),'comparator':([21,],[39,]),'parameters':([35,],[47,]),'conditionalElsif':([38,52,],[50,62,]),'elsif':([38,52,],[52,52,]),}
+_lr_goto_items = {'instruction':([0,],[1,]),'instructionBody':([0,7,21,27,55,61,64,67,],[2,20,42,49,65,69,70,72,]),'conditional':([0,5,7,16,21,27,55,61,64,67,],[5,16,16,16,16,16,16,16,16,16,]),'whileLoop':([0,6,7,18,21,27,55,61,64,67,],[6,18,18,18,18,18,18,18,18,18,]),'bodyLine':([0,7,21,27,55,61,64,67,],[7,7,7,7,7,7,7,7,]),'assignmentRule':([0,7,21,27,55,61,64,67,],[10,10,10,10,10,10,10,10,]),'nestedConditional':([0,5,7,16,21,27,55,61,64,67,],[12,17,12,17,12,12,12,12,12,12,]),'nestedWhile':([0,6,7,18,21,27,55,61,64,67,],[13,19,13,19,13,13,13,13,13,13,]),'condition':([8,9,11,15,57,],[21,27,33,39,67,]),'conditionValue':([8,9,11,15,43,57,],[22,22,22,22,58,22,]),'number':([8,9,11,15,43,57,],[24,24,35,38,24,24,]),'printBody':([11,],[28,]),'dataType':([11,],[32,]),'comparator':([22,],[43,]),'parameters':([36,],[51,]),'conditionalElsif':([42,56,],[54,66,]),'elsif':([42,56,],[56,56,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -44,36 +44,40 @@ _lr_productions = [
   ('whileLoop -> WHILE condition instructionBody END','whileLoop',4,'p_whileLoop','main.py',50),
   ('nestedWhile -> whileLoop','nestedWhile',1,'p_nestedWhile','main.py',55),
   ('nestedWhile -> whileLoop nestedWhile','nestedWhile',2,'p_nestedWhile','main.py',56),
-  ('bodyLine -> ID ASSIGNMENT number','bodyLine',3,'p_bodyLine','main.py',62),
-  ('bodyLine -> ID ASSIGNMENT STRING','bodyLine',3,'p_bodyLine','main.py',63),
-  ('bodyLine -> PRINT printBody','bodyLine',2,'p_bodyLine','main.py',64),
-  ('bodyLine -> nestedConditional','bodyLine',1,'p_bodyLine','main.py',65),
-  ('bodyLine -> nestedWhile','bodyLine',1,'p_bodyLine','main.py',66),
-  ('instructionBody -> bodyLine','instructionBody',1,'p_instructionBody','main.py',70),
-  ('instructionBody -> bodyLine instructionBody','instructionBody',2,'p_instructionBody','main.py',71),
-  ('printBody -> ID','printBody',1,'p_printBody','main.py',76),
-  ('printBody -> TRUE','printBody',1,'p_printBody','main.py',77),
-  ('printBody -> FALSE','printBody',1,'p_printBody','main.py',78),
-  ('printBody -> dataType','printBody',1,'p_printBody','main.py',79),
-  ('printBody -> condition','printBody',1,'p_printBody','main.py',80),
-  ('parameters -> ID','parameters',1,'p_parameters','main.py',85),
-  ('parameters -> ID COMMA ID','parameters',3,'p_parameters','main.py',86),
-  ('arithmaticOperator -> PLUS','arithmaticOperator',1,'p_arithmeticOperator','main.py',95),
-  ('arithmaticOperator -> MINUS','arithmaticOperator',1,'p_arithmeticOperator','main.py',96),
-  ('arithmaticOperator -> POWER','arithmaticOperator',1,'p_arithmeticOperator','main.py',97),
-  ('arithmaticOperator -> MULTIPLICATION','arithmaticOperator',1,'p_arithmeticOperator','main.py',98),
-  ('arithmaticOperator -> DIVISION','arithmaticOperator',1,'p_arithmeticOperator','main.py',99),
-  ('operations -> number arithmaticOperator number','operations',3,'p_operation','main.py',105),
-  ('conditionValue -> ID','conditionValue',1,'p_conditionValue','main.py',111),
-  ('conditionValue -> number','conditionValue',1,'p_conditionValue','main.py',112),
-  ('condition -> conditionValue comparator conditionValue','condition',3,'p_condition','main.py',117),
-  ('comparator -> GREATERTHAN','comparator',1,'p_comparator','main.py',122),
-  ('comparator -> LESSTHAN','comparator',1,'p_comparator','main.py',123),
-  ('comparator -> EQUALS','comparator',1,'p_comparator','main.py',124),
-  ('comparator -> GREATEROREQUALS','comparator',1,'p_comparator','main.py',125),
-  ('comparator -> LESSOREQUALS','comparator',1,'p_comparator','main.py',126),
-  ('number -> FLOAT','number',1,'p_number','main.py',131),
-  ('number -> INTEGER','number',1,'p_number','main.py',132),
-  ('dataType -> STRING','dataType',1,'p_dataType','main.py',137),
-  ('dataType -> number','dataType',1,'p_dataType','main.py',138),
+  ('assignmentRule -> ID ASSIGNMENT number','assignmentRule',3,'p_assignmentRule','main.py',61),
+  ('assignmentRule -> ID ASSIGNMENT ID','assignmentRule',3,'p_assignmentRule','main.py',62),
+  ('assignmentRule -> ID ASSIGNMENT condition','assignmentRule',3,'p_assignmentRule','main.py',63),
+  ('assignmentRule -> ID ASSIGNMENT TRUE','assignmentRule',3,'p_assignmentRule','main.py',64),
+  ('assignmentRule -> ID ASSIGNMENT FALSE','assignmentRule',3,'p_assignmentRule','main.py',65),
+  ('bodyLine -> assignmentRule','bodyLine',1,'p_bodyLine','main.py',69),
+  ('bodyLine -> PRINT printBody','bodyLine',2,'p_bodyLine','main.py',70),
+  ('bodyLine -> nestedConditional','bodyLine',1,'p_bodyLine','main.py',71),
+  ('bodyLine -> nestedWhile','bodyLine',1,'p_bodyLine','main.py',72),
+  ('instructionBody -> bodyLine','instructionBody',1,'p_instructionBody','main.py',76),
+  ('instructionBody -> bodyLine instructionBody','instructionBody',2,'p_instructionBody','main.py',77),
+  ('printBody -> ID','printBody',1,'p_printBody','main.py',82),
+  ('printBody -> TRUE','printBody',1,'p_printBody','main.py',83),
+  ('printBody -> FALSE','printBody',1,'p_printBody','main.py',84),
+  ('printBody -> dataType','printBody',1,'p_printBody','main.py',85),
+  ('printBody -> condition','printBody',1,'p_printBody','main.py',86),
+  ('parameters -> ID','parameters',1,'p_parameters','main.py',91),
+  ('parameters -> ID COMMA ID','parameters',3,'p_parameters','main.py',92),
+  ('arithmeticOperator -> PLUS','arithmeticOperator',1,'p_arithmeticOperator','main.py',101),
+  ('arithmeticOperator -> MINUS','arithmeticOperator',1,'p_arithmeticOperator','main.py',102),
+  ('arithmeticOperator -> POWER','arithmeticOperator',1,'p_arithmeticOperator','main.py',103),
+  ('arithmeticOperator -> MULTIPLICATION','arithmeticOperator',1,'p_arithmeticOperator','main.py',104),
+  ('arithmeticOperator -> DIVISION','arithmeticOperator',1,'p_arithmeticOperator','main.py',105),
+  ('operations -> number arithmeticOperator number','operations',3,'p_operation','main.py',111),
+  ('conditionValue -> ID','conditionValue',1,'p_conditionValue','main.py',117),
+  ('conditionValue -> number','conditionValue',1,'p_conditionValue','main.py',118),
+  ('condition -> conditionValue comparator conditionValue','condition',3,'p_condition','main.py',123),
+  ('comparator -> GREATERTHAN','comparator',1,'p_comparator','main.py',128),
+  ('comparator -> LESSTHAN','comparator',1,'p_comparator','main.py',129),
+  ('comparator -> EQUALS','comparator',1,'p_comparator','main.py',130),
+  ('comparator -> GREATEROREQUALS','comparator',1,'p_comparator','main.py',131),
+  ('comparator -> LESSOREQUALS','comparator',1,'p_comparator','main.py',132),
+  ('number -> FLOAT','number',1,'p_number','main.py',137),
+  ('number -> INTEGER','number',1,'p_number','main.py',138),
+  ('dataType -> STRING','dataType',1,'p_dataType','main.py',143),
+  ('dataType -> number','dataType',1,'p_dataType','main.py',144),
 ]

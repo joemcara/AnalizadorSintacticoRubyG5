@@ -56,14 +56,20 @@ def p_nestedWhile(p):
                 | whileLoop nestedWhile
   '''
 
-
+def p_assignmentRule(p):
+  '''
+    assignmentRule : ID ASSIGNMENT number
+                    | ID ASSIGNMENT ID
+                    | ID ASSIGNMENT condition
+                    | ID ASSIGNMENT TRUE
+                    | ID ASSIGNMENT FALSE
+  '''
 def p_bodyLine(p):
   '''
-    bodyLine : ID ASSIGNMENT number
-                    | ID ASSIGNMENT STRING
-                    | PRINT printBody 
-                    | nestedConditional
-                    | nestedWhile
+    bodyLine : assignmentRule
+              | PRINT printBody 
+              | nestedConditional
+              | nestedWhile
   '''
 def p_instructionBody(p):
   '''
@@ -93,7 +99,7 @@ def p_parameters(p):
 def p_arithmeticOperator(p):
 
   '''
-    arithmaticOperator : PLUS
+    arithmeticOperator : PLUS
                         | MINUS
                         | POWER
                         | MULTIPLICATION 
@@ -102,7 +108,7 @@ def p_arithmeticOperator(p):
 
 def p_operation(p):
   '''
-    operations : number arithmaticOperator number
+    operations : number arithmeticOperator number
   '''
 #DataTypes
 
