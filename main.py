@@ -31,11 +31,6 @@ def p_conditionalElsif(p):
                   | elsif  conditionalElsif
   '''
 
-def p_nestedElsif(p):
-  '''
-  nesteElsif : instructionConditional
-  
-  '''
 
 def p_instructionLoop(p):
   '''
@@ -82,9 +77,9 @@ def p_arithmeticOperator(p):
                         | DIVISION
   '''
 
-def p_operations(p):
+def p_operation(p):
   '''
-    operations : dataType arithmaticOperator dataType
+    operations : number arithmaticOperator number
   '''
 #DataTypes
 
