@@ -98,13 +98,22 @@ def p_callFunction(p):
   'funcionCall : ID LPAREN parameters RPAREN'
 
 #StructureData
-def p_stack(p):
+def p_creationStack(p):
   'creationStack : STACK DOT NEW'
 
+def p_creationNode(p):
+  '''
+  creationNode : NODE DOT NEW LPAREN RPAREN
+              | NODE DOT NEW LPAREN ID RPAREN
+  '''
+
+def p_creationLinkedList(p):
+  'creationLinkedList : LINKEDLIST DOT NEW'
 
 def p_creationTDA(p):
   '''
     creationTDA : creationStack
+                | creationLinkedList
 
   '''
 #Operations
