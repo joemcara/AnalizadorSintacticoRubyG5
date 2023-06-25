@@ -8,10 +8,18 @@ def p_instruction(p):
 
 def p_instructionFunction(p):
   '''
-  instruction : DEF ID LPAREN parameters RPAREN instructionBody END
-              | DEF ID LPAREN RPAREN END
+  instruction : defFunction
+              | blockFunction
               | lambda_expression
   '''
+def p_defFunction(p):
+  '''
+    defFunction : DEF ID LPAREN parameters RPAREN instructionBody END
+              | DEF ID LPAREN RPAREN END
+              | DEF ID LPAREN RPAREN YIELD END
+              | DEF ID LPAREN parameters RPAREN instructionBody YIELD END
+  '''
+
 def p_lambda_expression(p):
   """lambda_expression : LAMBDA LBRACE instructionBody RBRACE
                        |  ID ASSIGNMENT LAMBDA LBRACE instructionBody RBRACE
@@ -139,6 +147,8 @@ def p_functionCall(p):
   '''
   functionCall : ID LPAREN arguments RPAREN
               | ID LPAREN RPAREN
+              | ID LPAREN RPAREN blockFunction
+              | ID LPAREN arguments RPAREN blockFunction
   '''
 
 
