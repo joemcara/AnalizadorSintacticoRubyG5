@@ -65,6 +65,8 @@ def p_assignmentRule(p):
                     | ID ASSIGNMENT FALSE
                     | ID ASSIGNMENT creationTDA
                     | ID ASSIGNMENT operations
+                    | ID ASSIGNMENT array
+                    | ID ASSIGNMENT ID array
   '''
 def p_bodyLine(p):
   '''
@@ -73,6 +75,7 @@ def p_bodyLine(p):
               | nestedConditional
               | nestedWhile
               | funcionCall
+              | arrayConcat
   '''
 def p_instructionBody(p):
   '''
@@ -184,11 +187,25 @@ def p_operations(p):
   '''
 #DataTypes
 
+#array----------------------------------------------
+def p_array(p):
+  '''array : OPENBRACKET element_list CLOSEDBRACKET'''
+
+def p_element_list(p):
+  '''element_list : conditionValue
+                 | element_list COMMA conditionValue'''
+
 def p_conditionValue(p):
   '''
     conditionValue : ID
                    | number
   '''
+def p_arrayConcat(p):
+  '''
+  arrayConcat : ID ARRAYAPPEND ID
+              | ID ARRAYAPPEND number
+  '''
+#----------------------------------------------
 
 def p_condition(p):
   '''

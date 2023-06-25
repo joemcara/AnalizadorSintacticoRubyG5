@@ -28,6 +28,7 @@ tokens = (
   'COLON',
   'LBRACE',
   'RBRACE',
+  'ARRAYAPPEND',
   #Joseph
   'DIVISION',
   'PLUS',
@@ -63,6 +64,7 @@ t_CLOSEDBRACKET = r'\]'
 t_COLON = r'\:'
 t_LBRACE = r'\{'
 t_RBRACE = r'\}'
+t_ARRAYAPPEND = r'\<<'
 #Joseph
 t_DIVISION = r'\/'
 t_PLUS = r'\+'
