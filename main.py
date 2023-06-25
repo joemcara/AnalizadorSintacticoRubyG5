@@ -162,14 +162,25 @@ def p_arithmeticOperator(p):
                         | MULTIPLICATION 
                         | DIVISION
   '''
+def p_getAttribute(p):
+  '''
+    getAttribute : ID DOT ID
+  '''
 
+def p_operationValue(p):
+  '''
+    operationValue : ID
+                   | number
+                   | getAttribute
+  '''
 def p_operation(p):
-  'operation : number arithmeticOperator number'
+  'operation : operationValue arithmeticOperator operationValue'
 
 def p_operations(p):
   '''
     operations : operation
-               | operation arithmeticOperator number
+               | operation arithmeticOperator operations
+               | operationValue
   '''
 #DataTypes
 
