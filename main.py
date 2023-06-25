@@ -63,6 +63,7 @@ def p_assignmentRule(p):
                     | ID ASSIGNMENT condition
                     | ID ASSIGNMENT TRUE
                     | ID ASSIGNMENT FALSE
+                    | ID ASSIGNMENT creationTDA
   '''
 def p_bodyLine(p):
   '''
@@ -70,6 +71,7 @@ def p_bodyLine(p):
               | PRINT printBody 
               | nestedConditional
               | nestedWhile
+              | funcionCall
   '''
 def p_instructionBody(p):
   '''
@@ -89,12 +91,22 @@ def p_printBody(p):
 def p_parameters(p):
   '''
     parameters : ID 
-               | ID COMMA ID 
+               | ID COMMA parameters 
   '''
 
+def p_callFunction(p):
+  'funcionCall : ID LPAREN parameters RPAREN'
+
 #StructureData
+def p_stack(p):
+  'creationStack : STACK DOT NEW'
 
 
+def p_creationTDA(p):
+  '''
+    creationTDA : creationStack
+
+  '''
 #Operations
 def p_arithmeticOperator(p):
 
