@@ -76,9 +76,11 @@ def p_bodyLine(p):
               | PRINT printBody 
               | nestedConditional
               | nestedWhile
-              | funcionCall
+              | functionCall
               | arrayConcat
-              | RETURN argument
+              | RETURN arguments
+              | PUTS printBody
+              | method
   '''
 def p_instructionBody(p):
   '''
@@ -93,6 +95,8 @@ def p_printBody(p):
               | FALSE 
               | dataType
               | condition
+              | method
+              | functionCall
   '''
 
 def p_argument(p):
@@ -101,7 +105,18 @@ def p_argument(p):
               | number
               | attribute
               | indexation
+              | STRING
   '''
+
+def p_arguments(p):
+  '''
+  arguments : argument
+            | argument COMMA arguments
+  '''
+def p_method(p):
+  '''
+    method : ID DOT functionCall 
+  '''
 #------------------------------------------------------------  
 #Parameters
 def p_parameters(p):
@@ -110,9 +125,9 @@ def p_parameters(p):
                | ID COMMA parameters 
   '''
 
-def p_callFunction(p):
+def p_functionCall(p):
   '''
-  funcionCall : ID LPAREN parameters RPAREN
+  functionCall : ID LPAREN arguments RPAREN
               | ID LPAREN RPAREN
   '''
 
@@ -180,6 +195,7 @@ def p_operationValue(p):
     operationValue : ID
                    | number
                    | attribute
+                   | indexation
   '''
 def p_operation(p):
   '''operation : operationValue arithmeticOperator operationValue
@@ -209,6 +225,7 @@ def p_conditionValue(p):
     conditionValue : ID
                    | number
                    | indexation
+                   | attribute
   '''
 def p_arrayConcat(p):
   '''
