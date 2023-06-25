@@ -98,6 +98,7 @@ def p_callFunction(p):
   'funcionCall : ID LPAREN parameters RPAREN'
 
 #StructureData
+#STACK
 def p_creationStack(p):
   'creationStack : STACK DOT NEW'
 
@@ -107,6 +108,7 @@ def p_creationNode(p):
               | NODE DOT NEW LPAREN ID RPAREN
   '''
 
+#linkedlist
 def p_creationLinkedList(p):
   'creationLinkedList : LINKEDLIST DOT NEW'
 
@@ -114,8 +116,32 @@ def p_creationTDA(p):
   '''
     creationTDA : creationStack
                 | creationLinkedList
+                | creationHashmap
 
   '''
+
+#Hashmap
+def p_creationHashmap(p):
+  '''creationHashmap : HASH DOT NEW
+                    | LBRACE pairs RBRACE
+                    | LBRACE RBRACE
+  '''
+def p_pair(p):
+    '''pair : STRING COLON value'''
+
+def p_pairs(p):
+    '''pairs : pair
+             | pair COMMA pairs''' 
+    
+def p_value(p):
+    '''value : ID
+             | STRING 
+             | number
+             | LBRACE pairs RBRACE
+             | LBRACE RBRACE
+             '''
+
+
 #Operations
 def p_arithmeticOperator(p):
 

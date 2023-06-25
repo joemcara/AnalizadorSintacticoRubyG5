@@ -5,7 +5,7 @@ import reservadas
 #nick break - in 
 #joseph elsif - to_i
 reserved = reservadas.crear(
-  ['if','else','print','end','break','class','while','for','true','false','in','elsif','def','case','then','puts','gets','chomp','to_i','to_f','stack','new', 'linkedlist', 'node'])
+  ['if','else','print','end','break','class','while','for','true','false','in','elsif','def','case','then','puts','gets','chomp','to_i','to_f','stack','new', 'linkedlist', 'node', 'hash'])
 
 
 
@@ -25,6 +25,9 @@ tokens = (
   'LPAREN',
   'RPAREN',
   'INTEGER',
+  'COLON',
+  'LBRACE',
+  'RBRACE',
   #Joseph
   'DIVISION',
   'PLUS',
@@ -57,6 +60,9 @@ t_INTEGER = r'\d+'
 t_DOT = r'\.'
 t_OPENBRACKET = r'\['
 t_CLOSEDBRACKET = r'\]'
+t_COLON = r'\:'
+t_LBRACE = r'\{'
+t_RBRACE = r'\}'
 #Joseph
 t_DIVISION = r'\/'
 t_PLUS = r'\+'
