@@ -11,7 +11,7 @@ def p_instructionFunction(p):
   instruction : DEF ID LPAREN parameters RPAREN instructionBody END
               | DEF ID LPAREN RPAREN END
   '''
-
+#estructura de control if ---------------------------------------
 def p_instructionConditional(p):
   '''  
     instruction : conditional
@@ -38,8 +38,8 @@ def p_conditionalElsif(p):
   conditionalElsif : elsif 
                   | elsif  conditionalElsif
   '''
-
-
+#-----------------------------------------------------
+# estructura de control while ------------------------
 def p_instructionLoop(p):
   '''
     instruction : whileLoop 
@@ -55,7 +55,8 @@ def p_nestedWhile(p):
     nestedWhile : whileLoop
                 | whileLoop nestedWhile
   '''
-
+#----------------------------------------------------
+#usos generales -----------------------------------
 def p_assignmentRule(p):
   '''
     assignmentRule : ID ASSIGNMENT number
@@ -66,7 +67,8 @@ def p_assignmentRule(p):
                     | ID ASSIGNMENT creationTDA
                     | ID ASSIGNMENT operations
                     | ID ASSIGNMENT array
-                    | ID ASSIGNMENT ID array
+                    | ID ASSIGNMENT indexation
+                    | ID ASSIGNMENT attribute
   '''
 def p_bodyLine(p):
   '''
@@ -76,6 +78,7 @@ def p_bodyLine(p):
               | nestedWhile
               | funcionCall
               | arrayConcat
+              | RETURN argument
   '''
 def p_instructionBody(p):
   '''
@@ -91,6 +94,15 @@ def p_printBody(p):
               | dataType
               | condition
   '''
+
+def p_argument(p):
+  '''
+    argument : ID
+              | number
+              | attribute
+              | indexation
+  '''
+#------------------------------------------------------------  
 #Parameters
 def p_parameters(p):
   '''
@@ -114,13 +126,6 @@ def p_creationStack(p):
 
 
 #linkedlist
-
-def p_creationNode(p):
-  '''
-  creationNode : NODE DOT NEW LPAREN RPAREN
-              | NODE DOT NEW LPAREN ID RPAREN
-  '''
-
 
 def p_creationLinkedList(p):
   'creationLinkedList : LINKEDLIST DOT NEW'
@@ -152,7 +157,7 @@ def p_value(p):
              | number
              | LBRACE pairs RBRACE
              | LBRACE RBRACE
-             '''
+    '''
 
 
 #Operations
@@ -165,31 +170,35 @@ def p_arithmeticOperator(p):
                         | MULTIPLICATION 
                         | DIVISION
   '''
-def p_getAttribute(p):
+def p_attribute(p):
   '''
-    getAttribute : ID DOT ID
+    attribute : ID DOT ID
   '''
 
 def p_operationValue(p):
   '''
     operationValue : ID
                    | number
-                   | getAttribute
+                   | attribute
   '''
 def p_operation(p):
-  'operation : operationValue arithmeticOperator operationValue'
+  '''operation : operationValue arithmeticOperator operationValue
+               | LPAREN operationValue arithmeticOperator operationValue RPAREN
+  '''
 
 def p_operations(p):
   '''
     operations : operation
                | operation arithmeticOperator operations
-               | operationValue
+               | operation arithmeticOperator operationValue
+               | operationValue arithmeticOperator operation
   '''
 #DataTypes
 
 #array----------------------------------------------
 def p_array(p):
-  '''array : OPENBRACKET element_list CLOSEDBRACKET'''
+  '''array : OPENBRACKET element_list CLOSEDBRACKET
+           | OPENBRACKET CLOSEDBRACKET'''
 
 def p_element_list(p):
   '''element_list : conditionValue
@@ -199,11 +208,18 @@ def p_conditionValue(p):
   '''
     conditionValue : ID
                    | number
+                   | indexation
   '''
 def p_arrayConcat(p):
   '''
   arrayConcat : ID ARRAYAPPEND ID
               | ID ARRAYAPPEND number
+  '''
+
+def p_indexation(p):
+  '''
+    indexation : ID OPENBRACKET element_list CLOSEDBRACKET
+               | ID OPENBRACKET operation CLOSEDBRACKET
   '''
 #----------------------------------------------
 
