@@ -32,12 +32,6 @@ def p_elsif(p):
   '''
   elsif : ELSIF condition instructionBody 
   '''
-def p_nestedConditional(p):
-  '''
-    nestedConditional : conditional
-                      | conditional nestedConditional
-  '''
-
 def p_conditionalElsif(p):
   '''
   conditionalElsif : elsif 
@@ -54,13 +48,13 @@ def p_whileLoop(P):
   '''
   whileLoop : WHILE condition instructionBody END
   '''
+#estructura de control for--------------------------
+def p_instructionFor(p):
+  'instruction : forLoop'
 
-def p_nestedWhile(p):
-  '''
-    nestedWhile : whileLoop
-                | whileLoop nestedWhile
-  '''
-#----------------------------------------------------
+def p_forLoop(p):
+  'forLoop : FOR ID IN LPAREN INTEGER DOT DOT INTEGER RPAREN instructionBody END'
+#-------------------------------------------------
 #usos generales -----------------------------------
 def p_assignmentRule(p):
   '''
@@ -80,14 +74,15 @@ def p_bodyLine(p):
   '''
     bodyLine : assignmentRule
               | PRINT printBody 
-              | nestedConditional
-              | nestedWhile
+              | conditional
+              | whileLoop
               | functionCall
               | arrayConcat
               | RETURN arguments
               | PUTS printBody
               | method
               | unariOperator
+              | forLoop
   '''
 def p_instructionBody(p):
   '''
