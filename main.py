@@ -64,6 +64,7 @@ def p_assignmentRule(p):
                     | ID ASSIGNMENT TRUE
                     | ID ASSIGNMENT FALSE
                     | ID ASSIGNMENT creationTDA
+                    | ID ASSIGNMENT operations
   '''
 def p_bodyLine(p):
   '''
@@ -95,12 +96,21 @@ def p_parameters(p):
   '''
 
 def p_callFunction(p):
-  'funcionCall : ID LPAREN parameters RPAREN'
+  '''
+  funcionCall : ID LPAREN parameters RPAREN
+              | ID LPAREN RPAREN
+  '''
 
-#StructureData
+#StructureData 
 #STACK
 def p_creationStack(p):
-  'creationStack : STACK DOT NEW'
+  '''
+  creationStack : STACK DOT NEW
+                | OPENBRACKET CLOSEDBRACKET
+  '''
+
+
+#linkedlist
 
 def p_creationNode(p):
   '''
@@ -108,7 +118,7 @@ def p_creationNode(p):
               | NODE DOT NEW LPAREN ID RPAREN
   '''
 
-#linkedlist
+
 def p_creationLinkedList(p):
   'creationLinkedList : LINKEDLIST DOT NEW'
 
@@ -154,8 +164,12 @@ def p_arithmeticOperator(p):
   '''
 
 def p_operation(p):
+  'operation : number arithmeticOperator number'
+
+def p_operations(p):
   '''
-    operations : number arithmeticOperator number
+    operations : operation
+               | operation arithmeticOperator number
   '''
 #DataTypes
 
