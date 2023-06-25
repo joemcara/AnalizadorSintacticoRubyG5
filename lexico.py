@@ -5,7 +5,7 @@ import reservadas
 #nick break - in 
 #joseph elsif - to_i
 reserved = reservadas.crear(
-  ['if','else','print','end','break','class','while','for','true','false','in','elsif','def','case','then','puts','gets','chomp','to_i','to_f','stack','new', 'linkedlist', 'node', 'hash', 'return','yield','do'])
+  ['if','else','print','end','break','class','while','for','true','false','in','elsif','def','case','then','puts','gets','chomp','to_i','to_f','stack','new', 'linkedlist', 'node', 'hash', 'return','yield','do', 'lambda'])
 
 
 

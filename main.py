@@ -10,8 +10,12 @@ def p_instructionFunction(p):
   '''
   instruction : DEF ID LPAREN parameters RPAREN instructionBody END
               | DEF ID LPAREN RPAREN END
-              | DEF ID LPAREN RPAREN instructionBody YIELD END
+              | lambda_expression
   '''
+def p_lambda_expression(p):
+  """lambda_expression : LAMBDA LBRACE instructionBody RBRACE
+                       |  ID ASSIGNMENT LAMBDA LBRACE instructionBody RBRACE
+  """
 #estructura de control if ---------------------------------------
 def p_instructionConditional(p):
   '''  
