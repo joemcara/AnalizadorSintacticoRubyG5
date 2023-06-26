@@ -12,6 +12,8 @@ def p_instructionFunction(p):
               | blockFunction
               | lambda_expression
   '''
+
+#Andres
 def p_defFunction(p):
   '''
     defFunction : DEF ID LPAREN parameters RPAREN instructionBody END
@@ -20,11 +22,13 @@ def p_defFunction(p):
               | DEF ID LPAREN parameters RPAREN instructionBody YIELD END
   '''
 
+#Nick
 def p_lambda_expression(p):
   """lambda_expression : LAMBDA LBRACE instructionBody RBRACE
                        |  ID ASSIGNMENT LAMBDA LBRACE instructionBody RBRACE
   """
 #estructura de control if ---------------------------------------
+#Andres
 def p_instructionConditional(p):
   '''  
     instruction : conditional
@@ -47,6 +51,7 @@ def p_conditionalElsif(p):
   '''
 #-----------------------------------------------------
 # estructura de control while ------------------------
+#Yoser
 def p_instructionLoop(p):
   '''
     instruction : whileLoop 
@@ -56,7 +61,9 @@ def p_whileLoop(P):
   '''
   whileLoop : WHILE condition instructionBody END
   '''
+  
 #estructura de control for--------------------------
+#Nick
 def p_instructionFor(p):
   'instruction : forLoop'
 
@@ -81,32 +88,21 @@ def p_assignmentRule(p):
 def p_bodyLine(p):
   '''
     bodyLine : assignmentRule
-              | PRINT printBody 
+              | PRINT arguments
               | conditional
               | whileLoop
               | functionCall
               | arrayConcat
               | RETURN arguments
-              | PUTS printBody
+              | PUTS arguments
               | method
-              | unariOperator
+              | unaryOperator
               | forLoop
   '''
 def p_instructionBody(p):
   '''
     instructionBody : bodyLine
                     | bodyLine instructionBody 
-  '''
-
-def p_printBody(p):
-  '''
-  printBody : ID 
-              | TRUE  
-              | FALSE 
-              | dataType
-              | condition
-              | method
-              | functionCall
   '''
 
 def p_argument(p):
@@ -116,6 +112,11 @@ def p_argument(p):
               | attribute
               | indexation
               | STRING
+              | TRUE
+              | FALSE
+              | functionCall
+              | method
+              | condition
   '''
 
 def p_arguments(p):
@@ -151,7 +152,7 @@ def p_functionCall(p):
               | ID LPAREN arguments RPAREN blockFunction
   '''
 
-
+#Yoser
 def p_blockFunction(p):
   '''
     blockFunction : LBRACE instructionBody RBRACE
@@ -160,6 +161,7 @@ def p_blockFunction(p):
 
 #StructureData 
 #STACK
+#Yoser
 def p_creationStack(p):
   '''
   creationStack : STACK DOT NEW
@@ -167,7 +169,7 @@ def p_creationStack(p):
   '''
 
 #linkedlist
-
+#Andres
 def p_creationLinkedList(p):
   'creationLinkedList : LINKEDLIST DOT NEW'
 
@@ -180,6 +182,7 @@ def p_creationTDA(p):
   '''
 
 #Hashmap
+#Nick
 def p_creationHashmap(p):
   '''creationHashmap : HASH DOT NEW
                     | LBRACE pairs RBRACE
@@ -235,7 +238,6 @@ def p_operations(p):
                | operation arithmeticOperator operationValue
                | operationValue arithmeticOperator operation
   '''
-#DataTypes
 
 #array----------------------------------------------
 def p_array(p):
@@ -279,9 +281,9 @@ def p_comparator(p):
                | GREATEROREQUALS
                | LESSOREQUALS
   '''
-def p_unariOperator(p):
+def p_unaryOperator(p):
   ''' 
-  unariOperator : ID ASSIGNDECREMENT number
+  unaryOperator : ID ASSIGNDECREMENT number
                 | ID ASSIGNINCREMENT number
   '''
 def p_number(p):
@@ -290,11 +292,6 @@ def p_number(p):
              | INTEGER
     '''
 
-def p_dataType(p):
-  '''
-  dataType : STRING
-           | number
-  '''
 
 def p_error(p):
   if p:
