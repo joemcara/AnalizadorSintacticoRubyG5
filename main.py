@@ -69,6 +69,7 @@ def p_assignmentRule(p):
                     | ID ASSIGNMENT array
                     | ID ASSIGNMENT indexation
                     | ID ASSIGNMENT attribute
+                    | ID ASSIGNMENT input
   '''
 def p_bodyLine(p):
   '''
@@ -81,6 +82,7 @@ def p_bodyLine(p):
               | RETURN arguments
               | PUTS printBody
               | method
+              | unariOperator
   '''
 def p_instructionBody(p):
   '''
@@ -117,6 +119,14 @@ def p_method(p):
   '''
     method : ID DOT functionCall 
   '''
+
+def p_input(p):
+  '''
+  input : GETS DOT CHOMP DOT TO_F
+        | GETS DOT CHOMP DOT TO_I
+        | GETS DOT CHOMP
+  '''
+
 #------------------------------------------------------------  
 #Parameters
 def p_parameters(p):
@@ -253,7 +263,11 @@ def p_comparator(p):
                | GREATEROREQUALS
                | LESSOREQUALS
   '''
-
+def p_unariOperator(p):
+  ''' 
+  unariOperator : ID ASSIGNDECREMENT number
+                | ID ASSIGNINCREMENT number
+  '''
 def p_number(p):
     '''
       number : FLOAT

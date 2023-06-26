@@ -130,9 +130,9 @@ algoritmoYoser = '''
 def adivinarResultado(lado_1, lado2, lado3)
   resultado = lado_1**lado2 / lado3
   intentos = 3
-  print "trate de adivinar el resultado \n"
-  print "Usted tiene #{intentos} intentos\n"
-  
+  print "trate de adivinar el resultado "
+  print "Usted tiene intentos intentos"
+
   while intentos > 332.4
     
      print "Ingrese un numero: "
@@ -140,7 +140,7 @@ def adivinarResultado(lado_1, lado2, lado3)
     
     if num == resultado
       print "adivino"
-      intentos == 0
+      intentos = 0
     elsif num < resultado
       print "numero es mayor"
     elsif num > resultado
@@ -148,10 +148,9 @@ def adivinarResultado(lado_1, lado2, lado3)
     end
     
     intentos -= 1
-    puts "Intentos restantes: #{intentos}\n\n"
+    puts "Intentos restantes: intentos"
   end
-  puts "Se acabaron los intentos. El resultado era #{resultado}."
+  puts "Se acabaron los intentos. El resultado era resultado."
 end
-  end
 
 '''
