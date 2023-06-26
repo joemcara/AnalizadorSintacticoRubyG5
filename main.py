@@ -10,6 +10,7 @@ def p_instructionFunction(p):
   '''
   instruction : DEF ID LPAREN parameters RPAREN instructionBody END
               | DEF ID LPAREN RPAREN END
+              | DEF ID LPAREN RPAREN instructionBody YIELD END
   '''
 #estructura de control if ---------------------------------------
 def p_instructionConditional(p):
@@ -141,6 +142,13 @@ def p_functionCall(p):
               | ID LPAREN RPAREN
   '''
 
+
+def p_blockFunction(p):
+  '''
+    blockFunction : LBRACE instructionBody RBRACE
+                  | DO instructionBody END 
+  '''
+
 #StructureData 
 #STACK
 def p_creationStack(p):
@@ -148,7 +156,6 @@ def p_creationStack(p):
   creationStack : STACK DOT NEW
                 | OPENBRACKET CLOSEDBRACKET
   '''
-
 
 #linkedlist
 
